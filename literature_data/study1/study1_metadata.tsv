@@ -1,0 +1,136 @@
+#SampleID	Collection_Date	env_material	ETHNICITY	Host_Age	host_body_mass_index	Host_diet	host_sex	Group	Subject_ID	status	Replicate	Sample_Name	SAMPLE_TYPE	Acetate	Butyrate	Formate	Heptanoate	Hexanoate	Isobutyrate	Isovalerate	Lactate	Propionate	Succinate	Valerate
+#q2:types	categorical	categorical	categorical	numeric	numeric	categorical	categorical	categorical	categorical	categorical	categorical	categorical	categorical	numeric	numeric	numeric	numeric	numeric	numeric	numeric	numeric	numeric	numeric	numeric
+SRR6185260	16-Apr	Feces	Indian	40	27.1	Low_dietary_fibre_intake	male	Placebo	ADAPT02	post	ADAPT02 sample 2	ADAPT02_ETP1	Post-intervention	14.09	2.25	0.6	0.2	0.2	1.41	1.07	0.53	2.32	0.62	0.88
+SRR6185180	16-Jun	Feces	Indian	40	27.1	Low_dietary_fibre_intake	male	Prebiotic	ADAPT02	post	ADAPT02 sample 4	ADAPT02_ETP2	Post-intervention	16.77	3.74	0.6	0.2	0.2	1.14	1.24	0.53	4.64	0.62	1.25
+SRR6185276	16-Apr	Feces	Indian	40	27.1	Low_dietary_fibre_intake	male	Placebo	ADAPT02	pre	ADAPT02 sample 1	ADAPT02_STP1	Pre-intervention	26.85	6.8	0.6	0.2	0.51	2.21	1.63	0.53	7.43	0.62	1.7
+SRR6185211	16-May	Feces	Indian	40	27.1	Low_dietary_fibre_intake	male	Prebiotic	ADAPT02	pre	ADAPT02 sample 3	ADAPT02_STP2	Pre-intervention	23.65	6.11	0.6	0.2	0.2	1.75	1.73	0.53	6.67	0.62	1.74
+SRR6185259	16-Apr	Feces	NZ European	52	20.6	High_dietary_fibre_intake	female	Prebiotic	ADAPT03	post	ADAPT03 sample 2	ADAPT03_ETP1	Post-intervention	27.01	5.15	0.6	0.23	0.99	0.62	0.46	0.53	5.51	0.62	1.09
+SRR6185177	16-Jun	Feces	NZ European	52	20.6	High_dietary_fibre_intake	female	Placebo	ADAPT03	post	ADAPT03 sample 4	ADAPT03_ETP2	Post-intervention	17.04	3.51	0.6	0.21	0.56	0.45	0.65	0.62	3.54	0.62	0.89
+SRR6185224	16-Apr	Feces	NZ European	52	20.6	High_dietary_fibre_intake	female	Prebiotic	ADAPT03	pre	ADAPT03 sample 1	ADAPT03_STP1	Pre-intervention	13.92	3.36	0.6	0.2	0.6	0.68	0.48	0.53	3.71	0.62	0.79
+SRR6185212	16-May	Feces	NZ European	52	20.6	High_dietary_fibre_intake	female	Placebo	ADAPT03	pre	ADAPT03 sample 3	ADAPT03_STP2	Pre-intervention	5.08	2.01	0.6	0.2	0.2	0.2	0.34	0.53	1.21	0.62	0.37
+SRR6185262	16-Apr	Feces	Chinese	52	22.3	High_dietary_fibre_intake	female	Placebo	ADAPT04	post	ADAPT04 sample 2	ADAPT04_ETP1	Post-intervention	21.5	4.33	0.6	0.2	0.2	1.31	0.85	0.53	6.85	0.62	0.82
+SRR6185178	16-Jun	Feces	Chinese	52	22.3	High_dietary_fibre_intake	female	Prebiotic	ADAPT04	post	ADAPT04 sample 4	ADAPT04_ETP2	Post-intervention	52.04	12.01	0.6	0.2	0.2	1.03	0.98	0.53	10.79	0.62	1.14
+SRR6185278	16-Apr	Feces	Chinese	52	22.3	High_dietary_fibre_intake	female	Placebo	ADAPT04	pre	ADAPT04 sample 1	ADAPT04_STP1	Pre-intervention	34.7	9.24	0.6	0.2	0.2	0.78	0.51	0.53	7.61	0.62	0.95
+SRR6185192	16-May	Feces	Chinese	52	22.3	High_dietary_fibre_intake	female	Prebiotic	ADAPT04	pre	ADAPT04 sample 3	ADAPT04_STP2	Pre-intervention	35.01	10.28	0.6	0.2	0.2	1.07	0.98	0.53	11.73	0.62	1.4
+SRR6185261	16-Apr	Feces	NZ European	28	24	Low_dietary_fibre_intake	female	Prebiotic	ADAPT05	post	ADAPT05 sample 2	ADAPT05_ETP1	Post-intervention	11.1	2.5	0.6	0.2	0.38	0.63	0.46	0.53	4.12	0.62	0.88
+SRR6185183	16-Jun	Feces	NZ European	28	24	Low_dietary_fibre_intake	female	Placebo	ADAPT05	post	ADAPT05 sample 4	ADAPT05_ETP2	Post-intervention	60.84	13.9	0.6	0.2	0.76	0.63	0.61	0.8	19.3	0.62	2.86
+SRR6185277	16-Apr	Feces	NZ European	28	24	Low_dietary_fibre_intake	female	Prebiotic	ADAPT05	pre	ADAPT05 sample 1	ADAPT05_STP1	Pre-intervention	14.01	3.09	0.6	0.2	0.2	1.35	0.92	0.53	4.01	0.62	0.74
+SRR6185191	16-May	Feces	NZ European	28	24	Low_dietary_fibre_intake	female	Placebo	ADAPT05	pre	ADAPT05 sample 3	ADAPT05_STP2	Pre-intervention	45.84	11.81	0.6	0.24	0.92	0.72	0.78	0.53	12.07	0.62	1.91
+SRR6185264	16-Apr	Feces	NZ European	59	22.5	High_dietary_fibre_intake	male	Placebo	ADAPT06	post	ADAPT06 sample 2	ADAPT06_ETP1	Post-intervention	48.82	20.35	0.6	0.2	1.3	2.17	1.48	0.53	11.14	0.62	2.11
+SRR6185184	16-Jun	Feces	NZ European	59	22.5	High_dietary_fibre_intake	male	Prebiotic	ADAPT06	post	ADAPT06 sample 4	ADAPT06_ETP2	Post-intervention	42.17	13.44	0.6	0.28	1.66	1.05	1.01	0.53	9.79	0.62	1.81
+SRR6185236	16-Apr	Feces	NZ European	59	22.5	High_dietary_fibre_intake	male	Placebo	ADAPT06	pre	ADAPT06 sample 1	ADAPT06_STP1	Pre-intervention	37.16	10.86	0.6	0.2	0.86	1.56	1.05	0.53	8.88	0.62	1.5
+SRR6185194	16-May	Feces	NZ European	59	22.5	High_dietary_fibre_intake	male	Prebiotic	ADAPT06	pre	ADAPT06 sample 3	ADAPT06_STP2	Pre-intervention	50.31	16.11	0.6	0.2	1.03	1.87	1.59	0.53	12.96	0.62	2.17
+SRR6185263	16-May	Feces	NZ European	42	20.7	Low_dietary_fibre_intake	male	Placebo	ADAPT08	post	ADAPT08 sample 2	ADAPT08_ETP1	Post-intervention	33.35	6.23	0.6	0.34	1.29	1.06	0.73	0.53	6.49	0.62	1.56
+SRR6185181	16-Jun	Feces	NZ European	42	20.7	Low_dietary_fibre_intake	male	Prebiotic	ADAPT08	post	ADAPT08 sample 4	ADAPT08_ETP2	Post-intervention	22.89	6.93	0.6	0.2	0.2	2.37	1.99	0.53	10.12	0.62	1.54
+SRR6185235	16-Apr	Feces	NZ European	42	20.7	Low_dietary_fibre_intake	male	Placebo	ADAPT08	pre	ADAPT08 sample 1	ADAPT08_STP1	Pre-intervention	11.27	2.45	0.6	0.2	0.37	1.09	0.78	0.53	4.19	0.62	0.86
+SRR6185193	16-May	Feces	NZ European	42	20.7	Low_dietary_fibre_intake	male	Prebiotic	ADAPT08	pre	ADAPT08 sample 3	ADAPT08_STP2	Pre-intervention	25.26	7.46	0.6	0.2	0.2	2.11	1.97	0.53	11.09	0.62	1.78
+SRR6185165	16-May	Feces	NZ European	20	20.2	High_dietary_fibre_intake	female	Prebiotic	ADAPT09	post	ADAPT09 sample 2	ADAPT09_ETP1	Post-intervention	38.91	10.32	0.6	0.2	0.96	0.94	0.58	0.53	11.43	0.62	1.56
+SRR6185182	16-Jun	Feces	NZ European	20	20.2	High_dietary_fibre_intake	female	Placebo	ADAPT09	post	ADAPT09 sample 4	ADAPT09_ETP2	Post-intervention	39.69	11.94	0.6	0.2	0.69	0.77	0.8	0.53	17.03	0.62	1.98
+SRR6185240	16-Apr	Feces	NZ European	20	20.2	High_dietary_fibre_intake	female	Prebiotic	ADAPT09	pre	ADAPT09 sample 1	ADAPT09_STP1	Pre-intervention	48.73	14.16	0.6	0.38	2.22	0.82	0.56	0.53	11.36	0.62	2.2
+SRR6185188	16-May	Feces	NZ European	20	20.2	High_dietary_fibre_intake	female	Placebo	ADAPT09	pre	ADAPT09 sample 3	ADAPT09_STP2	Pre-intervention	66.53	19.69	0.6	0.2	1.13	0.48	0.46	0.53	19.41	0.62	2.04
+SRR6185166	16-May	Feces	Indian	22	28	High_dietary_fibre_intake	male	Placebo	ADAPT10	post	ADAPT10 sample 2	ADAPT10_ETP1	Post-intervention	78.19	18.13	0.6	0.2	0.2	0.72	0.53	0.53	34.06	0.62	1.82
+SRR6185175	16-Jun	Feces	Indian	22	28	High_dietary_fibre_intake	male	Prebiotic	ADAPT10	post	ADAPT10 sample 4	ADAPT10_ETP2	Post-intervention	85.83	24.54	0.6	0.2	0.2	0.2	0.24	0.53	36.37	0.62	1.6
+SRR6185238	16-Apr	Feces	Indian	22	28	High_dietary_fibre_intake	male	Placebo	ADAPT10	pre	ADAPT10 sample 1	ADAPT10_STP1	Pre-intervention	54.31	16.19	0.6	0.2	0.2	0.58	0.45	0.53	26.19	0.62	1.18
+SRR6185187	16-May	Feces	Indian	22	28	High_dietary_fibre_intake	male	Prebiotic	ADAPT10	pre	ADAPT10 sample 3	ADAPT10_STP2	Pre-intervention	86.84	20.2	0.6	0.2	0.2	0.2	0.25	0.53	44.12	0.62	2.22
+SRR6185167	16-May	Feces	Middle Eastern	43	24.1	Low_dietary_fibre_intake	female	Prebiotic	ADAPT11	post	ADAPT11 sample 2	ADAPT11_ETP1	Post-intervention	11.07	1.04	0.6	0.2	0.2	1.08	0.74	0.53	2.2	0.62	0.51
+SRR6185176	16-Jun	Feces	Middle Eastern	43	24.1	Low_dietary_fibre_intake	female	Placebo	ADAPT11	post	ADAPT11 sample 4	ADAPT11_ETP2	Post-intervention	8.32	0.32	0.6	0.2	0.2	0.2	0.73	0.53	1.4	0.62	0.4
+SRR6185242	16-Apr	Feces	Middle Eastern	43	24.1	Low_dietary_fibre_intake	female	Prebiotic	ADAPT11	pre	ADAPT11 sample 1	ADAPT11_STP1	Pre-intervention	5.89	0.45	0.6	0.2	0.2	0.51	0.4	0.53	0.91	0.62	0.35
+SRR6185190	16-May	Feces	Middle Eastern	43	24.1	Low_dietary_fibre_intake	female	Placebo	ADAPT11	pre	ADAPT11 sample 3	ADAPT11_STP2	Pre-intervention	9.26	0.74	0.6	0.2	0.2	0.51	0.82	0.53	1.61	0.62	0.59
+SRR6185168	16-May	Feces	NZ European	59	28.4	Low_dietary_fibre_intake	male	Placebo	ADAPT12	post	ADAPT12 sample 2	ADAPT12_ETP1	Post-intervention	22.96	6.44	0.6	0.2	0.2	1.22	0.78	0.53	11.3	0.62	1.17
+SRR6185204	16-Jun	Feces	NZ European	59	28.4	Low_dietary_fibre_intake	male	Prebiotic	ADAPT12	post	ADAPT12 sample 4	ADAPT12_ETP2	Post-intervention	64.88	18.92	0.6	0.2	0.2	1.88	1.64	0.53	29.41	0.62	4.33
+SRR6185241	16-Apr	Feces	NZ European	59	28.4	Low_dietary_fibre_intake	male	Placebo	ADAPT12	pre	ADAPT12 sample 1	ADAPT12_STP1	Pre-intervention	44.76	14.93	0.6	0.2	0.2	0.73	0.55	0.53	12.95	0.62	0.96
+SRR6185189	16-May	Feces	NZ European	59	28.4	Low_dietary_fibre_intake	male	Prebiotic	ADAPT12	pre	ADAPT12 sample 3	ADAPT12_STP2	Pre-intervention	34.37	8.36	0.6	0.2	0.2	1.54	1.17	0.53	13.46	0.62	3.71
+SRR6185169	16-May	Feces	Irish	37	22	High_dietary_fibre_intake	female	Prebiotic	ADAPT13	post	ADAPT13 sample 2	ADAPT13_ETP1	Post-intervention	17.1	4.62	0.6	0.2	0.42	1.25	0.88	0.53	7.14	0.62	1.14
+SRR6185203	16-Jun	Feces	Irish	37	22	High_dietary_fibre_intake	female	Placebo	ADAPT13	post	ADAPT13 sample 4	ADAPT13_ETP2	Post-intervention	37.09	15.21	0.6	0.2	1.11	1.16	1.11	0.53	12.47	0.62	2.27
+SRR6185228	16-Apr	Feces	Irish	37	22	High_dietary_fibre_intake	female	Prebiotic	ADAPT13	pre	ADAPT13 sample 1	ADAPT13_STP1	Pre-intervention	20.77	10.33	0.6	0.21	1.16	1.11	0.78	0.53	6.32	0.62	1.29
+SRR6185186	16-May	Feces	Irish	37	22	High_dietary_fibre_intake	female	Placebo	ADAPT13	pre	ADAPT13 sample 3	ADAPT13_STP2	Pre-intervention	22.29	6.16	0.6	0.39	1.18	0.98	1.02	0.53	6.79	0.62	1.7
+SRR6185170	16-May	Feces	NZ European	22	22.6	High_dietary_fibre_intake	male	Placebo	ADAPT14	post	ADAPT14 sample 2	ADAPT14_ETP1	Post-intervention	16.94	3.78	0.6	0.2	0.24	1.05	0.82	0.53	5.4	0.62	1.05
+SRR6185206	16-Jun	Feces	NZ European	22	22.6	High_dietary_fibre_intake	male	Prebiotic	ADAPT14	post	ADAPT14 sample 4	ADAPT14_ETP2	Post-intervention	42.15	10.79	0.6	0.2	0.51	2.55	2.15	0.53	15.1	0.71	2.16
+SRR6185227	16-Apr	Feces	NZ European	22	22.6	High_dietary_fibre_intake	male	Placebo	ADAPT14	pre	ADAPT14 sample 1	ADAPT14_STP1	Pre-intervention	22.78	5.18	0.6	0.2	0.32	1.96	1.37	0.53	9.17	0.62	1.41
+SRR6185185	16-May	Feces	NZ European	22	22.6	High_dietary_fibre_intake	male	Prebiotic	ADAPT14	pre	ADAPT14 sample 3	ADAPT14_STP2	Pre-intervention	9.84	1.42	0.6	0.2	0.2	0.25	0.49	0.53	2.77	0.62	0.61
+SRR6185171	16-May	Feces	Indian	34	20.5	High_dietary_fibre_intake	male	Prebiotic	ADAPT15	post	ADAPT15 sample 2	ADAPT15_ETP1	Post-intervention	21.7	8.15	0.6	0.2	0.2	1.37	0.99	0.53	7.24	0.62	1.22
+SRR6185205	16-Jun	Feces	Indian	34	20.5	High_dietary_fibre_intake	male	Placebo	ADAPT15	post	ADAPT15 sample 4	ADAPT15_ETP2	Post-intervention	32.46	10.02	0.6	0.2	0.2	0.95	1.04	0.53	13.26	0.62	1.37
+SRR6185226	16-Apr	Feces	Indian	34	20.5	High_dietary_fibre_intake	male	Prebiotic	ADAPT15	pre	ADAPT15 sample 1	ADAPT15_STP1	Pre-intervention	12.78	6.63	0.6	0.2	0.2	1.16	0.89	0.53	4.25	0.62	1.08
+SRR6185249	16-Jun	Feces	Indian	34	20.5	High_dietary_fibre_intake	male	Placebo	ADAPT15	pre	ADAPT15 sample 3	ADAPT15_STP2	Pre-intervention	20.72	8.2	0.6	0.2	0.2	1.04	1.12	0.53	6.41	0.62	1.3
+SRR6185172	16-May	Feces	European	32	18.9	High_dietary_fibre_intake	female	Placebo	ADAPT16	post	ADAPT16 sample 2	ADAPT16_ETP1	Post-intervention	23.28	7.97	0.6	0.2	0.22	1.04	0.76	0.53	7.08	0.62	1.1
+SRR6185208	16-Jun	Feces	European	32	18.9	High_dietary_fibre_intake	female	Prebiotic	ADAPT16	post	ADAPT16 sample 4	ADAPT16_ETP2	Post-intervention	67.02	16.52	0.6	0.2	0.2	0.2	0.2	0.53	6.97	10.36	0.2
+SRR6185225	16-Apr	Feces	European	32	18.9	High_dietary_fibre_intake	female	Placebo	ADAPT16	pre	ADAPT16 sample 1	ADAPT16_STP1	Pre-intervention	18.84	5.48	0.6	0.2	0.49	1.52	0.92	0.53	7.17	0.62	1.14
+SRR6185250	16-Jun	Feces	European	32	18.9	High_dietary_fibre_intake	female	Prebiotic	ADAPT16	pre	ADAPT16 sample 3	ADAPT16_STP2	Pre-intervention	30.78	9.25	0.6	0.2	0.2	0.68	0.66	0.53	7.55	0.62	0.9
+SRR6185173	16-May	Feces	NZ European	37	24.6	High_dietary_fibre_intake	male	Prebiotic	ADAPT17	post	ADAPT17 sample 2	ADAPT17_ETP1	Post-intervention	29.02	8.36	0.6	0.2	0.2	1.99	1.57	0.53	17.17	0.62	0.2
+SRR6185207	16-Jun	Feces	NZ European	37	24.6	High_dietary_fibre_intake	male	Placebo	ADAPT17	post	ADAPT17 sample 4	ADAPT17_ETP2	Post-intervention	16.96	4.6	0.6	0.2	0.2	0.55	0.77	0.53	9.51	0.62	0.81
+SRR6185232	16-Apr	Feces	NZ European	37	24.6	High_dietary_fibre_intake	male	Prebiotic	ADAPT17	pre	ADAPT17 sample 1	ADAPT17_STP1	Pre-intervention	15.09	5.29	0.6	0.2	0.2	0.97	0.71	0.53	5.89	0.62	0.85
+SRR6185251	16-May	Feces	NZ European	37	24.6	High_dietary_fibre_intake	male	Placebo	ADAPT17	pre	ADAPT17 sample 3	ADAPT17_STP2	Pre-intervention	12.76	4.21	0.6	0.2	0.2	0.52	0.66	0.53	6.94	0.62	0.9
+SRR6185174	16-May	Feces	Indian	26	22.5	Low_dietary_fibre_intake	female	Prebiotic	ADAPT19	post	ADAPT19 sample 2	ADAPT19_ETP1	Post-intervention	28.04	7.86	0.6	0.2	0.2	0.8	0.49	0.53	6.75	0.62	1.17
+SRR6185210	16-Jun	Feces	Indian	26	22.5	Low_dietary_fibre_intake	female	Placebo	ADAPT19	post	ADAPT19 sample 4	ADAPT19_ETP2	Post-intervention	26.81	7.26	0.6	0.2	0.2	0.65	0.65	0.53	9.71	0.62	0.96
+SRR6185231	16-Apr	Feces	Indian	26	22.5	Low_dietary_fibre_intake	female	Prebiotic	ADAPT19	pre	ADAPT19 sample 1	ADAPT19_STP1	Pre-intervention	31.21	9.31	0.6	0.2	0.2	1.31	0.83	0.53	11.13	0.62	1.17
+SRR6185252	16-May	Feces	Indian	26	22.5	Low_dietary_fibre_intake	female	Placebo	ADAPT19	pre	ADAPT19 sample 3	ADAPT19_STP2	Pre-intervention	43.55	18.73	0.6	0.2	0.2	0.74	0.68	0.53	16.02	1.26	1.66
+SRR6185292	16-May	Feces	Romanian	25	23.6	High_dietary_fibre_intake	female	Placebo	ADAPT20	post	ADAPT20 sample 2	ADAPT20_ETP1	Post-intervention	66.64	16.34	0.6	0.23	1.59	1.65	0.94	0.53	12.98	0.62	2.1
+SRR6185209	16-Jun	Feces	Romanian	25	23.6	High_dietary_fibre_intake	female	Prebiotic	ADAPT20	post	ADAPT20 sample 4	ADAPT20_ETP2	Post-intervention	79.4	17.83	0.6	0.2	0.62	0.79	0.55	0.53	24.85	6.84	2.12
+SRR6185230	16-Apr	Feces	Romanian	25	23.6	High_dietary_fibre_intake	female	Placebo	ADAPT20	pre	ADAPT20 sample 1	ADAPT20_STP1	Pre-intervention	55.41	13.17	0.6	0.2	0.82	1.16	0.63	0.53	11.29	0.62	1.37
+SRR6185245	16-May	Feces	Romanian	25	23.6	High_dietary_fibre_intake	female	Prebiotic	ADAPT20	pre	ADAPT20 sample 3	ADAPT20_STP2	Pre-intervention	53.25	11.67	0.6	0.2	0.77	1.32	0.99	0.54	10.89	0.62	1.56
+SRR6185291	16-May	Feces	Indian	33	22.3	Low_dietary_fibre_intake	female	Prebiotic	ADAPT21	post	ADAPT21 sample 2	ADAPT21_ETP1	Post-intervention	38.89	8.11	0.6	0.2	0.2	0.94	0.54	0.53	14.13	0.62	0.88
+SRR6185196	16-Jun	Feces	Indian	33	22.3	Low_dietary_fibre_intake	female	Placebo	ADAPT21	post	ADAPT21 sample 4	ADAPT21_ETP2	Post-intervention	52.64	14.28	0.6	0.2	0.2	2.14	1.82	0.53	18.89	0.62	2.02
+SRR6185229	16-Apr	Feces	Indian	33	22.3	Low_dietary_fibre_intake	female	Prebiotic	ADAPT21	pre	ADAPT21 sample 1	ADAPT21_STP1	Pre-intervention	72.52	15.8	0.6	0.2	0.2	1.05	0.61	0.53	25.18	0.62	1.28
+SRR6185246	16-May	Feces	Indian	33	22.3	Low_dietary_fibre_intake	female	Placebo	ADAPT21	pre	ADAPT21 sample 3	ADAPT21_STP2	Pre-intervention	39.46	9.63	0.6	0.2	0.2	0.2	0.2	0.53	24.08	43.46	0.48
+SRR6185290	16-May	Feces	Maori	35	22.3	High_dietary_fibre_intake	female	Prebiotic	ADAPT23	post	ADAPT23 sample 2	ADAPT23_ETP1	Post-intervention	47.22	11.99	0.6	0.2	0.66	1.16	0.79	0.53	18.77	0.62	1.66
+SRR6185195	16-Jul	Feces	Maori	35	22.3	High_dietary_fibre_intake	female	Placebo	ADAPT23	post	ADAPT23 sample 4	ADAPT23_ETP2	Post-intervention	26.4	7.98	0.6	0.2	0.36	1.58	1.5	0.53	11.81	0.62	1.72
+SRR6185223	16-May	Feces	Maori	35	22.3	High_dietary_fibre_intake	female	Prebiotic	ADAPT23	pre	ADAPT23 sample 1	ADAPT23_STP1	Pre-intervention	39.99	11.22	0.6	0.2	0.2	1.35	0.85	0.53	16.88	0.62	1.31
+SRR6185247	16-Jun	Feces	Maori	35	22.3	High_dietary_fibre_intake	female	Placebo	ADAPT23	pre	ADAPT23 sample 3	ADAPT23_STP2	Pre-intervention	20.6	4.85	0.6	0.2	0.24	1.01	1.13	0.53	7.82	0.62	1.21
+SRR6185289	16-May	Feces	NZ European	19	18.5	High_dietary_fibre_intake	female	Placebo	ADAPT24	post	ADAPT24 sample 2	ADAPT24_ETP1	Post-intervention	5.86	1.32	0.6	0.2	0.2	0.47	0.37	0.53	1.75	0.62	0.36
+SRR6185275	16-Jun	Feces	NZ European	19	18.5	High_dietary_fibre_intake	female	Prebiotic	ADAPT24	post	ADAPT24 sample 4	ADAPT24_ETP2	Post-intervention	28.48	9.66	0.6	0.2	0.76	1.24	1.41	0.53	8.52	0.62	1.88
+SRR6185222	16-Apr	Feces	NZ European	19	18.5	High_dietary_fibre_intake	female	Placebo	ADAPT24	pre	ADAPT24 sample 1	ADAPT24_STP1	Pre-intervention	22	7.08	0.6	0.2	0.77	1.81	1.35	0.53	6.9	0.62	1.5
+SRR6185248	16-May	Feces	NZ European	19	18.5	High_dietary_fibre_intake	female	Prebiotic	ADAPT24	pre	ADAPT24 sample 3	ADAPT24_STP2	Pre-intervention	64.26	22.81	0.6	0.2	1.33	1.02	0.94	2.32	9.15	0.62	1.75
+SRR6185288	16-May	Feces	NZ European	20	19.8	High_dietary_fibre_intake	female	Prebiotic	ADAPT25	post	ADAPT25 sample 2	ADAPT25_ETP1	Post-intervention	19.46	4.72	0.6	0.2	0.43	1.38	1.03	0.53	4.2	0.62	1.04
+SRR6185221	16-Jun	Feces	NZ European	20	19.8	High_dietary_fibre_intake	female	Placebo	ADAPT25	post	ADAPT25 sample 4	ADAPT25_ETP2	Post-intervention	26.9	6.43	0.6	0.2	0.35	1.29	1.49	0.53	6	0.62	1.59
+SRR6185267	16-Apr	Feces	NZ European	20	19.8	High_dietary_fibre_intake	female	Prebiotic	ADAPT25	pre	ADAPT25 sample 1	ADAPT25_STP1	Pre-intervention	16.45	3.99	0.6	0.2	0.29	1.66	1.21	0.53	4.61	0.62	1.25
+SRR6185243	16-May	Feces	NZ European	20	19.8	High_dietary_fibre_intake	female	Placebo	ADAPT25	pre	ADAPT25 sample 3	ADAPT25_STP2	Pre-intervention	33.07	10.39	0.6	0.2	0.59	1.51	1.6	0.53	6.4	0.62	1.6
+SRR6185287	16-May	Feces	NZ European	33	26.5	Low_dietary_fibre_intake	female	Placebo	ADAPT26	post	ADAPT26 sample 2	ADAPT26_ETP1	Post-intervention	35.89	9.62	0.6	0.54	1.84	2.38	1.66	0.53	10.3	0.62	2.7
+SRR6185233	16-Jul	Feces	NZ European	33	26.5	Low_dietary_fibre_intake	female	Prebiotic	ADAPT26	post	ADAPT26 sample 4	ADAPT26_ETP2	Post-intervention	69.61	15.89	0.6	0.23	1.56	0.2	0.98	0.53	10.12	0.62	1.92
+SRR6185268	16-May	Feces	NZ European	33	26.5	Low_dietary_fibre_intake	female	Placebo	ADAPT26	pre	ADAPT26 sample 1	ADAPT26_STP1	Pre-intervention	45	11.66	0.6	0.2	0.93	1.82	1.05	0.53	9.8	0.62	1.95
+SRR6185244	16-May	Feces	NZ European	33	26.5	Low_dietary_fibre_intake	female	Prebiotic	ADAPT26	pre	ADAPT26 sample 3	ADAPT26_STP2	Pre-intervention	32.46	9.79	0.6	0.5	1.34	1.42	1.32	0.53	9.31	0.62	2.07
+SRR6185286	16-May	Feces	Pakeha	64	23.6	High_dietary_fibre_intake	female	Placebo	ADAPT28	post	ADAPT28 sample 2	ADAPT28_ETP1	Post-intervention	33.47	8.82	0.6	0.2	0.2	1.58	1.05	0.53	8.9	0.62	1.17
+SRR6185234	16-Jul	Feces	Pakeha	64	23.6	High_dietary_fibre_intake	female	Prebiotic	ADAPT28	post	ADAPT28 sample 4	ADAPT28_ETP2	Post-intervention	44.1	15.46	0.6	0.2	0.53	0.2	1.33	0.53	12.77	0.62	1.85
+SRR6185265	16-Apr	Feces	Pakeha	64	23.6	High_dietary_fibre_intake	female	Placebo	ADAPT28	pre	ADAPT28 sample 1	ADAPT28_STP1	Pre-intervention	31.54	7.51	0.6	0.22	0.57	3.21	2.27	0.53	11.11	0.62	1.98
+SRR6185198	16-May	Feces	Pakeha	64	23.6	High_dietary_fibre_intake	female	Prebiotic	ADAPT28	pre	ADAPT28 sample 3	ADAPT28_STP2	Pre-intervention	43.34	10.04	0.6	0.2	0.43	2.48	2	0.53	15.24	0.62	2.1
+SRR6185285	16-May	Feces	Sri Lankan	21	28.2	Low_dietary_fibre_intake	male	Prebiotic	ADAPT29	post	ADAPT29 sample 2	ADAPT29_ETP1	Post-intervention	29.06	8.36	0.6	0.2	0.2	1.51	1.23	0.53	16.52	0.62	1.63
+SRR6185279	16-Jul	Feces	Sri Lankan	21	28.2	Low_dietary_fibre_intake	male	Placebo	ADAPT29	post	ADAPT29 sample 4	ADAPT29_ETP2	Post-intervention	52.56	14.09	0.6	0.2	0.2	3.08	2.75	0.53	26.38	0.62	3
+SRR6185266	16-May	Feces	Sri Lankan	21	28.2	Low_dietary_fibre_intake	male	Prebiotic	ADAPT29	pre	ADAPT29 sample 1	ADAPT29_STP1	Pre-intervention	21	5.32	0.6	0.2	0.2	1.39	1.05	0.53	14.4	0.62	0.88
+SRR6185197	16-Jun	Feces	Sri Lankan	21	28.2	Low_dietary_fibre_intake	male	Placebo	ADAPT29	pre	ADAPT29 sample 3	ADAPT29_STP2	Pre-intervention	14.18	6.71	0.6	0.2	0.2	1.08	1.15	0.53	8.97	0.62	1.35
+SRR6185294	16-May	Feces	Maori	34	27.3	Low_dietary_fibre_intake	male	Placebo	ADAPT30	post	ADAPT30 sample 2	ADAPT30_ETP1	Post-intervention	26.37	14.72	0.6	0.2	0.6	3.98	3.19	0.53	18.18	0.62	3.3
+SRR6185280	16-Jul	Feces	Maori	34	27.3	Low_dietary_fibre_intake	male	Prebiotic	ADAPT30	post	ADAPT30 sample 4	ADAPT30_ETP2	Post-intervention	19.32	5.78	0.6	0.2	0.44	0.88	1.09	0.53	7.73	0.62	1.43
+SRR6185271	16-May	Feces	Maori	34	27.3	Low_dietary_fibre_intake	male	Placebo	ADAPT30	pre	ADAPT30 sample 1	ADAPT30_STP1	Pre-intervention	18.38	8.88	0.6	0.21	0.53	2.54	1.94	0.53	10.64	0.62	2.05
+SRR6185239	16-Jun	Feces	Maori	34	27.3	Low_dietary_fibre_intake	male	Prebiotic	ADAPT30	pre	ADAPT30 sample 3	ADAPT30_STP2	Pre-intervention	37.71	11.38	0.6	0.2	0.41	1.93	1.87	0.53	15.9	1.17	2.08
+SRR6185293	16-May	Feces	Maori	35	27.5	High_dietary_fibre_intake	female	Prebiotic	ADAPT31	post	ADAPT31 sample 2	ADAPT31_ETP1	Post-intervention	42.91	11.97	0.6	0.29	1.99	0.8	0.45	0.53	8.42	0.62	1.97
+SRR6185281	16-Jul	Feces	Maori	35	27.5	High_dietary_fibre_intake	female	Placebo	ADAPT31	post	ADAPT31 sample 4	ADAPT31_ETP2	Post-intervention	28.63	6.92	0.6	0.2	0.41	1.46	1.57	0.53	7.19	0.62	1.62
+SRR6185272	16-May	Feces	Maori	35	27.5	High_dietary_fibre_intake	female	Prebiotic	ADAPT31	pre	ADAPT31 sample 1	ADAPT31_STP1	Pre-intervention	29.6	6.82	0.6	0.22	0.81	1.86	1.37	0.53	7.47	0.62	1.65
+SRR6185237	16-Jun	Feces	Maori	35	27.5	High_dietary_fibre_intake	female	Placebo	ADAPT31	pre	ADAPT31 sample 3	ADAPT31_STP2	Pre-intervention	19.38	5.32	0.6	0.2	0.28	0.62	0.7	0.61	5.56	0.62	1.02
+SRR6185219	16-May	Feces	NZ European	52	24.2	Low_dietary_fibre_intake	male	Placebo	ADAPT32	post	ADAPT32 sample 2	ADAPT32_ETP1	Post-intervention	61.42	16.19	0.6	0.2	0.2	1.19	0.69	0.53	24.79	0.62	2.28
+SRR6185282	16-Jul	Feces	NZ European	52	24.2	Low_dietary_fibre_intake	male	Prebiotic	ADAPT32	post	ADAPT32 sample 4	ADAPT32_ETP2	Post-intervention	41.96	12.65	0.6	0.2	0.2	1.94	1.86	0.53	13.27	0.62	1.9
+SRR6185269	16-May	Feces	NZ European	52	24.2	Low_dietary_fibre_intake	male	Placebo	ADAPT32	pre	ADAPT32 sample 1	ADAPT32_STP1	Pre-intervention	15.91	6.37	0.6	0.2	0.2	2.59	1.79	0.53	6.81	0.62	1.8
+SRR6185202	16-Jun	Feces	NZ European	52	24.2	Low_dietary_fibre_intake	male	Prebiotic	ADAPT32	pre	ADAPT32 sample 3	ADAPT32_STP2	Pre-intervention	22.83	8.45	0.6	0.2	0.2	1.4	1.23	0.61	8.84	0.62	1.18
+SRR6185220	16-May	Feces	NZ European	48	27.7	High_dietary_fibre_intake	male	Prebiotic	ADAPT33	post	ADAPT33 sample 2	ADAPT33_ETP1	Post-intervention	58.65	18.63	0.6	0.2	0.2	0.7	0.36	0.53	13.71	0.7	1.43
+SRR6185283	16-Jul	Feces	NZ European	48	27.7	High_dietary_fibre_intake	male	Placebo	ADAPT33	post	ADAPT33 sample 4	ADAPT33_ETP2	Post-intervention	59.29	16.51	0.6	0.2	0.2	0.33	0.43	0.53	16.16	0.62	1.57
+SRR6185270	16-May	Feces	NZ European	48	27.7	High_dietary_fibre_intake	male	Prebiotic	ADAPT33	pre	ADAPT33 sample 1	ADAPT33_STP1	Pre-intervention	22.25	6.76	0.6	0.37	1.11	2.49	1.74	0.53	5.45	0.62	1.67
+SRR6185201	16-Jun	Feces	NZ European	48	27.7	High_dietary_fibre_intake	male	Placebo	ADAPT33	pre	ADAPT33 sample 3	ADAPT33_STP2	Pre-intervention	48.22	17.97	0.6	0.2	0.2	0.78	0.81	0.53	14.95	1.09	1.77
+SRR6185217	16-May	Feces	Chinese	53	20.1	High_dietary_fibre_intake	female	Placebo	ADAPT34	post	ADAPT34 sample 2	ADAPT34_ETP1	Post-intervention	58.71	14.87	0.6	0.2	0.2	0.73	0.5	0.53	19.92	0.62	0.92
+SRR6185284	16-Jul	Feces	Chinese	53	20.1	High_dietary_fibre_intake	female	Prebiotic	ADAPT34	post	ADAPT34 sample 4	ADAPT34_ETP2	Post-intervention	61.85	16.42	0.6	0.2	0.2	0.2	0.2	0.53	20.58	0.62	1.13
+SRR6185273	16-May	Feces	Chinese	53	20.1	High_dietary_fibre_intake	female	Placebo	ADAPT34	pre	ADAPT34 sample 1	ADAPT34_STP1	Pre-intervention	66.03	18.68	0.6	0.2	0.2	0.86	0.48	0.53	24.56	0.62	1.23
+SRR6185200	16-Jun	Feces	Chinese	53	20.1	High_dietary_fibre_intake	female	Prebiotic	ADAPT34	pre	ADAPT34 sample 3	ADAPT34_STP2	Pre-intervention	24.16	4.7	0.6	0.2	0.2	0.32	0.4	0.53	8.17	0.62	0.45
+SRR6185218	16-Jun	Feces	NZ European	50	22	Low_dietary_fibre_intake	female	Prebiotic	ADAPT37	post	ADAPT37 sample 2	ADAPT37_ETP1	Post-intervention	9.33	2.85	0.6	0.2	0.2	0.98	0.6	0.53	4.24	0.62	0.51
+SRR6185164	16-Jul	Feces	NZ European	50	22	Low_dietary_fibre_intake	female	Placebo	ADAPT37	post	ADAPT37 sample 4	ADAPT37_ETP2	Post-intervention	21.63	6.25	0.6	0.51	1.22	1.27	1.36	0.53	7.81	0.62	2.26
+SRR6185274	16-May	Feces	NZ European	50	22	Low_dietary_fibre_intake	female	Prebiotic	ADAPT37	pre	ADAPT37 sample 1	ADAPT37_STP1	Pre-intervention	6.63	2.36	0.6	0.2	0.28	1.16	0.8	0.53	2.28	0.62	0.66
+SRR6185199	16-Jun	Feces	NZ European	50	22	Low_dietary_fibre_intake	female	Placebo	ADAPT37	pre	ADAPT37 sample 3	ADAPT37_STP2	Pre-intervention	11.03	1.96	0.6	0.2	0.2	0.49	0.5	0.76	2.6	0.98	0.37
+SRR6185215	16-Jun	Feces	NZ European	25	23	High_dietary_fibre_intake	male	Placebo	ADAPT38	post	ADAPT38 sample 2	ADAPT38_ETP1	Post-intervention	6.63	1.31	0.6	0.2	0.2	0.46	0.33	0.53	1.96	0.62	0.42
+SRR6185163	16-Jul	Feces	NZ European	25	23	High_dietary_fibre_intake	male	Prebiotic	ADAPT38	post	ADAPT38 sample 4	ADAPT38_ETP2	Post-intervention	38.76	6.11	0.6	0.2	0.43	0.65	0.64	0.53	8.42	0.62	1.13
+SRR6185256	16-May	Feces	NZ European	25	23	High_dietary_fibre_intake	male	Placebo	ADAPT38	pre	ADAPT38 sample 1	ADAPT38_STP1	Pre-intervention	16.91	4.83	0.6	0.2	0.62	1.3	0.86	0.53	4.33	0.62	0.99
+SRR6185254	16-Jun	Feces	NZ European	25	23	High_dietary_fibre_intake	male	Prebiotic	ADAPT38	pre	ADAPT38 sample 3	ADAPT38_STP2	Pre-intervention	25.77	4.16	0.6	0.2	0.2	1.62	1.52	0.53	6.9	0.62	1.58
+SRR6185216	16-Jun	Feces	Chinese	52	21.3	High_dietary_fibre_intake	female	Prebiotic	ADAPT39	post	ADAPT39 sample 2	ADAPT39_ETP1	Post-intervention	19.56	2.82	0.6	0.2	0.25	1.09	0.68	0.53	5.98	0.62	0.78
+SRR6185255	16-May	Feces	Chinese	52	21.3	High_dietary_fibre_intake	female	Prebiotic	ADAPT39	pre	ADAPT39 sample 1	ADAPT39_STP1	Pre-intervention	23.29	2.33	0.6	0.2	0.4	0.86	0.49	0.53	5.59	0.62	0.9
+SRR6185213	16-Jun	Feces	Filipino	33	21.1	Low_dietary_fibre_intake	female	Placebo	ADAPT40	post	ADAPT40 sample 2	ADAPT40_ETP1	Post-intervention	42.25	15.91	0.6	1.13	3.38	2.76	1.88	0.53	17.64	0.62	4.67
+SRR6185162	16-Jul	Feces	Filipino	33	21.1	Low_dietary_fibre_intake	female	Prebiotic	ADAPT40	post	ADAPT40 sample 4	ADAPT40_ETP2	Post-intervention	40.6	7.61	0.6	0.2	0.2	1.3	1.18	0.53	15.15	0.62	1.58
+SRR6185258	16-May	Feces	Filipino	33	21.1	Low_dietary_fibre_intake	female	Placebo	ADAPT40	pre	ADAPT40 sample 1	ADAPT40_STP1	Pre-intervention	63.1	25.8	0.6	0.2	0.97	0.55	0.32	0.53	12.46	0.62	1.75
+SRR6185253	16-Jun	Feces	Filipino	33	21.1	Low_dietary_fibre_intake	female	Prebiotic	ADAPT40	pre	ADAPT40 sample 3	ADAPT40_STP2	Pre-intervention	57.74	18.39	0.6	0.22	1.17	0.2	0.35	0.74	11.65	0.62	1.78
+SRR6185214	16-Jun	Feces	NZ European	32	22.2	Low_dietary_fibre_intake	female	Placebo	ADAPT42	post	ADAPT42 sample 2	ADAPT42_ETP1	Post-intervention	11.84	3.79	0.6	0.2	0.22	0.83	0.66	0.53	2.12	0.62	1.06
+SRR6185161	16-Jul	Feces	NZ European	32	22.2	Low_dietary_fibre_intake	female	Prebiotic	ADAPT42	post	ADAPT42 sample 4	ADAPT42_ETP2	Post-intervention	76.15	13.54	0.6	0.2	0.2	0.79	0.7	0.53	13.87	0.62	3.24
+SRR6185257	16-May	Feces	NZ European	32	22.2	Low_dietary_fibre_intake	female	Placebo	ADAPT42	pre	ADAPT42 sample 1	ADAPT42_STP1	Pre-intervention	51.88	18.33	0.6	0.2	0.29	1.07	0.63	0.53	10.59	0.62	2.16
+SRR6185179	16-Jun	Feces	NZ European	32	22.2	Low_dietary_fibre_intake	female	Prebiotic	ADAPT42	pre	ADAPT42 sample 3	ADAPT42_STP2	Pre-intervention	20.29	2.53	0.6	0.2	0.2	1.25	1.35	0.53	5.03	0.62	1.44
