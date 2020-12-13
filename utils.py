@@ -122,7 +122,8 @@ def train_scfa_dynamics_model(
                     random_state=0,
                     max_iter=100000,
                     tol=1e-6,
-                    l1_ratio=l1_ratio
+                    l1_ratio=l1_ratio,
+                    n_jobs=-1
                 ).fit(X_var, Y_var)
                 best_l1_ratio = clf.l1_ratio_
                 best_alpha = clf.alpha_
