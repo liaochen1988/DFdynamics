@@ -86,6 +86,7 @@ def train_scfa_dynamics_model(
     exclude_group=None, # group of mice excluded from model training
     exclude_vendor=None, # group of mice excluded from model training
     model='Correlation',# regression model
+    opt_params = None, # optimal model parameters
     feedback=False # if True, add SCFA feedback, i.e., dSCFA/dt = f(microbiome, SCFA)
 ):
     # get processed input data
@@ -103,6 +104,7 @@ def train_scfa_dynamics_model(
         return df_output
     elif model=='ElasticNet':
         lines = []
+        regression_model = {}
         for scfa_ in target_scfa_sliced:
             if feedback:
                 X_var = np.concatenate((np.asarray(df_bac_sliced.values), np.asarray(df_scfa_sliced[scfa_]).reshape(-1,1)), 1)
@@ -111,26 +113,35 @@ def train_scfa_dynamics_model(
                 X_var = np.asarray(df_bac_sliced.values)
                 X_var_names = list(df_bac_sliced.columns)
             Y_var = np.asarray(list(df_scfa_deriv[scfa_]))
-            l1_ratio = [1e-4, .1, .3, .5, .7, .9, .95, .99, 1]
-            reg = ElasticNetCV(
-                eps=1e-4,
-                n_alphas=10000,
-                cv=5,
-                random_state=0,
-                max_iter=100000,
-                tol=1e-6,
-                l1_ratio=l1_ratio
-            ).fit(X_var, Y_var)
-            clf = ElasticNet(
-                l1_ratio=reg.l1_ratio_,
-                alpha=reg.alpha_,
+            if opt_params is None:
+                l1_ratio = [1e-4, .1, .3, .5, .7, .9, .95, .99, 1]
+                clf = ElasticNetCV(
+                    eps=1e-4,
+                    n_alphas=10000,
+                    cv=5,
+                    random_state=0,
+                    max_iter=100000,
+                    tol=1e-6,
+                    l1_ratio=l1_ratio
+                ).fit(X_var, Y_var)
+                best_l1_ratio = clf.l1_ratio_
+                best_alpha = clf.alpha_
+            else:
+                best_l1_ratio = opt_params[0]
+                best_alpha = opt_params[1]
+            reg = ElasticNet(
+                l1_ratio=best_l1_ratio,
+                alpha=best_alpha,
                 random_state=0,
                 max_iter=100000,
                 tol=1e-6
-            ).fit(X_var, Y_var)
-            lines.append([scfa_, reg.alpha_, reg.l1_ratio_, clf.score(X_var, Y_var)]+list(clf.coef_))
+            )
+            clf = reg.fit(X_var, Y_var)
+            reg.feature_names = X_var_names
+            regression_model[scfa_] = reg
+            lines.append([scfa_, best_alpha, best_l1_ratio, clf.score(X_var, Y_var)]+list(clf.coef_))
         df_output = pd.DataFrame(lines, columns=['SCFA','BestAlpha','BestL1Ratio','R2']+X_var_names)
-        return df_output
+        return df_output, regression_model
     elif model=='RandomForest':
         # Number of trees in random forest
         n_estimators = [int(x) for x in np.linspace(start = 200, stop = 2000, num = 5)]
@@ -156,6 +167,7 @@ def train_scfa_dynamics_model(
 
         lines_opt = []
         lines_reg = []
+        regression_model = {}
         for scfa_ in target_scfa_sliced:
             if feedback:
                 X_var = np.concatenate((np.asarray(df_bac_sliced.values), np.asarray(df_scfa_sliced[scfa_]).reshape(-1,1)), 1)
@@ -165,40 +177,54 @@ def train_scfa_dynamics_model(
                 X_var_names = list(df_bac_sliced.columns)
             Y_var = np.asarray(list(df_scfa_deriv[scfa_]))
 
-            # grid search
-            rf = RandomForestRegressor()
-            rf_random = GridSearchCV(
-                estimator = rf,
-                param_grid = random_grid,
-                cv = 5,
-                verbose=2,
-                n_jobs = -1)
+            if opt_params is None:
+                # grid search
+                rf = RandomForestRegressor()
+                rf_random = GridSearchCV(
+                    estimator = rf,
+                    param_grid = random_grid,
+                    cv = 5,
+                    verbose=2,
+                    n_jobs = -1)
 
-            # fit the random search model
-            rf_random.fit(X_var, Y_var)
-            lines_opt.append([scfa_,
-                              rf_random.best_params_['n_estimators'],
-                              rf_random.best_params_['max_features'],
-                              rf_random.best_params_['max_depth'],
-                              rf_random.best_params_['min_samples_split'],
-                              rf_random.best_params_['min_samples_leaf'],
-                              rf_random.best_params_['bootstrap']])
+                # fit the random search model
+                rf_random.fit(X_var, Y_var)
+                lines_opt.append([scfa_,
+                                 rf_random.best_params_['n_estimators'],
+                                 rf_random.best_params_['max_features'],
+                                 rf_random.best_params_['max_depth'],
+                                 rf_random.best_params_['min_samples_split'],
+                                 rf_random.best_params_['min_samples_leaf'],
+                                 rf_random.best_params_['bootstrap']])
 
-            # run RF using optimal parameter
-            reg = RandomForestRegressor(
-                random_state=0,
-                bootstrap=rf_random.best_params_['bootstrap'],
-                max_depth=None if rf_random.best_params_['max_depth']=='nan' else rf_random.best_params_['max_depth'],
-                max_features=rf_random.best_params_['max_features'],
-                min_samples_leaf=rf_random.best_params_['min_samples_leaf'],
-                min_samples_split=rf_random.best_params_['min_samples_split'],
-                n_estimators=rf_random.best_params_['n_estimators'],
-                n_jobs=-1)
+                # run RF using optimal parameter
+                reg = RandomForestRegressor(
+                    random_state=0,
+                    bootstrap=rf_random.best_params_['bootstrap'],
+                    max_depth=None if rf_random.best_params_['max_depth']=='nan' else rf_random.best_params_['max_depth'],
+                    max_features=rf_random.best_params_['max_features'],
+                    min_samples_leaf=rf_random.best_params_['min_samples_leaf'],
+                    min_samples_split=rf_random.best_params_['min_samples_split'],
+                    n_estimators=rf_random.best_params_['n_estimators'],
+                    n_jobs=-1)
+            else:
+                reg = RandomForestRegressor(
+                    random_state=0,
+                    bootstrap=list(opt_params.loc[opt_params.SCFA==scfa_,'bootstrap'])[0],
+                    max_depth=None if str(list(opt_params.loc[opt_params.SCFA==scfa_,'max_depth'])[0])=='nan' else list(opt_params.loc[opt_params.SCFA==scfa_,'max_depth'])[0],
+                    max_features=list(opt_params.loc[opt_params.SCFA==scfa_,'max_features'])[0],
+                    min_samples_leaf=list(opt_params.loc[opt_params.SCFA==scfa_,'min_samples_leaf'])[0],
+                    min_samples_split=list(opt_params.loc[opt_params.SCFA==scfa_,'min_samples_split'])[0],
+                    n_estimators=list(opt_params.loc[opt_params.SCFA==scfa_,'n_estimators'])[0],
+                    n_jobs=-1
+                )
             clf = reg.fit(X_var, Y_var)
+            reg.feature_names = X_var_names # add feature names
             lines_reg.append([scfa_, clf.score(X_var, Y_var)]+ list(clf.feature_importances_))
+            regression_model[scfa_] = reg
         df_output_opt = pd.DataFrame(lines_opt, columns=['SCFA','n_estimators','max_features','max_depth','min_samples_split','min_samples_leaf','bootstrap'])
         df_output_reg = pd.DataFrame(lines_reg, columns=['SCFA','R2']+X_var_names)
-        return df_output_reg, df_output_opt
+        return df_output_reg, df_output_opt, regression_model
     else:
         print('unknown method: %s'%(method))
         raise
