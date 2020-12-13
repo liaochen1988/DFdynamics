@@ -23,14 +23,14 @@ def data_processing_scfa(
 ):
     # exlucde mice group
     if exclude_group is not None:
-        assert exlcude_group in ['A','B','C','D','E']
+        assert exclude_group in ['A','B','C','D','E']
         df_meta_sliced = df_meta[df_meta.RandomizedGroup != exclude_group]
     else:
         df_meta_sliced = deepcopy(df_meta)
 
     # exlucde mice group
     if exclude_vendor is not None:
-        assert exlcude_vendor in ['Hunan','Shanghai','Guangdong','Beijing']
+        assert exclude_vendor in ['Hunan','Shanghai','Guangdong','Beijing']
         df_meta_sliced = df_meta_sliced[df_meta_sliced.Vendor != exclude_vendor]
 
     # select target scfa
