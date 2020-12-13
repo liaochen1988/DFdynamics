@@ -10,16 +10,16 @@ from scipy.stats import pearsonr, spearmanr
 import warnings
 warnings.filterwarnings("ignore")
 
-def train_scfa_dynamics_model(
+# Note: all samples in df_meta should be consistent in their diets
+def data_processing_scfa(
     df_meta, # meta data
     df_bac,  # relative abundace or absolute abundance of gut microbiome
     df_scfa, # SCFA measurement
-    target_diet  # model will be trained on mice feeding on this diet
     target_scfa, # dependent variable(s) in the regression
-    model,   # regression model
-    topN=40, # keep only the most abundance N taxa in the model
-    exclude_group=None, # group of mice excluded from model training
-    feedback=False # if True, add SCFA feedback, i.e., dSCFA/dt = f(microbiome, SCFA)
+    topN,    # keep only the most abundance N taxa in the model
+    normalize_X, # normalize maximum of bacterial abundance to 1
+    exclude_group, # group of mice excluded from model training
+    exclude_vendor # vendor of mice excluded from model training
 ):
     # exlucde mice group
     if exclude_group is not None:
@@ -28,8 +28,10 @@ def train_scfa_dynamics_model(
     else:
         df_meta_sliced = deepcopy(df_meta)
 
-    # select only mice samples for the specific diet
-    df_meta_sliced = df_meta_sliced[df_meta_sliced.Diet==target_diet]
+    # exlucde mice group
+    if exclude_vendor is not None:
+        assert exlcude_vendor in ['Hunan','Shanghai','Guangdong','Beijing']
+        df_meta_sliced = df_meta_sliced[df_meta_sliced.Vendor != exclude_vendor]
 
     # select target scfa
     for scfa_ in target_scfa:
@@ -42,7 +44,7 @@ def train_scfa_dynamics_model(
 
     # make sure that meta data and SCFA have the same samples in the same order
     shared_samples = [x for x in df_meta_sliced.index if x in list(df_scfa.index)]
-    df_scfa_sliced = df_scfa_sliced.loc[shared_samples, target_scfa_sliced]
+    df_scfa_sliced = df_scfa.loc[shared_samples, target_scfa_sliced]
     df_meta_sliced = df_meta_sliced.loc[shared_samples]
 
     # calculate SCFA derivatives
@@ -67,16 +69,33 @@ def train_scfa_dynamics_model(
     df_bac_sliced_T = df_bac_sliced_T.sort_values(by=['mean'], axis=0, ascending=False)
     df_bac_sliced_T = df_bac_sliced_T.drop('mean', axis=1)
     df_bac_sliced = df_bac_sliced_T.iloc[0:topN].T
-    topN_taxa = list(df_bac_sliced.columns)
 
     # normalize max value of bacterial abundance to 1
-    df_bac_sliced = df_bac_sliced/df_bac_sliced.max().max()
+    if normalize_X:
+        df_bac_sliced = df_bac_sliced/df_bac_sliced.max().max()
+
+    return target_scfa_sliced, df_meta_sliced, df_bac_sliced, df_scfa_sliced, df_scfa_deriv
+
+def train_scfa_dynamics_model(
+    df_meta, # meta data
+    df_bac,  # relative abundace or absolute abundance of gut microbiome
+    df_scfa, # SCFA measurement
+    target_scfa, # dependent variable(s) in the regression
+    topN=40, # keep only the most abundance N taxa in the model
+    normalize_X=True, # normalize maximum of bacterial abundance to 1
+    exclude_group=None, # group of mice excluded from model training
+    exclude_vendor=None, # group of mice excluded from model training
+    model='Correlation',# regression model
+    feedback=False # if True, add SCFA feedback, i.e., dSCFA/dt = f(microbiome, SCFA)
+):
+    # get processed input data
+    target_scfa_sliced, df_meta_sliced, df_bac_sliced, df_scfa_sliced, df_scfa_deriv = data_processing_scfa(df_meta, df_bac, df_scfa, target_scfa, topN, normalize_X, exclude_group, exclude_vendor)
 
     # train specified model on the data
     if model=='Correlation':
         lines = []
         for scfa_ in target_scfa_sliced:
-            for t in topN_taxa:
+            for t in list(df_bac_sliced.columns):
                 corr_p, pvalue_p = pearsonr(df_scfa_deriv[scfa_], df_bac_sliced[t])
                 corr_s, pvalue_s = spearmanr(df_scfa_deriv[scfa_], df_bac_sliced[t])
                 lines.append([scfa_, t, corr_p, pvalue_p, corr_s, pvalue_s])
@@ -87,18 +106,18 @@ def train_scfa_dynamics_model(
         for scfa_ in target_scfa_sliced:
             if feedback:
                 X_var = np.concatenate((np.asarray(df_bac_sliced.values), np.asarray(df_scfa_sliced[scfa_]).reshape(-1,1)), 1)
-                X_var_names = topN_taxa + ['SCFA_fdb']
+                X_var_names = list(df_bac_sliced.columns) + ['SCFA_fdb']
             else:
                 X_var = np.asarray(df_bac_sliced.values)
-                X_var_names = topN_taxa
+                X_var_names = list(df_bac_sliced.columns)
             Y_var = np.asarray(list(df_scfa_deriv[scfa_]))
-            l1_ratio = [1e-4, 0.1, 0.3, 0.5, 0.7, 0.9, 0.95, 0.99, 1.00]
+            l1_ratio = [1e-4, .1, .3, .5, .7, .9, .95, .99, 1]
             reg = ElasticNetCV(
                 eps=1e-4,
-                n_alphas=1e4,
+                n_alphas=10000,
                 cv=5,
                 random_state=0,
-                max_iter=1e5,
+                max_iter=100000,
                 tol=1e-6,
                 l1_ratio=l1_ratio
             ).fit(X_var, Y_var)
@@ -106,7 +125,7 @@ def train_scfa_dynamics_model(
                 l1_ratio=reg.l1_ratio_,
                 alpha=reg.alpha_,
                 random_state=0,
-                max_iter=1e5,
+                max_iter=100000,
                 tol=1e-6
             ).fit(X_var, Y_var)
             lines.append([scfa_, reg.alpha_, reg.l1_ratio_, clf.score(X_var, Y_var)]+list(clf.coef_))
@@ -140,10 +159,11 @@ def train_scfa_dynamics_model(
         for scfa_ in target_scfa_sliced:
             if feedback:
                 X_var = np.concatenate((np.asarray(df_bac_sliced.values), np.asarray(df_scfa_sliced[scfa_]).reshape(-1,1)), 1)
-                X_var_names = topN_taxa + ['SCFA_fdb']
+                X_var_names = list(df_bac_sliced.columns) + ['SCFA_fdb']
             else:
                 X_var = np.asarray(df_bac_sliced.values)
-                X_var_names = topN_taxa
+                X_var_names = list(df_bac_sliced.columns)
+            Y_var = np.asarray(list(df_scfa_deriv[scfa_]))
 
             # grid search
             rf = RandomForestRegressor()
