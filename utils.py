@@ -19,7 +19,8 @@ def data_processing_scfa(
     topN,    # keep only the most abundance N taxa in the model
     normalize_X, # normalize maximum of bacterial abundance to 1
     exclude_group, # group of mice excluded from model training
-    exclude_vendor # vendor of mice excluded from model training
+    exclude_vendor, # vendor of mice excluded from model training
+    use_deriv # use derivative as dependent variable
 ):
     # exlucde mice group
     if exclude_group is not None:
@@ -50,15 +51,16 @@ def data_processing_scfa(
     # calculate SCFA derivatives
     df_scfa_meta = pd.merge(df_meta_sliced, df_scfa_sliced, left_index=True, right_index=True, how='inner')
     df_scfa_deriv = deepcopy(df_scfa_meta)
-    for curr_mice in set(df_scfa_deriv.MiceID):
-        curr_df = df_scfa_meta[df_scfa_meta.MiceID==curr_mice].sort_values(by='Day')
-        xdata = np.array(curr_df['Day'])
-        for scfa_ in target_scfa_sliced:
-            ydata = np.array(curr_df[scfa_])
-            cs = CubicSpline(xdata, ydata)
-            csd1 = cs.derivative(nu=1)
-            ydata_d1 = csd1(xdata)
-            df_scfa_deriv.loc[df_scfa_deriv.MiceID==curr_mice, scfa_] = ydata_d1
+    if use_deriv:
+        for curr_mice in set(df_scfa_deriv.MiceID):
+            curr_df = df_scfa_meta[df_scfa_meta.MiceID==curr_mice].sort_values(by='Day')
+            xdata = np.array(curr_df['Day'])
+            for scfa_ in target_scfa_sliced:
+                ydata = np.array(curr_df[scfa_])
+                cs = CubicSpline(xdata, ydata)
+                csd1 = cs.derivative(nu=1)
+                ydata_d1 = csd1(xdata)
+                df_scfa_deriv.loc[df_scfa_deriv.MiceID==curr_mice, scfa_] = ydata_d1
 
     # keep only samples in df_meta_sliced for bacterial abundance data
     df_bac_sliced = df_bac.loc[df_meta_sliced.index]
@@ -87,10 +89,11 @@ def train_scfa_dynamics_model(
     exclude_vendor=None, # group of mice excluded from model training
     model='Correlation',# regression model
     opt_params = None, # optimal model parameters
-    feedback=False # if True, add SCFA feedback, i.e., dSCFA/dt = f(microbiome, SCFA)
+    feedback=False, # if True, add SCFA feedback, i.e., dSCFA/dt = f(microbiome, SCFA)
+    use_deriv=True, # if False, use SCFA concentration as the dependent variable
 ):
     # get processed input data
-    target_scfa_sliced, df_meta_sliced, df_bac_sliced, df_scfa_sliced, df_scfa_deriv = data_processing_scfa(df_meta, df_bac, df_scfa, target_scfa, topN, normalize_X, exclude_group, exclude_vendor)
+    target_scfa_sliced, df_meta_sliced, df_bac_sliced, df_scfa_sliced, df_scfa_deriv = data_processing_scfa(df_meta, df_bac, df_scfa, target_scfa, topN, normalize_X, exclude_group, exclude_vendor, use_deriv)
 
     # train specified model on the data
     if model=='Correlation':
@@ -220,9 +223,9 @@ def train_scfa_dynamics_model(
                     n_jobs=-1
                 )
             clf = reg.fit(X_var, Y_var)
-            reg.feature_names = X_var_names # add feature names
+            reg.feature_names = deepcopy(X_var_names) # add feature names
             lines_reg.append([scfa_, clf.score(X_var, Y_var)]+ list(clf.feature_importances_))
-            regression_model[scfa_] = reg
+            regression_model[scfa_] = deepcopy(reg)
         df_output_opt = pd.DataFrame(lines_opt, columns=['SCFA','n_estimators','max_features','max_depth','min_samples_split','min_samples_leaf','bootstrap'])
         df_output_reg = pd.DataFrame(lines_reg, columns=['SCFA','R2']+X_var_names)
         return df_output_reg, df_output_opt, regression_model
