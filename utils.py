@@ -89,7 +89,7 @@ def train_scfa_dynamics_model(
     exclude_vendor=None, # group of mice excluded from model training
     model='Correlation',# regression model
     opt_params = None, # optimal model parameters
-    feedback=False, # if True, add SCFA feedback, i.e., dSCFA/dt = f(microbiome, SCFA)
+    addVar=False, # if True, add SCFA concentration for model dSCFA/dt=f(microbiome) and add time for model SCFA(t)=f(microbiome)
     use_deriv=True, # if False, use SCFA concentration as the dependent variable
 ):
     # get processed input data
@@ -109,9 +109,12 @@ def train_scfa_dynamics_model(
         lines = []
         regression_model = {}
         for scfa_ in target_scfa_sliced:
-            if feedback:
-                X_var = np.concatenate((np.asarray(df_bac_sliced.values), np.asarray(df_scfa_sliced[scfa_]).reshape(-1,1)), 1)
-                X_var_names = list(df_bac_sliced.columns) + ['SCFA_fdb']
+            if addVar:
+                if use_deriv:
+                    X_var = np.concatenate((np.asarray(df_bac_sliced.values), np.asarray(df_scfa_sliced[scfa_]).reshape(-1,1)), 1)
+                else:
+                    X_var = np.concatenate((np.asarray(df_bac_sliced.values), np.asarray(df_meta_sliced['Day']).reshape(-1,1)), 1)
+                X_var_names = list(df_bac_sliced.columns) + ['AddVar']
             else:
                 X_var = np.asarray(df_bac_sliced.values)
                 X_var_names = list(df_bac_sliced.columns)
@@ -173,9 +176,12 @@ def train_scfa_dynamics_model(
         lines_reg = []
         regression_model = {}
         for scfa_ in target_scfa_sliced:
-            if feedback:
-                X_var = np.concatenate((np.asarray(df_bac_sliced.values), np.asarray(df_scfa_sliced[scfa_]).reshape(-1,1)), 1)
-                X_var_names = list(df_bac_sliced.columns) + ['SCFA_fdb']
+            if addVar:
+                if use_deriv:
+                    X_var = np.concatenate((np.asarray(df_bac_sliced.values), np.asarray(df_scfa_sliced[scfa_]).reshape(-1,1)), 1)
+                else:
+                    X_var = np.concatenate((np.asarray(df_bac_sliced.values), np.asarray(df_meta_sliced['Day']).reshape(-1,1)), 1)
+                X_var_names = list(df_bac_sliced.columns) + ['AddVar']
             else:
                 X_var = np.asarray(df_bac_sliced.values)
                 X_var_names = list(df_bac_sliced.columns)
