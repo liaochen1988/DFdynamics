@@ -52,15 +52,15 @@ def data_processing_scfa(
     df_scfa_meta = pd.merge(df_meta_sliced, df_scfa_sliced, left_index=True, right_index=True, how='inner')
     df_scfa_deriv = deepcopy(df_scfa_meta)
     if use_deriv:
-        for curr_mice in set(df_scfa_deriv.MiceID):
-            curr_df = df_scfa_meta[df_scfa_meta.MiceID==curr_mice].sort_values(by='Day')
+        for curr_subject in set(df_scfa_deriv.Subject):
+            curr_df = df_scfa_meta[df_scfa_meta.Subject==curr_subject].sort_values(by='Day')
             xdata = np.array(curr_df['Day'])
             for scfa_ in target_scfa_sliced:
                 ydata = np.array(curr_df[scfa_])
                 cs = CubicSpline(xdata, ydata)
                 csd1 = cs.derivative(nu=1)
                 ydata_d1 = csd1(xdata)
-                df_scfa_deriv.loc[df_scfa_deriv.MiceID==curr_mice, scfa_] = ydata_d1
+                df_scfa_deriv.loc[df_scfa_deriv.Subject==curr_subject, scfa_] = ydata_d1
 
     # keep only samples in df_meta_sliced for bacterial abundance data
     df_bac_sliced = df_bac.loc[df_meta_sliced.index]
@@ -238,3 +238,126 @@ def train_scfa_dynamics_model(
     else:
         print('unknown method: %s'%(method))
         raise
+
+
+def generate_stan_files_for_fiber_respones(
+    df_bac, # 16S data (relative or absolute), rows are samples, columns are taxa
+    df_meta, # meta data, rows are samples, columns are Subject, Day, and Diet
+    topN=20, # select the topN taxa to run bayesian regression
+    stan_path='/Users/liaoc/Documents/cmdstan-2.24.1/projects/microbiome_fiber_response_LD'
+):
+    # stan program does not support certain symbols, replace them with meaningful ones
+    df_bac_renamed = deepcopy(df_bac)
+    df_bac_renamed.columns = [c.replace('/','_slash_').replace(' ','_space_').replace('[','_leftsquarebracket_').replace(']','_rightsquarebracket_').replace('-','_dash_').replace('.','_dot_').replace('(','_leftroundbracket').replace(')','_rightroundbracket_') for c in df_bac_renamed.columns]
+
+    # add pseudo abundances to zeros
+    for sample_id in df_bac_renamed.index:
+        sample = np.array(df_bac_renamed.loc[sample_id])
+        minval = np.min(sample[np.nonzero(sample)]) # minimum non-zero value
+        sample[sample==0] = minval
+        df_bac_renamed.loc[sample_id] = sample
+
+    # select the topN most abundant taxa
+    df_bac_renamed_T = df_bac_renamed.loc[df_meta.index].T
+    df_bac_renamed_T['mean'] = df_bac_renamed_T.mean(axis=1)
+    df_bac_renamed_T = df_bac_renamed_T.sort_values(by=['mean'],axis=0,ascending=False)
+    df_bac_renamed_T = df_bac_renamed_T.drop('mean', axis=1)
+    df_bac_renamed_topN = df_bac_renamed_T.iloc[0:topN].T
+
+    # normalize bacterial abundance (maximum -> 1)
+    selected_bacterial_taxa = list(df_bac_renamed.columns)
+    df_bac_renamed_w_meta = pd.merge(df_meta, df_bac_renamed/df_bac_renamed.max().max(), left_index=True, right_index=True, how='inner')
+
+    # remove samples that have single data (at least two data is required)
+    subjects_to_remove = []
+    for curr_subject in set(df_bac_renamed_w_meta.Subject):
+        if len(df_bac_renamed_w_meta[df_bac_renamed_w_meta.Subject==curr_subject])<2:
+            subjects_to_remove.append(curr_subject)
+    df_bac_renamed_w_meta = df_bac_renamed_w_meta[~df_bac_renamed_w_meta.Subject.isin(subjects_to_removed)]
+
+    # calculate log-derivatives of bacterial abundance
+    df_bac_deriv = deepcopy(df_bac_renamed_w_meta)
+    for curr_subject in set(df_bac_deriv.Subject):
+        curr_df = df_bac_deriv[df_bac_deriv.Subject==curr_subject]
+        for taxon in selected_bacterial_taxa:
+            xdata = np.array(curr_df['Day'])
+            ydata = np.array(curr_df[taxon])
+            cs = CubicSpline(xdata, ydata)
+            csd1 = cs.derivative(nu=1)
+            ydata_d1 = csd1(xdata)
+            df_bac_deriv.loc[df_bac_deriv.Subject==curr_subject, taxon] = ydata_d1
+
+    # construct regression matrix
+    Ymat = df_bac_deriv[selected_bacterial_taxa].values
+    Ymat = Ymat.flatten(order='F')
+    Ymat = StandardScaler().fit_transform(Ymat.reshape(-1,1)).reshape(1,-1)[0] # standardize
+
+    Xmat = np.zeros(shape=(topN*len(df_bac_deriv.index), (topN+2)*topN))
+    for k in np.arange(topN):
+        Xmat[k*len(df_bac_deriv.index):(k+1)*len(df_bac_deriv.index),k*(topN+2)] = 1
+        Xmat[k*len(df_bac_deriv.index):(k+1)*len(df_bac_deriv.index),k*(topN+2)+1] = df_bac_deriv.Diet.values
+        Xmat[k*len(df_bac_deriv.index):(k+1)*len(df_bac_deriv.index),k*(topN+2)+2:(k+1)*(topN+2)] = df_bac_renamed_w_meta[selected_bacterial_taxa].values
+
+    # write data to stan program files
+    json_str = '{\n"N" : %d,\n'%(len(Ymat))
+    json_str += '\"dlogX\" : [%s],\n'%(','.join(list(Ymat.astype(str))))
+    for k1,c1 in enumerate(bacterial_taxa):
+        # growth rate
+        json_str += '\"growth_rate_%s\" : [%s],\n'%(c1,','.join(list(Xmat[:,k1*(topN+2)].astype(str))))
+        # diet response
+        json_str += '\"fiber_response_%s\" : [%s],\n'%(c1,','.join(list(Xmat[:,k1*(topN+2)+1].astype(str))))
+        # bacterial interactions
+        for k2,c2 in enumerate(selected_bacterial_taxa):
+            v = list(Xmat[:,k1*(topN+2)+2+k2].astype(str))
+            json_str += '\"pairwise_interaction_%s_%s\" : [%s]'%(c1,c2,','.join(v))
+            if c1 == selected_bacterial_taxa[-1] and c2 == selected_bacterial_taxa[-1]:
+                json_str += '\n}'
+            else:
+                json_str += ',\n'
+    text_file = open("%s/mice_scfa.data.json"%(stan_path), "w")
+    text_file.write("%s" % json_str)
+    text_file.close()
+
+    # write stan program
+    # data block
+    model_str = 'data {\n'
+    model_str += '\tint<lower=0> N;\n'
+    model_str += '\tvector[N] dlogX;\n'
+    for c1 in selected_bacterial_taxa:
+        model_str += '\tvector[N] growth_rate_%s;\n'%(c1)
+        model_str += '\tvector[N] fiber_response_%s;\n'%(c1)
+        for c2 in selected_bacterial_taxa:
+            model_str += '\tvector[N] pairwise_interaction_%s_%s;\n'%(c1,c2)
+    model_str += '}\n'
+
+    # parameter block
+    model_str += 'parameters {\n\treal<lower=0,upper=1> sigma;\n'
+    for c1 in selected_bacterial_taxa:
+        model_str += '\treal alpha__%s;\n'%(c1) # growth rate
+        model_str += '\treal epsilon__%s;\n'%(c1) # inulin response
+        for c2 in selected_bacterial_taxa:
+            model_str += '\treal beta__%s_%s;\n'%(c1,c2)
+    model_str += '}\n'
+
+    # model block
+    model_str += 'model {\n\tsigma ~ uniform(0,1);\n'
+    for c1 in selected_bacterial_taxa:
+        model_str += '\talpha__%s ~ normal(0,1);\n'%(c1) # growth rate
+        model_str += '\tepsilon__%s ~ normal(0,1);\n'%(c1) # inulin response
+        for c2 in selected_bacterial_taxa:
+            model_str += '\tbeta__%s_%s ~ normal(0,1);\n'%(c1,c2)
+    model_str += '\tdlogX ~ normal('
+    for c1 in selected_bacterial_taxa:
+        model_str += 'alpha__%s*growth_rate_%s+'%(c1,c1) # growth rate
+        model_str += 'epsilon__%s*fiber_response_%s+'%(c1,c1) # inulin response
+        for c2 in selected_bacterial_taxa:
+            if c1 == selected_bacterial_taxa[-1] and c2 == selected_bacterial_taxa[-1]:
+                model_str += 'beta__%s_%s*pairwise_interaction_%s_%s'%(c1,c2,c1,c2)
+            else:
+                model_str += 'beta__%s_%s*pairwise_interaction_%s_%s+'%(c1,c2,c1,c2)
+    model_str += ', sigma);\n}'
+    text_file = open("%s/mice_scfa.stan"%(stan_path), "w")
+    text_file.write("%s" % model_str)
+    text_file.close()
+
+    return
