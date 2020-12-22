@@ -7,6 +7,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import RandomizedSearchCV, GridSearchCV
 from scipy.interpolate import CubicSpline
 from scipy.stats import pearsonr, spearmanr
+import scipy.stats.kde as kde
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -17,10 +18,10 @@ def data_processing_scfa(
     df_scfa, # SCFA measurement
     target_scfa, # dependent variable(s) in the regression
     topN,    # keep only the most abundance N taxa in the model
-    normalize_X, # normalize maximum of bacterial abundance to 1
     exclude_group, # group of mice excluded from model training
     exclude_vendor, # vendor of mice excluded from model training
-    use_deriv # use derivative as dependent variable
+    use_deriv_scfa, # use derivative for SCFA
+    use_deriv_microbiome # use derivative for microbiome
 ):
     # exlucde mice group
     if exclude_group is not None:
@@ -51,16 +52,16 @@ def data_processing_scfa(
     # calculate SCFA derivatives
     df_scfa_meta = pd.merge(df_meta_sliced, df_scfa_sliced, left_index=True, right_index=True, how='inner')
     df_scfa_deriv = deepcopy(df_scfa_meta)
-    if use_deriv:
-        for curr_subject in set(df_scfa_deriv.Subject):
-            curr_df = df_scfa_meta[df_scfa_meta.Subject==curr_subject].sort_values(by='Day')
+    if use_deriv_scfa:
+        for curr_subject in set(df_scfa_deriv.SubjectID):
+            curr_df = df_scfa_meta[df_scfa_meta.SubjectID==curr_subject].sort_values(by='Day')
             xdata = np.array(curr_df['Day'])
             for scfa_ in target_scfa_sliced:
                 ydata = np.array(curr_df[scfa_])
                 cs = CubicSpline(xdata, ydata)
                 csd1 = cs.derivative(nu=1)
                 ydata_d1 = csd1(xdata)
-                df_scfa_deriv.loc[df_scfa_deriv.Subject==curr_subject, scfa_] = ydata_d1
+                df_scfa_deriv.loc[df_scfa_deriv.SubjectID==curr_subject, scfa_] = ydata_d1
 
     # keep only samples in df_meta_sliced for bacterial abundance data
     df_bac_sliced = df_bac.loc[df_meta_sliced.index]
@@ -71,12 +72,24 @@ def data_processing_scfa(
     df_bac_sliced_T = df_bac_sliced_T.sort_values(by=['mean'], axis=0, ascending=False)
     df_bac_sliced_T = df_bac_sliced_T.drop('mean', axis=1)
     df_bac_sliced = df_bac_sliced_T.iloc[0:topN].T
+    selected_topN_bac = list(df_bac_sliced.columns)
 
-    # normalize max value of bacterial abundance to 1
-    if normalize_X:
-        df_bac_sliced = df_bac_sliced/df_bac_sliced.max().max()
+    # calculate Microbiome derivative
+    df_bac_meta = pd.merge(df_meta_sliced, df_bac_sliced, left_index=True, right_index=True, how='inner')
+    df_bac_deriv = deepcopy(df_bac_meta)
+    if use_deriv_microbiome:
+        for curr_subject in set(df_bac_deriv.SubjectID):
+            curr_df = df_bac_meta[df_bac_meta.SubjectID==curr_subject].sort_values(by='Day')
+            xdata = np.array(curr_df['Day'])
+            for bac_ in selected_topN_bac:
+                ydata = np.array(curr_df[bac_])
+                cs = CubicSpline(xdata, ydata)
+                csd1 = cs.derivative(nu=1)
+                ydata_d1 = csd1(xdata)
+                df_bac_deriv.loc[df_bac_deriv.SubjectID==curr_subject, bac_] = ydata_d1
+    df_bac_deriv = df_bac_deriv[selected_topN_bac]
 
-    return target_scfa_sliced, df_meta_sliced, df_bac_sliced, df_scfa_sliced, df_scfa_deriv
+    return target_scfa_sliced, selected_topN_bac, df_meta_sliced, df_bac_sliced, df_bac_deriv, df_scfa_sliced, df_scfa_deriv
 
 def train_scfa_dynamics_model(
     df_meta, # meta data
@@ -89,19 +102,28 @@ def train_scfa_dynamics_model(
     exclude_vendor=None, # group of mice excluded from model training
     model='Correlation',# regression model
     opt_params = None, # optimal model parameters
-    addVar=False, # if True, add SCFA concentration for model dSCFA/dt=f(microbiome) and add time for model SCFA(t)=f(microbiome)
-    use_deriv=True, # if False, use SCFA concentration as the dependent variable
+    addVar=None, # options: time or SCFA
+    use_deriv_scfa=True, # whether using dSCFA/dt as the dependent variable
+    use_deriv_microbiome=False, # whether dMicrobiome/dt as the independent variable
 ):
     # get processed input data
-    target_scfa_sliced, df_meta_sliced, df_bac_sliced, df_scfa_sliced, df_scfa_deriv = data_processing_scfa(df_meta, df_bac, df_scfa, target_scfa, topN, normalize_X, exclude_group, exclude_vendor, use_deriv)
+    target_scfa_sliced, selected_topN_bac, df_meta_sliced, df_bac_sliced, df_bac_deriv, df_scfa_sliced, df_scfa_deriv = data_processing_scfa(df_meta, df_bac, df_scfa, target_scfa, topN, exclude_group, exclude_vendor, use_deriv_scfa, use_deriv_microbiome)
+
+    # set X variable column names
+    if addVar is not None:
+        X_var_names = selected_topN_bac + ['AddVar']
+    else:
+        X_var_names = selected_topN_bac
 
     # train specified model on the data
     if model=='Correlation':
+        if normalize_X:
+            df_bac_deriv = df_bac_deriv/df_bac_deriv.max().max()
         lines = []
         for scfa_ in target_scfa_sliced:
-            for t in list(df_bac_sliced.columns):
-                corr_p, pvalue_p = pearsonr(df_scfa_deriv[scfa_], df_bac_sliced[t])
-                corr_s, pvalue_s = spearmanr(df_scfa_deriv[scfa_], df_bac_sliced[t])
+            for t in selected_topN_bac:
+                corr_p, pvalue_p = pearsonr(df_scfa_deriv[scfa_], df_bac_deriv[t])
+                corr_s, pvalue_s = spearmanr(df_scfa_deriv[scfa_], df_bac_deriv[t])
                 lines.append([scfa_, t, corr_p, pvalue_p, corr_s, pvalue_s])
         df_output = pd.DataFrame(lines, columns=['SCFA','Taxa','PearsonR','PearsonP','SpearmanR','SpearmanP'])
         return df_output
@@ -109,16 +131,21 @@ def train_scfa_dynamics_model(
         lines = []
         regression_model = {}
         for scfa_ in target_scfa_sliced:
-            if addVar:
-                if use_deriv:
-                    X_var = np.concatenate((np.asarray(df_bac_sliced.values), np.asarray(df_scfa_sliced[scfa_]).reshape(-1,1)), 1)
+            if addVar is not None:
+                if addVar=='SCFA':
+                    X_var = np.concatenate((np.asarray(df_bac_deriv.values), np.asarray(df_scfa_sliced[scfa_]).reshape(-1,1)), 1)
+                elif addVar=='time':
+                    X_var = np.concatenate((np.asarray(df_bac_deriv.values), np.asarray(df_meta_sliced['Day']).reshape(-1,1)), 1)
                 else:
-                    X_var = np.concatenate((np.asarray(df_bac_sliced.values), np.asarray(df_meta_sliced['Day']).reshape(-1,1)), 1)
-                X_var_names = list(df_bac_sliced.columns) + ['AddVar']
+                    print('unknown additional variable %s'%(addVar))
+                    raise
             else:
-                X_var = np.asarray(df_bac_sliced.values)
-                X_var_names = list(df_bac_sliced.columns)
+                X_var = np.asarray(df_bac_deriv.values)
             Y_var = np.asarray(list(df_scfa_deriv[scfa_]))
+
+            if normalize_X:
+                X_var = X_var/X_var.max().max()
+
             if opt_params is None:
                 l1_ratio = [1e-4, .1, .3, .5, .7, .9, .95, .99, 1]
                 clf = ElasticNetCV(
@@ -176,16 +203,20 @@ def train_scfa_dynamics_model(
         lines_reg = []
         regression_model = {}
         for scfa_ in target_scfa_sliced:
-            if addVar:
-                if use_deriv:
-                    X_var = np.concatenate((np.asarray(df_bac_sliced.values), np.asarray(df_scfa_sliced[scfa_]).reshape(-1,1)), 1)
+            if addVar is not None:
+                if addVar=='SCFA':
+                    X_var = np.concatenate((np.asarray(df_bac_deriv.values), np.asarray(df_scfa_sliced[scfa_]).reshape(-1,1)), 1)
+                elif addVar=='time':
+                    X_var = np.concatenate((np.asarray(df_bac_deriv.values), np.asarray(df_meta_sliced['Day']).reshape(-1,1)), 1)
                 else:
-                    X_var = np.concatenate((np.asarray(df_bac_sliced.values), np.asarray(df_meta_sliced['Day']).reshape(-1,1)), 1)
-                X_var_names = list(df_bac_sliced.columns) + ['AddVar']
+                    print('unknown additional variable %s'%(addVar))
+                    raise
             else:
-                X_var = np.asarray(df_bac_sliced.values)
-                X_var_names = list(df_bac_sliced.columns)
+                X_var = np.asarray(df_bac_deriv.values)
             Y_var = np.asarray(list(df_scfa_deriv[scfa_]))
+
+            if normalize_X:
+                X_var = X_var/X_var.max().max()
 
             if opt_params is None:
                 # grid search
@@ -242,7 +273,8 @@ def train_scfa_dynamics_model(
 
 def generate_stan_files_for_fiber_respones(
     df_bac, # 16S data (relative or absolute), rows are samples, columns are taxa
-    df_meta, # meta data, rows are samples, columns are Subject, Day, and Diet
+    df_meta, # meta data, rows are samples, columns are SubjectID, Day, and Dose
+    prefix, # prefix of stan file name
     topN=20, # select the topN taxa to run bayesian regression
     stan_path='/Users/liaoc/Documents/cmdstan-2.24.1/projects/microbiome_fiber_response_LD'
 ):
@@ -262,30 +294,33 @@ def generate_stan_files_for_fiber_respones(
     df_bac_renamed_T['mean'] = df_bac_renamed_T.mean(axis=1)
     df_bac_renamed_T = df_bac_renamed_T.sort_values(by=['mean'],axis=0,ascending=False)
     df_bac_renamed_T = df_bac_renamed_T.drop('mean', axis=1)
-    df_bac_renamed_topN = df_bac_renamed_T.iloc[0:topN].T
+    df_bac_renamed = df_bac_renamed_T.iloc[0:topN].T
 
     # normalize bacterial abundance (maximum -> 1)
     selected_bacterial_taxa = list(df_bac_renamed.columns)
     df_bac_renamed_w_meta = pd.merge(df_meta, df_bac_renamed/df_bac_renamed.max().max(), left_index=True, right_index=True, how='inner')
 
+    # if there are duplicate samples for the same subject, average the data
+    df_bac_renamed_w_meta = df_bac_renamed_w_meta.groupby(['SubjectID','Day']).agg(np.mean).reset_index()
+
     # remove samples that have single data (at least two data is required)
     subjects_to_remove = []
-    for curr_subject in set(df_bac_renamed_w_meta.Subject):
-        if len(df_bac_renamed_w_meta[df_bac_renamed_w_meta.Subject==curr_subject])<2:
+    for curr_subject in set(df_bac_renamed_w_meta.SubjectID):
+        if len(df_bac_renamed_w_meta[df_bac_renamed_w_meta.SubjectID==curr_subject])<2:
             subjects_to_remove.append(curr_subject)
-    df_bac_renamed_w_meta = df_bac_renamed_w_meta[~df_bac_renamed_w_meta.Subject.isin(subjects_to_removed)]
+    df_bac_renamed_w_meta = df_bac_renamed_w_meta[~df_bac_renamed_w_meta.SubjectID.isin(subjects_to_remove)]
 
     # calculate log-derivatives of bacterial abundance
     df_bac_deriv = deepcopy(df_bac_renamed_w_meta)
-    for curr_subject in set(df_bac_deriv.Subject):
-        curr_df = df_bac_deriv[df_bac_deriv.Subject==curr_subject]
+    for curr_subject in set(df_bac_deriv.SubjectID):
+        curr_df = df_bac_deriv[df_bac_deriv.SubjectID==curr_subject].sort_values(by='Day')
         for taxon in selected_bacterial_taxa:
             xdata = np.array(curr_df['Day'])
             ydata = np.array(curr_df[taxon])
             cs = CubicSpline(xdata, ydata)
             csd1 = cs.derivative(nu=1)
             ydata_d1 = csd1(xdata)
-            df_bac_deriv.loc[df_bac_deriv.Subject==curr_subject, taxon] = ydata_d1
+            df_bac_deriv.loc[df_bac_deriv.SubjectID==curr_subject, taxon] = ydata_d1
 
     # construct regression matrix
     Ymat = df_bac_deriv[selected_bacterial_taxa].values
@@ -295,13 +330,13 @@ def generate_stan_files_for_fiber_respones(
     Xmat = np.zeros(shape=(topN*len(df_bac_deriv.index), (topN+2)*topN))
     for k in np.arange(topN):
         Xmat[k*len(df_bac_deriv.index):(k+1)*len(df_bac_deriv.index),k*(topN+2)] = 1
-        Xmat[k*len(df_bac_deriv.index):(k+1)*len(df_bac_deriv.index),k*(topN+2)+1] = df_bac_deriv.Diet.values
+        Xmat[k*len(df_bac_deriv.index):(k+1)*len(df_bac_deriv.index),k*(topN+2)+1] = df_bac_deriv.Dose.values
         Xmat[k*len(df_bac_deriv.index):(k+1)*len(df_bac_deriv.index),k*(topN+2)+2:(k+1)*(topN+2)] = df_bac_renamed_w_meta[selected_bacterial_taxa].values
 
     # write data to stan program files
     json_str = '{\n"N" : %d,\n'%(len(Ymat))
     json_str += '\"dlogX\" : [%s],\n'%(','.join(list(Ymat.astype(str))))
-    for k1,c1 in enumerate(bacterial_taxa):
+    for k1,c1 in enumerate(selected_bacterial_taxa):
         # growth rate
         json_str += '\"growth_rate_%s\" : [%s],\n'%(c1,','.join(list(Xmat[:,k1*(topN+2)].astype(str))))
         # diet response
@@ -314,7 +349,7 @@ def generate_stan_files_for_fiber_respones(
                 json_str += '\n}'
             else:
                 json_str += ',\n'
-    text_file = open("%s/mice_scfa.data.json"%(stan_path), "w")
+    text_file = open("%s/%s.data.json"%(stan_path, prefix), "w")
     text_file.write("%s" % json_str)
     text_file.close()
 
@@ -356,8 +391,62 @@ def generate_stan_files_for_fiber_respones(
             else:
                 model_str += 'beta__%s_%s*pairwise_interaction_%s_%s+'%(c1,c2,c1,c2)
     model_str += ', sigma);\n}'
-    text_file = open("%s/mice_scfa.stan"%(stan_path), "w")
+    text_file = open("%s/%s.stan"%(stan_path, prefix), "w")
     text_file.write("%s" % model_str)
     text_file.close()
 
-    return
+    return selected_bacterial_taxa
+
+def hpd_grid(sample, alpha=0.05, roundto=2):
+    """Calculate highest posterior density (HPD) of array for given alpha.
+    The HPD is the minimum width Bayesian credible interval (BCI).
+    The function works for multimodal distributions, returning more than one mode
+    Parameters
+    ----------
+
+    sample : Numpy array or python list
+        An array containing MCMC samples
+    alpha : float
+        Desired probability of type I error (defaults to 0.05)
+    roundto: integer
+        Number of digits after the decimal point for the results
+    Returns
+    ----------
+    hpd: array with the lower
+
+    """
+    sample = np.asarray(sample)
+    sample = sample[~np.isnan(sample)]
+    # get upper and lower bounds
+    l = np.min(sample)
+    u = np.max(sample)
+    density = kde.gaussian_kde(sample)
+    x = np.linspace(l, u, 2000)
+    y = density.evaluate(x)
+    #y = density.evaluate(x, l, u) waitting for PR to be accepted
+    xy_zipped = zip(x, y/np.sum(y))
+    xy = sorted(xy_zipped, key=lambda x: x[1], reverse=True)
+    xy_cum_sum = 0
+    hdv = []
+    for val in xy:
+        xy_cum_sum += val[1]
+        hdv.append(val[0])
+        if xy_cum_sum >= (1-alpha):
+            break
+    hdv.sort()
+    diff = (u-l)/20  # differences of 5%
+    hpd = []
+    hpd.append(round(min(hdv), roundto))
+    for i in range(1, len(hdv)):
+        if hdv[i]-hdv[i-1] >= diff:
+            hpd.append(round(hdv[i-1], roundto))
+            hpd.append(round(hdv[i], roundto))
+    hpd.append(round(max(hdv), roundto))
+    ite = iter(hpd)
+    hpd = list(zip(ite, ite))
+    modes = []
+    for value in hpd:
+        x_hpd = x[(x > value[0]) & (x < value[1])]
+        y_hpd = y[(x > value[0]) & (x < value[1])]
+        modes.append(round(x_hpd[np.argmax(y_hpd)], roundto))
+    return hpd, x, y, modes

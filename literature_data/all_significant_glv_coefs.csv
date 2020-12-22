@@ -1,0 +1,44 @@
+,Type,Taxa,Left,Right,Middle,SNR,Significant,Study
+0,basal_growth_rate,Prevotella,-1.0,-0.03,-0.515,-2.052565669471599,True,healey_2018_BJN
+1,fiber_response,Bifidobacterium,0.1,0.14,0.12,12.33628593218377,True,healey_2018_BJN
+2,fiber_response,Anaerostipes,0.06,0.1,0.08,8.06509697140682,True,healey_2018_BJN
+3,fiber_response,Prevotella,0.01,0.05,0.03,2.73711454576199,True,healey_2018_BJN
+4,pairwise_interaction,"('Blautia', 'Blautia')",-3.96,-1.2,-2.58,-3.685521089223954,True,healey_2018_BJN
+5,pairwise_interaction,"('Blautia', 'Faecalibacterium')",-3.29,-0.13,-1.71,-2.18109201193397,True,healey_2018_BJN
+6,pairwise_interaction,"('Blautia', 'Bifidobacterium')",-3.48,-0.86,-2.17,-3.268101682789394,True,healey_2018_BJN
+7,pairwise_interaction,"('Bifidobacterium', 'Bifidobacterium')",1.33,3.93,2.63,3.994282982146079,True,healey_2018_BJN
+8,pairwise_interaction,"('Prevotella', 'Faecalibacterium')",0.21,3.4,1.805,2.238596125545523,True,healey_2018_BJN
+9,pairwise_interaction,"('Prevotella', 'Prevotella')",-6.46,-4.34,-5.4,-10.1516007870635,True,healey_2018_BJN
+10,basal_growth_rate,Bifidobacterium,0.04,1.05,0.545,2.093837929226378,True,baxter_2019_mbio
+11,fiber_response,Faecalibacterium,0.01,0.04,0.025,3.879449848292642,True,baxter_2019_mbio
+12,fiber_response,Trichuris_dash_trichiura_dash__leftroundbrackethuman_dash_whipworm_rightroundbracket_,0.01,0.04,0.025,2.899653832430121,True,baxter_2019_mbio
+13,fiber_response,Bifidobacterium,0.02,0.05,0.035,5.346077921816151,True,baxter_2019_mbio
+14,fiber_response,Anaerostipes,0.01,0.04,0.025,2.876798952594752,True,baxter_2019_mbio
+15,pairwise_interaction,"('Bacteroides', 'Lachnospiraceae')",-4.75,-1.14,-2.945,-3.218317577400294,True,baxter_2019_mbio
+16,pairwise_interaction,"('Bacteroides', 'Trichuris_dash_trichiura_dash__leftroundbrackethuman_dash_whipworm_rightroundbracket_')",-3.53,-0.67,-2.1,-2.891420826207769,True,baxter_2019_mbio
+17,pairwise_interaction,"('Bacteroides', 'Bifidobacterium')",-4.07,-0.58,-2.325,-2.644192218734438,True,baxter_2019_mbio
+18,pairwise_interaction,"('Faecalibacterium', 'Faecalibacterium')",0.57,3.95,2.26,2.647707260714479,True,baxter_2019_mbio
+19,pairwise_interaction,"('Trichuris_dash_trichiura_dash__leftroundbrackethuman_dash_whipworm_rightroundbracket_', 'Bacteroides_dash_plebeius_dash_DSM_dash_17135')",-3.47,-0.3,-1.885,-2.364621907725689,True,baxter_2019_mbio
+20,pairwise_interaction,"('Prevotella', 'Prevotella')",0.71,3.77,2.24,2.909484369366326,True,baxter_2019_mbio
+21,pairwise_interaction,"('Bifidobacterium', 'Bacteroides')",-1.73,-0.17,-0.95,-2.417835761224866,True,baxter_2019_mbio
+22,pairwise_interaction,"('Bifidobacterium', 'Bifidobacterium')",4.48,8.02,6.25,6.954380960998659,True,baxter_2019_mbio
+23,fiber_response,Lachnospiraceae,0.01,0.06,0.035,2.75396936972437,True,vandeputte_2017_gut
+24,fiber_response,Anaerostipes,0.01,0.06,0.035,2.738454081983625,True,vandeputte_2017_gut
+25,fiber_response,Bifidobacterium,0.02,0.07,0.04500000000000001,3.269076169787632,True,vandeputte_2017_gut
+26,pairwise_interaction,"('Bacteroides', 'Bacteroides')",0.49,1.92,1.205,3.298997800042262,True,vandeputte_2017_gut
+27,pairwise_interaction,"('Bacteroides', 'Faecalibacterium')",-7.67,-4.9,-6.285,-8.95135196364907,True,vandeputte_2017_gut
+28,pairwise_interaction,"('Bacteroides', 'Ruminococcus_dash_sp_dot__dash_N15_dot_MGS_dash_57')",0.6,4.22,2.41,2.642689579785423,True,vandeputte_2017_gut
+29,pairwise_interaction,"('Bacteroides', 'Blautia')",-3.72,-0.09,-1.905,-2.074094448696916,True,vandeputte_2017_gut
+30,pairwise_interaction,"('Bacteroides', 'Christensenellaceae_dash_R_dash_7_dash_group')",0.21,3.92,2.065,2.189751412873505,True,vandeputte_2017_gut
+31,pairwise_interaction,"('Faecalibacterium', 'Faecalibacterium')",1.53,4.28,2.905,4.193005972829511,True,vandeputte_2017_gut
+32,pairwise_interaction,"('Bifidobacterium', 'Bifidobacterium')",0.36,3.93,2.145,2.36037822335232,True,vandeputte_2017_gut
+33,pairwise_interaction,"('Lachnospiraceae', 'Akkermansia_muciniphila')",0.11,1.63,0.87,2.270559359104416,True,creswell_2020_GM
+34,pairwise_interaction,"('Lachnospiraceae', 'Roseburia_intestinalis')",0.59,3.42,2.005,2.780318494266626,True,creswell_2020_GM
+35,pairwise_interaction,"('Faecalibacterium_prausnitzii', 'Gemmiger_formicilis')",0.2,3.54,1.87,2.234029348567134,True,creswell_2020_GM
+36,pairwise_interaction,"('Prevotella_copri', 'Anaerostipes_hadrus')",-2.41,-0.63,-1.52,-3.372511325782239,True,creswell_2020_GM
+37,pairwise_interaction,"('Prevotella_copri', 'Bifidobacterium_adolescentis')",0.28,1.87,1.075,2.674802215648642,True,creswell_2020_GM
+38,pairwise_interaction,"('Prevotella_copri', 'Prevotella_copri')",0.17,1.18,0.6749999999999999,2.628094875120634,True,creswell_2020_GM
+39,pairwise_interaction,"('Roseburia_faecis', 'Roseburia_faecis')",0.11,2.22,1.165,2.202735063282831,True,creswell_2020_GM
+40,pairwise_interaction,"('Akkermansia_muciniphila', 'Anaerostipes_hadrus')",-2.08,-0.3,-1.19,-2.648680639695992,True,creswell_2020_GM
+41,pairwise_interaction,"('Akkermansia_muciniphila', 'Bifidobacterium_adolescentis')",-1.59,-0.02,-0.805,-2.011412218991742,True,creswell_2020_GM
+42,pairwise_interaction,"('Akkermansia_muciniphila', 'Akkermansia_muciniphila')",-2.49,-0.97,-1.73,-4.480155920195205,True,creswell_2020_GM
