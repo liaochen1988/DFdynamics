@@ -532,7 +532,6 @@ def get_rf_prediction_error(
         )
 
         # rejoin sliced tables but only keep samples in the test dataset
-        # make sure to use df_bac_deriv (instead of df_bac_sliced)
         df_sliced_ext = deepcopy(df_meta_sliced)
         if prediction_type=='intrapolation':
             df_sliced_ext = df_sliced_ext[df_sliced_ext.RandomizedGroup==to_exclude]
@@ -543,6 +542,7 @@ def get_rf_prediction_error(
             raise
         df_sliced_ext = pd.merge(df_sliced_ext, df_scfa_sliced, left_index=True, right_index=True, how='inner')
         df_sliced_ext = pd.merge(df_sliced_ext, df_scfa_deriv, left_index=True, right_index=True, how='inner')
+        # make sure to use df_bac_deriv (instead of df_bac_sliced)
         df_sliced_ext = pd.merge(df_sliced_ext, df_bac_deriv, left_index=True, right_index=True, how='inner')
 
         # predict SCFA derivative and SCFA value
