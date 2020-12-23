@@ -6,6 +6,7 @@ from sklearn.linear_model import ElasticNet, ElasticNetCV
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import RandomizedSearchCV, GridSearchCV
 from scipy.interpolate import CubicSpline
+from scipy.integrate import odeint, ode, solve_ivp
 from scipy.stats import pearsonr, spearmanr
 import scipy.stats.kde as kde
 import warnings
@@ -415,3 +416,209 @@ def hpd_grid(sample, alpha=0.05, roundto=2):
         y_hpd = y[(x > value[0]) & (x < value[1])]
         modes.append(round(x_hpd[np.argmax(y_hpd)], roundto))
     return hpd, x, y, modes
+
+def get_rf_training_error(
+    df_meta,
+    df_scfa,
+    df_bac,
+    target_scfa,
+    topN,
+    exclude_group,
+    exclude_vendor,
+    use_deriv_scfa,
+    use_deriv_microbiome
+):
+    df_train = None
+
+    # get best RF model hyperparameters
+    if exclude_group is not None:
+        df_opt_paras = pd.read_csv('optimal_rf_parameters_exclude_group%s.csv'%(exclude_group), index_col=0)
+    if exclude_vendor is not None:
+        df_opt_paras = pd.read_csv('optimal_rf_parameters_exclude_vendor%s.csv'%(exclude_vendor), index_col=0)
+
+    # retrain the model
+    target_scfa_sliced, selected_topN_bac, df_meta_sliced, df_bac_sliced, df_bac_deriv, df_scfa_sliced, df_scfa_deriv = data_processing_scfa(
+        df_meta, df_bac, df_scfa, target_scfa, topN=topN, exclude_group=exclude_group, exclude_vendor=exclude_vendor, use_deriv_scfa=use_deriv_scfa, use_deriv_microbiome=use_deriv_microbiome)
+    _,_,reg = train_scfa_dynamics_model(
+        df_meta=df_meta,
+        df_bac=df_bac,
+        df_scfa=df_scfa,
+        target_scfa=target_scfa,
+        topN=topN,
+        exclude_group=exclude_group,
+        exclude_vendor=exclude_vendor,
+        model='RandomForest',
+        opt_params = df_opt_paras,
+        use_deriv_scfa=use_deriv_scfa,
+        use_deriv_microbiome=use_deriv_microbiome
+    )
+
+    # get predicted SCFA derivative of the same training dataset
+    for scfa_ in target_scfa:
+        df_train_tmp = deepcopy(df_scfa_deriv)
+        df_train_tmp = df_train_tmp[[x for x in df_train_tmp.columns if x not in list(set(target_scfa)-set([scfa_]))]]
+        df_train_tmp = df_train_tmp.rename({scfa_:'SCFA_deriv_observed'}, axis=1)
+        df_train_tmp['SCFA_mol'] = scfa_
+        df_train_tmp['SCFA_value_observed'] = df_scfa_sliced[scfa_]
+        X_var = np.asarray(df_bac_deriv.values)
+        df_train_tmp['SCFA_deriv_predicted'] = reg[scfa_].predict(X_var)
+
+        if df_train is None:
+            df_train = df_train_tmp
+        else:
+            df_train = pd.concat([df_train, df_train_tmp], ignore_index=True)
+
+    df_train['RelativeError'] = (df_train['SCFA_deriv_predicted']-df_train['SCFA_deriv_observed'])/df_train['SCFA_deriv_observed']*100
+    return df_train
+
+def get_rf_prediction_error(
+    df_meta,
+    df_scfa,
+    df_bac,
+    target_scfa,
+    prediction_type,
+    topN,
+    use_deriv_scfa,
+    use_deriv_microbiome,
+    is_plot=False,
+    save_fig=False
+):
+    df_pred = None
+    if prediction_type=='intrapolation':
+        exclude_set = ['A','B','C','D']
+        if is_plot:
+            fig, ax = plt.subplots(figsize=(20,12), nrows=4, ncols=4, sharex=True)
+    elif prediction_type=='extrapolation':
+        exclude_set = ['Beijing','Guangdong','Hunan','Shanghai']
+        if is_plot:
+            fig, ax = plt.subplots(figsize=(24,12), nrows=4, ncols=5, sharex=True)
+    else:
+        print('unknown prediction type %s'%(prediction_type))
+        raise
+
+    if is_plot:
+        scfa_color={'Acetate':'#DB5E56', 'Butyrate':'#56DB5E', 'Propionate':'#5E56DB'}
+
+    # get SCFA and microbiome derivative for all mice
+    # keep all taxa at this step
+    target_scfa_sliced, selected_topN_bac, df_meta_sliced, df_bac_sliced, df_bac_deriv, df_scfa_sliced, df_scfa_deriv = data_processing_scfa(df_meta=df_meta, df_bac=df_bac, df_scfa=df_scfa, target_scfa=target_scfa, topN=len(df_bac.columns), exclude_group=None, exclude_vendor=None, use_deriv_scfa=use_deriv_scfa, use_deriv_microbiome=use_deriv_microbiome)
+
+    # rename columns of df_scfa_deriv
+    df_scfa_deriv = df_scfa_deriv[target_scfa_sliced]
+    df_scfa_deriv.columns = [x+'_deriv_observed' for x in target_scfa_sliced]
+
+    # get prediction for excluded dataset in training
+    for idx_i,to_exclude in enumerate(exclude_set):
+        # get trained model
+        if prediction_type=='intrapolation':
+            df_opt_paras = pd.read_csv('intrapolation/optimal_rf_parameters_exclude_group%s.csv'%(to_exclude), index_col=0)
+        elif prediction_type=='extrapolation':
+            df_opt_paras = pd.read_csv('extrapolation/optimal_rf_parameters_exclude_vendor%s.csv'%(to_exclude), index_col=0)
+        else:
+            print('unknown prediction type %s'%(prediction_type))
+            raise
+        _,_,reg = train_scfa_dynamics_model(
+            df_meta=df_meta,
+            df_bac=df_bac,
+            df_scfa=df_scfa,
+            target_scfa=target_scfa,
+            topN=topN,
+            exclude_group=to_exclude if prediction_type=='intrapolation' else None,
+            exclude_vendor=to_exclude if prediction_type=='extrapolation' else None,
+            model='RandomForest',
+            opt_params=df_opt_paras,
+            use_deriv_scfa=use_deriv_scfa,
+            use_deriv_microbiome=use_deriv_microbiome
+        )
+
+        # rejoin sliced tables but only keep samples in the test dataset
+        # make sure to use df_bac_deriv (instead of df_bac_sliced)
+        df_sliced_ext = deepcopy(df_meta_sliced)
+        if prediction_type=='intrapolation':
+            df_sliced_ext = df_sliced_ext[df_sliced_ext.RandomizedGroup==to_exclude]
+        elif prediction_type=='extrapolation':
+            df_sliced_ext = df_sliced_ext[df_sliced_ext.Vendor==to_exclude]
+        else:
+            print('unknown prediction type %s'%(prediction_type))
+            raise
+        df_sliced_ext = pd.merge(df_sliced_ext, df_scfa_sliced, left_index=True, right_index=True, how='inner')
+        df_sliced_ext = pd.merge(df_sliced_ext, df_scfa_deriv, left_index=True, right_index=True, how='inner')
+        df_sliced_ext = pd.merge(df_sliced_ext, df_bac_deriv, left_index=True, right_index=True, how='inner')
+
+        # predict SCFA derivative and SCFA value
+        all_mice = set(df_sliced_ext['SubjectID'])
+        for scfa_ in target_scfa:
+            topN_taxa = reg[scfa_].feature_names
+            X_var = np.asarray(df_sliced_ext[topN_taxa].values)
+            df_sliced_ext['%s_deriv_predicted'%(scfa_)] = reg[scfa_].predict(X_var)
+
+            for idx_j, curr_mice in enumerate(all_mice):
+                df_tmp = df_sliced_ext[(df_sliced_ext.SubjectID==curr_mice)].sort_values(by='Day')
+                df_tmp = df_tmp[['SubjectID','Vendor','Day','RandomizedGroup',scfa_,scfa_+'_deriv_observed',scfa_+'_deriv_predicted']+topN_taxa]
+                df_tmp = df_tmp.rename({scfa_:'SCFA_value_observed',
+                                        scfa_+'_deriv_observed':'SCFA_deriv_observed',
+                                        scfa_+'_deriv_predicted':'SCFA_deriv_predicted'
+                                       }, axis=1)
+                df_tmp['SCFA_mol'] = scfa_
+
+                if use_deriv_scfa==False:
+                    # SCFA derivative and SCFA value are the same
+                    df_tmp['SCFA_value_predicted'] = df_tmp['SCFA_deriv_predicted']
+                else:
+                    # integration is needed to calculate SCFA value from SCFA derivative
+                    init_scfa_value = df_tmp.loc[df_tmp.Day==0,'SCFA_value_observed'].values[0]
+
+                    # get cubic spliner for each bacterial taxa
+                    tck = {}
+                    for taxa in topN_taxa:
+                        tck[taxa] = CubicSpline(df_tmp.Day, df_tmp[taxa])
+
+                    # remove taxa in df_tmp
+                    df_tmp = df_tmp[[x for x in df_tmp.columns if x not in topN_taxa]]
+
+                    # function to be used in ODE solver
+                    def f_solve_ivp(t, y, reg_scfa_, tck):
+                        x = []
+                        for feature in reg_scfa_.feature_names:
+                            x.append(tck[feature](t))
+                        deriv = reg_scfa_.predict([x])
+                        if y<=0 and deriv<0:
+                            deriv=0
+                        return deriv
+
+                    # solve the model
+                    xcorr = np.linspace(0,31,311)
+                    sol = solve_ivp(f_solve_ivp, [0,31], [init_scfa_value], args=(reg[scfa_], tck), method='RK45', t_eval=xcorr)
+                    sol_t = sol.t
+                    sol_y = sol.y[0]
+
+                    # interpolate the values on the day of observataion
+                    cs = CubicSpline(sol_t, sol_y)
+                    df_tmp['SCFA_value_predicted'] = cs(df_tmp.Day)
+
+                if df_pred is None:
+                    df_pred = df_tmp
+                else:
+                    df_pred = pd.concat([df_pred, df_tmp], ignore_index=True)
+
+                if is_plot:
+                    _ = ax[idx_i,idx_j].scatter(df_tmp.Day, df_tmp.SCFA_value_observed, marker='o', color=scfa_color[scfa_], s=100, label=scfa_)
+                    _ = ax[idx_i,idx_j].plot(df_tmp.Day, df_tmp.SCFA_value_predicted, '-', marker="s", markersize=10, color=scfa_color[scfa_])
+                    _ = ax[idx_i,idx_j].set_title(curr_mice)
+                    if idx_i==0 and idx_j==0:
+                        ax[idx_i,idx_j].legend()
+                    ax[idx_i,idx_j].set_xlim([-3.2,32])
+                    if idx_j==0:
+                        ax[idx_i,idx_j].set_ylabel('SCFA', fontsize=15)
+                    if idx_i==3:
+                        ax[idx_i,idx_j].set_xlabel('Day', fontsize=15)
+
+    if is_plot:
+        plt.tight_layout()
+        plt.rcParams['svg.fonttype'] = 'none'
+
+    if save_fig:
+        fig.savefig("rf_prediction_error_%s.svg"%(prediction_type), format="svg")
+
+    df_pred['RelativeError'] = (df_pred['SCFA_value_predicted']-df_pred['SCFA_value_observed'])/df_pred['SCFA_value_observed']*100
+    return df_pred
