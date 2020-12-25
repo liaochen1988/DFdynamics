@@ -20,9 +20,7 @@ def data_processing_scfa(
     target_scfa, # dependent variable(s) in the regression
     topN,    # keep only the most abundance N taxa in the model
     exclude_group, # group of mice excluded from model training
-    exclude_vendor, # vendor of mice excluded from model training
-    use_deriv_scfa, # use derivative for SCFA
-    use_deriv_microbiome # use derivative for microbiome
+    exclude_vendor # vendor of mice excluded from model training
 ):
     # exlucde mice group
     if exclude_group is not None:
@@ -40,29 +38,25 @@ def data_processing_scfa(
     for scfa_ in target_scfa:
         if scfa_ not in list(df_scfa.columns):
             print('unknown scfa: %s'%(target_scfa))
-    target_scfa_sliced = [x for x in target_scfa if x in list(df_scfa.columns)]
-    if len(target_scfa_sliced) == 0:
-        print('cannot find any SCFA.')
-        raise
+            raise
 
     # make sure that meta data and SCFA have the same samples in the same order
     shared_samples = [x for x in df_meta_sliced.index if x in list(df_scfa.index)]
-    df_scfa_sliced = df_scfa.loc[shared_samples, target_scfa_sliced]
+    df_scfa_sliced = df_scfa.loc[shared_samples, target_scfa]
     df_meta_sliced = df_meta_sliced.loc[shared_samples]
 
     # calculate SCFA derivatives
     df_scfa_meta = pd.merge(df_meta_sliced, df_scfa_sliced, left_index=True, right_index=True, how='inner')
     df_scfa_deriv = deepcopy(df_scfa_meta)
-    if use_deriv_scfa:
-        for curr_subject in set(df_scfa_deriv.SubjectID):
-            curr_df = df_scfa_meta[df_scfa_meta.SubjectID==curr_subject].sort_values(by='Day')
-            xdata = np.array(curr_df['Day'])
-            for scfa_ in target_scfa_sliced:
-                ydata = np.array(curr_df[scfa_])
-                cs = CubicSpline(xdata, ydata)
-                csd1 = cs.derivative(nu=1)
-                ydata_d1 = csd1(xdata)
-                df_scfa_deriv.loc[df_scfa_deriv.SubjectID==curr_subject, scfa_] = ydata_d1
+    for curr_subject in set(df_scfa_deriv.SubjectID):
+        curr_df = df_scfa_meta[df_scfa_meta.SubjectID==curr_subject].sort_values(by='Day')
+        xdata = np.array(curr_df['Day'])
+        for scfa_ in target_scfa:
+            ydata = np.array(curr_df[scfa_])
+            cs = CubicSpline(xdata, ydata)
+            csd1 = cs.derivative(nu=1)
+            ydata_d1 = csd1(xdata)
+            df_scfa_deriv.loc[df_scfa_deriv.SubjectID==curr_subject, scfa_] = ydata_d1
 
     # keep only samples in df_meta_sliced for bacterial abundance data
     df_bac_sliced = df_bac.loc[df_meta_sliced.index]
@@ -78,19 +72,18 @@ def data_processing_scfa(
     # calculate Microbiome derivative
     df_bac_meta = pd.merge(df_meta_sliced, df_bac_sliced, left_index=True, right_index=True, how='inner')
     df_bac_deriv = deepcopy(df_bac_meta)
-    if use_deriv_microbiome:
-        for curr_subject in set(df_bac_deriv.SubjectID):
-            curr_df = df_bac_meta[df_bac_meta.SubjectID==curr_subject].sort_values(by='Day')
-            xdata = np.array(curr_df['Day'])
-            for bac_ in selected_topN_bac:
-                ydata = np.array(curr_df[bac_])
-                cs = CubicSpline(xdata, ydata)
-                csd1 = cs.derivative(nu=1)
-                ydata_d1 = csd1(xdata)
-                df_bac_deriv.loc[df_bac_deriv.SubjectID==curr_subject, bac_] = ydata_d1
+    for curr_subject in set(df_bac_deriv.SubjectID):
+        curr_df = df_bac_meta[df_bac_meta.SubjectID==curr_subject].sort_values(by='Day')
+        xdata = np.array(curr_df['Day'])
+        for bac_ in selected_topN_bac:
+            ydata = np.array(curr_df[bac_])
+            cs = CubicSpline(xdata, ydata)
+            csd1 = cs.derivative(nu=1)
+            ydata_d1 = csd1(xdata)
+            df_bac_deriv.loc[df_bac_deriv.SubjectID==curr_subject, bac_] = ydata_d1
     df_bac_deriv = df_bac_deriv[selected_topN_bac]
 
-    return target_scfa_sliced, selected_topN_bac, df_meta_sliced, df_bac_sliced, df_bac_deriv, df_scfa_sliced, df_scfa_deriv
+    return selected_topN_bac, df_meta_sliced, df_bac_sliced, df_bac_deriv, df_scfa_sliced, df_scfa_deriv
 
 def train_scfa_dynamics_model(
     df_meta, # meta data
@@ -106,24 +99,38 @@ def train_scfa_dynamics_model(
     use_deriv_microbiome=False, # whether dMicrobiome/dt as the independent variable
 ):
     # get processed input data
-    target_scfa_sliced, selected_topN_bac, df_meta_sliced, df_bac_sliced, df_bac_deriv, df_scfa_sliced, df_scfa_deriv = data_processing_scfa(df_meta, df_bac, df_scfa, target_scfa, topN, exclude_group, exclude_vendor, use_deriv_scfa, use_deriv_microbiome)
+    selected_topN_bac, df_meta_sliced, df_bac_sliced, df_bac_deriv, df_scfa_sliced, df_scfa_deriv = data_processing_scfa(df_meta, df_bac, df_scfa, target_scfa, topN, exclude_group, exclude_vendor)
 
     # train specified model on the data
     if model=='Correlation':
         lines = []
-        for scfa_ in target_scfa_sliced:
+        for scfa_ in target_scfa:
             for t in selected_topN_bac:
-                corr_p, pvalue_p = pearsonr(df_scfa_deriv[scfa_], df_bac_deriv[t])
-                corr_s, pvalue_s = spearmanr(df_scfa_deriv[scfa_], df_bac_deriv[t])
+                if use_deriv_scfa:
+                    Y_var = np.asarray(list(df_scfa_deriv[scfa_]))
+                else:
+                    Y_var = np.asarray(list(df_scfa_sliced[scfa_]))
+                if use_deriv_microbiome:
+                    X_var = np.asarray(list(df_bac_deriv[t]))
+                else:
+                    X_var = np.asarray(list(df_bac_sliced[t]))
+                corr_p, pvalue_p = pearsonr(Y_var, X_var)
+                corr_s, pvalue_s = spearmanr(Y_var, X_var)
                 lines.append([scfa_, t, corr_p, pvalue_p, corr_s, pvalue_s])
         df_output = pd.DataFrame(lines, columns=['SCFA','Taxa','PearsonR','PearsonP','SpearmanR','SpearmanP'])
         return df_output
     elif model=='ElasticNet':
         lines = []
         regression_model = {}
-        for scfa_ in target_scfa_sliced:
-            X_var = np.asarray(df_bac_deriv.values)
-            Y_var = np.asarray(list(df_scfa_deriv[scfa_]))
+        for scfa_ in target_scfa:
+            if use_deriv_scfa:
+                Y_var = np.asarray(list(df_scfa_deriv[scfa_]))
+            else:
+                Y_var = np.asarray(list(df_scfa_sliced[scfa_]))
+            if use_deriv_microbiome:
+                X_var = np.asarray(df_bac_deriv.values)
+            else:
+                X_var = np.asarray(df_bac_sliced.values)
 
             if opt_params is None:
                 l1_ratio = [1e-4, .1, .3, .5, .7, .9, .95, .99, 1]
@@ -181,9 +188,16 @@ def train_scfa_dynamics_model(
         lines_opt = []
         lines_reg = []
         regression_model = {}
-        for scfa_ in target_scfa_sliced:
-            X_var = np.asarray(df_bac_deriv.values)
-            Y_var = np.asarray(list(df_scfa_deriv[scfa_]))
+        for scfa_ in target_scfa:
+            if use_scfa_deriv:
+                Y_var = np.asarray(list(df_scfa_deriv[scfa_]))
+            else:
+                Y_var = np.asarray(list(df_scfa_sliced[scfa_]))
+            if use_microbiome_deriv:
+                X_var = np.asarray(df_bac_deriv.values)
+            else:
+                X_var = np.asarray(df_bac_sliced.values)
+
             if opt_params is None:
                 # grid search
                 rf = RandomForestRegressor()
@@ -437,8 +451,8 @@ def get_rf_training_error(
         df_opt_paras = pd.read_csv('optimal_rf_parameters_exclude_vendor%s.csv'%(exclude_vendor), index_col=0)
 
     # retrain the model
-    target_scfa_sliced, selected_topN_bac, df_meta_sliced, df_bac_sliced, df_bac_deriv, df_scfa_sliced, df_scfa_deriv = data_processing_scfa(
-        df_meta, df_bac, df_scfa, target_scfa, topN=topN, exclude_group=exclude_group, exclude_vendor=exclude_vendor, use_deriv_scfa=use_deriv_scfa, use_deriv_microbiome=use_deriv_microbiome)
+    selected_topN_bac, df_meta_sliced, df_bac_sliced, df_bac_deriv, df_scfa_sliced, df_scfa_deriv = data_processing_scfa(
+        df_meta, df_bac, df_scfa, target_scfa, topN=topN, exclude_group=exclude_group, exclude_vendor=exclude_vendor)
     _,_,reg = train_scfa_dynamics_model(
         df_meta=df_meta,
         df_bac=df_bac,
@@ -455,20 +469,25 @@ def get_rf_training_error(
 
     # get predicted SCFA derivative of the same training dataset
     for scfa_ in target_scfa:
-        df_train_tmp = deepcopy(df_scfa_deriv)
+        if use_deriv_scfa:
+            df_train_tmp = deepcopy(df_scfa_deriv)
+        else:
+            df_train_tmp = deepcopy(df_scfa_sliced)
         df_train_tmp = df_train_tmp[[x for x in df_train_tmp.columns if x not in list(set(target_scfa)-set([scfa_]))]]
-        df_train_tmp = df_train_tmp.rename({scfa_:'SCFA_deriv_observed'}, axis=1)
+        df_train_tmp = df_train_tmp.rename({scfa_:'SCFA_observed'}, axis=1)
         df_train_tmp['SCFA_mol'] = scfa_
-        df_train_tmp['SCFA_value_observed'] = df_scfa_sliced[scfa_]
-        X_var = np.asarray(df_bac_deriv.values)
-        df_train_tmp['SCFA_deriv_predicted'] = reg[scfa_].predict(X_var)
+        if use_deriv_microbiome:
+            X_var = np.asarray(df_bac_deriv.values)
+        else:
+            X_var = np.asarray(df_bac_sliced.values)
+        df_train_tmp['SCFA_predicted'] = reg[scfa_].predict(X_var)
 
         if df_train is None:
             df_train = df_train_tmp
         else:
             df_train = pd.concat([df_train, df_train_tmp], ignore_index=True)
 
-    df_train['RelativeError'] = (df_train['SCFA_deriv_predicted']-df_train['SCFA_deriv_observed'])/df_train['SCFA_deriv_observed']*100
+    df_train['RelativeError_SCFA'] = (df_train['SCFA_predicted']-df_train['SCFA_observed'])/df_train['SCFA_observed']*100
     return df_train
 
 def get_rf_prediction_error(
@@ -501,11 +520,11 @@ def get_rf_prediction_error(
 
     # get SCFA and microbiome derivative for all mice
     # keep all taxa at this step
-    target_scfa_sliced, selected_topN_bac, df_meta_sliced, df_bac_sliced, df_bac_deriv, df_scfa_sliced, df_scfa_deriv = data_processing_scfa(df_meta=df_meta, df_bac=df_bac, df_scfa=df_scfa, target_scfa=target_scfa, topN=len(df_bac.columns), exclude_group=None, exclude_vendor=None, use_deriv_scfa=use_deriv_scfa, use_deriv_microbiome=use_deriv_microbiome)
+    selected_topN_bac, df_meta_sliced, df_bac_sliced, df_bac_deriv, df_scfa_sliced, df_scfa_deriv = data_processing_scfa(df_meta=df_meta, df_bac=df_bac, df_scfa=df_scfa, target_scfa=target_scfa, topN=len(df_bac.columns), exclude_group=None, exclude_vendor=None)
 
     # rename columns of df_scfa_deriv
-    df_scfa_deriv = df_scfa_deriv[target_scfa_sliced]
-    df_scfa_deriv.columns = [x+'_deriv_observed' for x in target_scfa_sliced]
+    df_scfa_sliced.columns = [x+'_value_observed' for x in target_scfa]
+    df_scfa_deriv.columns = [x+'_deriv_observed' for x in target_scfa]
 
     # get prediction for excluded dataset in training
     for idx_i,to_exclude in enumerate(exclude_set):
@@ -542,28 +561,45 @@ def get_rf_prediction_error(
             raise
         df_sliced_ext = pd.merge(df_sliced_ext, df_scfa_sliced, left_index=True, right_index=True, how='inner')
         df_sliced_ext = pd.merge(df_sliced_ext, df_scfa_deriv, left_index=True, right_index=True, how='inner')
-        # make sure to use df_bac_deriv (instead of df_bac_sliced)
-        df_sliced_ext = pd.merge(df_sliced_ext, df_bac_deriv, left_index=True, right_index=True, how='inner')
+        if use_deriv_microbiome:
+            df_sliced_ext = pd.merge(df_sliced_ext, df_bac_deriv, left_index=True, right_index=True, how='inner')
+        else:
+            df_sliced_ext = pd.merge(df_sliced_ext, df_bac_sliced, left_index=True, right_index=True, how='inner')
 
         # predict SCFA derivative and SCFA value
         all_mice = set(df_sliced_ext['SubjectID'])
         for scfa_ in target_scfa:
             topN_taxa = reg[scfa_].feature_names
             X_var = np.asarray(df_sliced_ext[topN_taxa].values)
-            df_sliced_ext['%s_deriv_predicted'%(scfa_)] = reg[scfa_].predict(X_var)
+            if use_deriv_scfa:
+                df_sliced_ext['%s_deriv_predicted'%(scfa_)] = reg[scfa_].predict(X_var)
+            else:
+                df_sliced_ext['%s_value_predicted'%(scfa_)] = reg[scfa_].predict(X_var)
 
             for idx_j, curr_mice in enumerate(all_mice):
-                df_tmp = df_sliced_ext[(df_sliced_ext.SubjectID==curr_mice)].sort_values(by='Day')
-                df_tmp = df_tmp[['SubjectID','Vendor','Day','RandomizedGroup',scfa_,scfa_+'_deriv_observed',scfa_+'_deriv_predicted']+topN_taxa]
-                df_tmp = df_tmp.rename({scfa_:'SCFA_value_observed',
-                                        scfa_+'_deriv_observed':'SCFA_deriv_observed',
-                                        scfa_+'_deriv_predicted':'SCFA_deriv_predicted'
-                                       }, axis=1)
+                df_tmp = df_sliced_ext[df_sliced_ext.SubjectID==curr_mice].sort_values(by='Day')
+                if use_deriv_scfa:
+                    df_tmp = df_tmp[['SubjectID','Vendor','Day','RandomizedGroup',scfa_+'_value_observed',scfa_+'_deriv_observed',scfa_+'_deriv_predicted']+topN_taxa]
+                    df_tmp = df_tmp.rename({scfa_+'_value_observed':'SCFA_value_observed',
+                                            scfa_+'_deriv_observed':'SCFA_deriv_observed',
+                                            scfa_+'_deriv_predicted':'SCFA_deriv_predicted'},
+                                           axis=1)
+                else:
+                    df_tmp = df_tmp[['SubjectID','Vendor','Day','RandomizedGroup',scfa_+'_value_observed',scfa_+'_deriv_observed',scfa_+'_value_predicted']+topN_taxa]
+                    df_tmp = df_tmp.rename({scfa_+'_value_observed':'SCFA_value_observed',
+                                            scfa_+'_deriv_observed':'SCFA_deriv_observed',
+                                            scfa_+'_value_predicted':'SCFA_value_predicted'},
+                                           axis=1)
                 df_tmp['SCFA_mol'] = scfa_
 
                 if use_deriv_scfa==False:
-                    # SCFA derivative and SCFA value are the same
-                    df_tmp['SCFA_value_predicted'] = df_tmp['SCFA_deriv_predicted']
+                    # calcualte derivative using predicted SCFA value
+                    xdata = np.asarray(list(df_tmp['Day']))
+                    ydata = np.asarray(list(df_tmp['SCFA_value_predicted']))
+                    cs = CubicSpline(xdata, ydata)
+                    csd1 = cs.derivative(nu=1)
+                    ydata_d1 = csd1(xdata)
+                    df_tmp['SCFA_derive_predicted'] = ydata_d1
                 else:
                     # integration is needed to calculate SCFA value from SCFA derivative
                     init_scfa_value = df_tmp.loc[df_tmp.Day==0,'SCFA_value_observed'].values[0]
@@ -596,6 +632,10 @@ def get_rf_prediction_error(
                     cs = CubicSpline(sol_t, sol_y)
                     df_tmp['SCFA_value_predicted'] = cs(df_tmp.Day)
 
+
+                # remove topN taxa
+                df_pred = df_pred[[x for x in df_pred.columns if x not in topN_taxa]]
+
                 if df_pred is None:
                     df_pred = df_tmp
                 else:
@@ -620,5 +660,6 @@ def get_rf_prediction_error(
     if save_fig:
         fig.savefig("rf_prediction_error_%s.svg"%(prediction_type), format="svg")
 
-    df_pred['RelativeError'] = (df_pred['SCFA_value_predicted']-df_pred['SCFA_value_observed'])/df_pred['SCFA_value_observed']*100
+    df_pred['RelativeError_SCFA_value'] = (df_pred['SCFA_value_predicted']-df_pred['SCFA_value_observed'])/df_pred['SCFA_value_observed']*100
+    df_pred['RelativeError_SCFA_deriv'] = (df_pred['SCFA_deriv_predicted']-df_pred['SCFA_deriv_observed'])/df_pred['SCFA_deriv_observed']*100
     return df_pred
