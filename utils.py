@@ -46,10 +46,10 @@ def data_processing_scfa(
     df_meta_sliced = df_meta_sliced.loc[shared_samples]
 
     # calculate SCFA derivatives
-    df_scfa_meta = pd.merge(df_meta_sliced, df_scfa_sliced, left_index=True, right_index=True, how='inner')
-    df_scfa_deriv = deepcopy(df_scfa_meta)
+    df_scfa_sliced = pd.merge(df_meta_sliced, df_scfa_sliced, left_index=True, right_index=True, how='inner')
+    df_scfa_deriv = deepcopy(df_scfa_sliced)
     for curr_subject in set(df_scfa_deriv.SubjectID):
-        curr_df = df_scfa_meta[df_scfa_meta.SubjectID==curr_subject].sort_values(by='Day')
+        curr_df = df_scfa_sliced[df_scfa_sliced.SubjectID==curr_subject].sort_values(by='Day')
         xdata = np.array(curr_df['Day'])
         for scfa_ in target_scfa:
             ydata = np.array(curr_df[scfa_])
@@ -189,11 +189,11 @@ def train_scfa_dynamics_model(
         lines_reg = []
         regression_model = {}
         for scfa_ in target_scfa:
-            if use_scfa_deriv:
+            if use_deriv_scfa:
                 Y_var = np.asarray(list(df_scfa_deriv[scfa_]))
             else:
                 Y_var = np.asarray(list(df_scfa_sliced[scfa_]))
-            if use_microbiome_deriv:
+            if use_deriv_microbiome:
                 X_var = np.asarray(df_bac_deriv.values)
             else:
                 X_var = np.asarray(df_bac_sliced.values)
@@ -523,8 +523,8 @@ def get_rf_prediction_error(
     selected_topN_bac, df_meta_sliced, df_bac_sliced, df_bac_deriv, df_scfa_sliced, df_scfa_deriv = data_processing_scfa(df_meta=df_meta, df_bac=df_bac, df_scfa=df_scfa, target_scfa=target_scfa, topN=len(df_bac.columns), exclude_group=None, exclude_vendor=None)
 
     # rename columns of df_scfa_deriv
-    df_scfa_sliced.columns = [x+'_value_observed' for x in target_scfa]
-    df_scfa_deriv.columns = [x+'_deriv_observed' for x in target_scfa]
+    df_scfa_sliced = df_scfa_sliced.rename({x:x+'_value_observed' for x in target_scfa}, axis=1)
+    df_scfa_deriv = df_scfa_deriv.rename({x:x+'_deriv_observed' for x in target_scfa}, axis=1)
 
     # get prediction for excluded dataset in training
     for idx_i,to_exclude in enumerate(exclude_set):
@@ -599,7 +599,7 @@ def get_rf_prediction_error(
                     cs = CubicSpline(xdata, ydata)
                     csd1 = cs.derivative(nu=1)
                     ydata_d1 = csd1(xdata)
-                    df_tmp['SCFA_derive_predicted'] = ydata_d1
+                    df_tmp['SCFA_deriv_predicted'] = ydata_d1
                 else:
                     # integration is needed to calculate SCFA value from SCFA derivative
                     init_scfa_value = df_tmp.loc[df_tmp.Day==0,'SCFA_value_observed'].values[0]
@@ -632,14 +632,13 @@ def get_rf_prediction_error(
                     cs = CubicSpline(sol_t, sol_y)
                     df_tmp['SCFA_value_predicted'] = cs(df_tmp.Day)
 
-
-                # remove topN taxa
-                df_pred = df_pred[[x for x in df_pred.columns if x not in topN_taxa]]
-
                 if df_pred is None:
                     df_pred = df_tmp
                 else:
                     df_pred = pd.concat([df_pred, df_tmp], ignore_index=True)
+
+                # remove topN taxa
+                df_pred = df_pred[[x for x in df_pred.columns if x not in topN_taxa]]
 
                 if is_plot:
                     _ = ax[idx_i,idx_j].scatter(df_tmp.Day, df_tmp.SCFA_value_observed, marker='o', color=scfa_color[scfa_], s=100, label=scfa_)
