@@ -188,7 +188,7 @@ def train_scfa_dynamics_model(
             regression_model[scfa_] = reg
             lines.append([scfa_, best_alpha, best_l1_ratio, clf.score(X_var, Y_var)]+list(clf.coef_))
         if use_deriv_microbiome is None:
-            df_output = pd.DataFrame(lines, columns=['SCFA','BestAlpha','BestL1Ratio','R2']+df_day_pres.columns)
+            df_output = pd.DataFrame(lines, columns=['SCFA','BestAlpha','BestL1Ratio','R2']+list(df_day_pres.columns))
         else:
             df_output = pd.DataFrame(lines, columns=['SCFA','BestAlpha','BestL1Ratio','R2']+selected_topN_bac)
         return df_output, regression_model
@@ -282,7 +282,7 @@ def train_scfa_dynamics_model(
             regression_model[scfa_] = deepcopy(reg)
         df_output_opt = pd.DataFrame(lines_opt, columns=['SCFA','n_estimators','max_features','max_depth','min_samples_split','min_samples_leaf','bootstrap'])
         if use_deriv_microbiome is None:
-            df_output_reg = pd.DataFrame(lines_reg, columns=['SCFA','R2']+df_day_pres.columns)
+            df_output_reg = pd.DataFrame(lines_reg, columns=['SCFA','R2']+list(df_day_pres.columns))
         else:
             df_output_reg = pd.DataFrame(lines_reg, columns=['SCFA','R2']+selected_topN_bac)
         return df_output_reg, df_output_opt, regression_model
