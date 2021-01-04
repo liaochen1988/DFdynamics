@@ -129,7 +129,7 @@ def train_scfa_dynamics_model(
             else:
                 Y_var = np.asarray(list(df_scfa_sliced[scfa_]))
             if use_deriv_microbiome is None:
-                X_var = np.asarray(list(df_scfa_sliced.Day))
+                X_var = np.asarray(list(df_scfa_sliced.Day)).reshape(-1,1)
             else:
                 if use_deriv_microbiome:
                     X_var = np.asarray(df_bac_deriv.values)
@@ -200,8 +200,8 @@ def train_scfa_dynamics_model(
                 Y_var = np.asarray(list(df_scfa_deriv[scfa_]))
             else:
                 Y_var = np.asarray(list(df_scfa_sliced[scfa_]))
-            if use_deriv_micorbiome is None:
-                X_var = np.asarray(list(df_scfa_sliced.Day))
+            if use_deriv_microbiome is None:
+                X_var = np.asarray(list(df_scfa_sliced.Day)).reshape(-1,1)
             else:
                 if use_deriv_microbiome:
                     X_var = np.asarray(df_bac_deriv.values)
@@ -493,7 +493,7 @@ def get_rf_training_error(
         df_train_tmp = df_train_tmp.rename({scfa_:'SCFA_observed'}, axis=1)
         df_train_tmp['SCFA_mol'] = scfa_
         if use_deriv_microbiome is None:
-            X_var = np.asarray(list(df_scfa_sliced.Day))
+            X_var = np.asarray(list(df_scfa_sliced.Day)).reshape(-1,1)
         else:
             if use_deriv_microbiome:
                 X_var = np.asarray(df_bac_deriv.values)
