@@ -85,6 +85,16 @@ def data_processing_scfa(
 
     return selected_topN_bac, df_meta_sliced, df_bac_sliced, df_bac_deriv, df_scfa_sliced, df_scfa_deriv
 
+def binarize_categories(lst):
+    lines = []
+    lst_sorted = list(np.sort(list(set(lst))))
+    for elem in lst:
+        curr_line = [0]*len(lst_sorted)
+        curr_line[lst_sorted.index(elem)] = 1
+        lines.append(curr_line)
+    df_line = pd.DataFrame(lines, columns=lst_sorted)
+    return df_line
+
 def train_scfa_dynamics_model(
     df_meta, # meta data
     df_bac,  # relative abundace or absolute abundance of gut microbiome
@@ -106,19 +116,31 @@ def train_scfa_dynamics_model(
     if model=='Correlation':
         lines = []
         for scfa_ in target_scfa:
-            for t in selected_topN_bac:
-                if use_deriv_scfa:
-                    Y_var = np.asarray(list(df_scfa_deriv[scfa_]))
-                else:
-                    Y_var = np.asarray(list(df_scfa_sliced[scfa_]))
-                if use_deriv_microbiome:
-                    X_var = np.asarray(list(df_bac_deriv[t]))
-                else:
-                    X_var = np.asarray(list(df_bac_sliced[t]))
-                corr_p, pvalue_p = pearsonr(Y_var, X_var)
-                corr_s, pvalue_s = spearmanr(Y_var, X_var)
-                lines.append([scfa_, t, corr_p, pvalue_p, corr_s, pvalue_s])
-        df_output = pd.DataFrame(lines, columns=['SCFA','Taxa','PearsonR','PearsonP','SpearmanR','SpearmanP'])
+            if use_deriv_microbiome is None:
+                df_day_pres = binarize_categories(list(df_scfa_sliced.Day))
+                for d in df_day_pres.columns:
+                    if use_deriv_scfa:
+                        Y_var = np.asarray(list(df_scfa_deriv[scfa_]))
+                    else:
+                        Y_var = np.asarray(list(df_scfa_sliced[scfa_]))
+                    X_var = np.asarray(list(df_day_pres[d]))
+                    corr_p, pvalue_p = pearsonr(Y_var, X_var)
+                    corr_s, pvalue_s = spearmanr(Y_var, X_var)
+                    lines.append([scfa_, d, corr_p, pvalue_p, corr_s, pvalue_s])
+            else:
+                for t in selected_topN_bac:
+                    if use_deriv_scfa:
+                        Y_var = np.asarray(list(df_scfa_deriv[scfa_]))
+                    else:
+                        Y_var = np.asarray(list(df_scfa_sliced[scfa_]))
+                    if use_deriv_microbiome:
+                        X_var = np.asarray(list(df_bac_deriv[t]))
+                    else:
+                        X_var = np.asarray(list(df_bac_sliced[t]))
+                    corr_p, pvalue_p = pearsonr(Y_var, X_var)
+                    corr_s, pvalue_s = spearmanr(Y_var, X_var)
+                    lines.append([scfa_, t, corr_p, pvalue_p, corr_s, pvalue_s])
+        df_output = pd.DataFrame(lines, columns=['SCFA','Feature','PearsonR','PearsonP','SpearmanR','SpearmanP'])
         return df_output
     elif model=='ElasticNet':
         lines = []
@@ -129,7 +151,8 @@ def train_scfa_dynamics_model(
             else:
                 Y_var = np.asarray(list(df_scfa_sliced[scfa_]))
             if use_deriv_microbiome is None:
-                X_var = np.asarray(list(df_scfa_sliced.Day)).reshape(-1,1)
+                df_day_pres = binarize_categories(list(df_scfa_sliced.Day))
+                X_var = np.asarray(df_day_pres.values)
             else:
                 if use_deriv_microbiome:
                     X_var = np.asarray(df_bac_deriv.values)
@@ -165,7 +188,7 @@ def train_scfa_dynamics_model(
             regression_model[scfa_] = reg
             lines.append([scfa_, best_alpha, best_l1_ratio, clf.score(X_var, Y_var)]+list(clf.coef_))
         if use_deriv_microbiome is None:
-            df_output = pd.DataFrame(lines, columns=['SCFA','BestAlpha','BestL1Ratio','R2','Day'])
+            df_output = pd.DataFrame(lines, columns=['SCFA','BestAlpha','BestL1Ratio','R2']+df_day_pres.columns)
         else:
             df_output = pd.DataFrame(lines, columns=['SCFA','BestAlpha','BestL1Ratio','R2']+selected_topN_bac)
         return df_output, regression_model
@@ -201,7 +224,8 @@ def train_scfa_dynamics_model(
             else:
                 Y_var = np.asarray(list(df_scfa_sliced[scfa_]))
             if use_deriv_microbiome is None:
-                X_var = np.asarray(list(df_scfa_sliced.Day)).reshape(-1,1)
+                df_day_pres = binarize_categories(list(df_scfa_sliced.Day))
+                X_var = np.asarray(df_day_pres.values)
             else:
                 if use_deriv_microbiome:
                     X_var = np.asarray(df_bac_deriv.values)
@@ -251,14 +275,14 @@ def train_scfa_dynamics_model(
                 )
             clf = reg.fit(X_var, Y_var)
             if use_deriv_microbiome is None:
-                reg.feature_names = ['Day'] # add feature names
+                reg.feature_names = deepcopy(df_day_pres.columns) # add feature names
             else:
                 reg.feature_names = deepcopy(selected_topN_bac) # add feature names
             lines_reg.append([scfa_, clf.score(X_var, Y_var)]+ list(clf.feature_importances_))
             regression_model[scfa_] = deepcopy(reg)
         df_output_opt = pd.DataFrame(lines_opt, columns=['SCFA','n_estimators','max_features','max_depth','min_samples_split','min_samples_leaf','bootstrap'])
         if use_deriv_microbiome is None:
-            df_output_reg = pd.DataFrame(lines_reg, columns=['SCFA','R2','Day'])
+            df_output_reg = pd.DataFrame(lines_reg, columns=['SCFA','R2']+df_day_pres.columns)
         else:
             df_output_reg = pd.DataFrame(lines_reg, columns=['SCFA','R2']+selected_topN_bac)
         return df_output_reg, df_output_opt, regression_model
@@ -493,7 +517,7 @@ def get_rf_training_error(
         df_train_tmp = df_train_tmp.rename({scfa_:'SCFA_observed'}, axis=1)
         df_train_tmp['SCFA_mol'] = scfa_
         if use_deriv_microbiome is None:
-            X_var = np.asarray(list(df_scfa_sliced.Day)).reshape(-1,1)
+            X_var = np.asarray(binarize_categories(list(df_scfa_sliced.Day)).values)
         else:
             if use_deriv_microbiome:
                 X_var = np.asarray(df_bac_deriv.values)
@@ -523,13 +547,14 @@ def get_rf_prediction_error(
 ):
     df_pred = None
     if prediction_type=='intrapolation':
-        exclude_set = ['A','B','C','D']
+        exclude_set = np.sort(list(set(df_meta.RandomizedGroup)))
+        exclude_set = [lett for lett in exclude_set if lett in ['A','B','C','D']]
         if is_plot:
-            fig, ax = plt.subplots(figsize=(20,12), nrows=4, ncols=4, sharex=True)
+            fig, ax = plt.subplots(figsize=(20, 3*len(exclude_set)), nrows=len(exclude_set), ncols=4, sharex=True)
     elif prediction_type=='extrapolation':
-        exclude_set = ['Beijing','Guangdong','Hunan','Shanghai']
+        exclude_set = np.sort(list(set(df_meta.Vendor)))
         if is_plot:
-            fig, ax = plt.subplots(figsize=(24,12), nrows=4, ncols=5, sharex=True)
+            fig, ax = plt.subplots(figsize=(20, 3*len(exclude_set)), nrows=len(exclude_set), ncols=5, sharex=True)
     else:
         print('unknown prediction type %s'%(prediction_type))
         raise
@@ -585,6 +610,10 @@ def get_rf_prediction_error(
                 df_sliced_ext = pd.merge(df_sliced_ext, df_bac_deriv, left_index=True, right_index=True, how='inner')
             else:
                 df_sliced_ext = pd.merge(df_sliced_ext, df_bac_sliced, left_index=True, right_index=True, how='inner')
+        else:
+            df_day_pres = binarize_categories(df_sliced_ext.Day)
+            for d in df_day_pres.columns:
+                df_sliced_ext[d] = list(df_day_pres[d])
 
         # predict SCFA derivative and SCFA value
         all_mice = set(df_sliced_ext['SubjectID'])
