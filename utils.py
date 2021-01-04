@@ -97,6 +97,7 @@ def train_scfa_dynamics_model(
     opt_params = None, # optimal model parameters
     use_deriv_scfa=True, # whether using dSCFA/dt as the dependent variable
     use_deriv_microbiome=False, # whether dMicrobiome/dt as the independent variable
+                                # if None, use day as the sole indepedent variable
 ):
     # get processed input data
     selected_topN_bac, df_meta_sliced, df_bac_sliced, df_bac_deriv, df_scfa_sliced, df_scfa_deriv = data_processing_scfa(df_meta, df_bac, df_scfa, target_scfa, topN, exclude_group, exclude_vendor)
@@ -127,10 +128,13 @@ def train_scfa_dynamics_model(
                 Y_var = np.asarray(list(df_scfa_deriv[scfa_]))
             else:
                 Y_var = np.asarray(list(df_scfa_sliced[scfa_]))
-            if use_deriv_microbiome:
-                X_var = np.asarray(df_bac_deriv.values)
+            if use_deriv_microbiome is None:
+                X_var = np.asarray(list(df_scfa_sliced.Day))
             else:
-                X_var = np.asarray(df_bac_sliced.values)
+                if use_deriv_microbiome:
+                    X_var = np.asarray(df_bac_deriv.values)
+                else:
+                    X_var = np.asarray(df_bac_sliced.values)
 
             if opt_params is None:
                 l1_ratio = [1e-4, .1, .3, .5, .7, .9, .95, .99, 1]
@@ -160,7 +164,10 @@ def train_scfa_dynamics_model(
             reg.feature_names = selected_topN_bac
             regression_model[scfa_] = reg
             lines.append([scfa_, best_alpha, best_l1_ratio, clf.score(X_var, Y_var)]+list(clf.coef_))
-        df_output = pd.DataFrame(lines, columns=['SCFA','BestAlpha','BestL1Ratio','R2']+selected_topN_bac)
+        if use_deriv_microbiome is None:
+            df_output = pd.DataFrame(lines, columns=['SCFA','BestAlpha','BestL1Ratio','R2','Day'])
+        else:
+            df_output = pd.DataFrame(lines, columns=['SCFA','BestAlpha','BestL1Ratio','R2']+selected_topN_bac)
         return df_output, regression_model
     elif model=='RandomForest':
         # Number of trees in random forest
@@ -193,10 +200,13 @@ def train_scfa_dynamics_model(
                 Y_var = np.asarray(list(df_scfa_deriv[scfa_]))
             else:
                 Y_var = np.asarray(list(df_scfa_sliced[scfa_]))
-            if use_deriv_microbiome:
-                X_var = np.asarray(df_bac_deriv.values)
+            if use_deriv_micorbiome is None:
+                X_var = np.asarray(list(df_scfa_sliced.Day))
             else:
-                X_var = np.asarray(df_bac_sliced.values)
+                if use_deriv_microbiome:
+                    X_var = np.asarray(df_bac_deriv.values)
+                else:
+                    X_var = np.asarray(df_bac_sliced.values)
 
             if opt_params is None:
                 # grid search
@@ -240,11 +250,17 @@ def train_scfa_dynamics_model(
                     n_jobs=-1
                 )
             clf = reg.fit(X_var, Y_var)
-            reg.feature_names = deepcopy(selected_topN_bac) # add feature names
+            if use_deriv_microbiome is None:
+                reg.feature_names = ['Day'] # add feature names
+            else:
+                reg.feature_names = deepcopy(selected_topN_bac) # add feature names
             lines_reg.append([scfa_, clf.score(X_var, Y_var)]+ list(clf.feature_importances_))
             regression_model[scfa_] = deepcopy(reg)
         df_output_opt = pd.DataFrame(lines_opt, columns=['SCFA','n_estimators','max_features','max_depth','min_samples_split','min_samples_leaf','bootstrap'])
-        df_output_reg = pd.DataFrame(lines_reg, columns=['SCFA','R2']+selected_topN_bac)
+        if use_deriv_microbiome is None:
+            df_output_reg = pd.DataFrame(lines_reg, columns=['SCFA','R2','Day'])
+        else:
+            df_output_reg = pd.DataFrame(lines_reg, columns=['SCFA','R2']+selected_topN_bac)
         return df_output_reg, df_output_opt, regression_model
     else:
         print('unknown method: %s'%(method))
@@ -476,10 +492,13 @@ def get_rf_training_error(
         df_train_tmp = df_train_tmp[[x for x in df_train_tmp.columns if x not in list(set(target_scfa)-set([scfa_]))]]
         df_train_tmp = df_train_tmp.rename({scfa_:'SCFA_observed'}, axis=1)
         df_train_tmp['SCFA_mol'] = scfa_
-        if use_deriv_microbiome:
-            X_var = np.asarray(df_bac_deriv.values)
+        if use_deriv_microbiome is None:
+            X_var = np.asarray(list(df_scfa_sliced.Day))
         else:
-            X_var = np.asarray(df_bac_sliced.values)
+            if use_deriv_microbiome:
+                X_var = np.asarray(df_bac_deriv.values)
+            else:
+                X_var = np.asarray(df_bac_sliced.values)
         df_train_tmp['SCFA_predicted'] = reg[scfa_].predict(X_var)
 
         if df_train is None:
@@ -561,10 +580,11 @@ def get_rf_prediction_error(
             raise
         df_sliced_ext = pd.merge(df_sliced_ext, df_scfa_sliced, left_index=True, right_index=True, how='inner')
         df_sliced_ext = pd.merge(df_sliced_ext, df_scfa_deriv, left_index=True, right_index=True, how='inner')
-        if use_deriv_microbiome:
-            df_sliced_ext = pd.merge(df_sliced_ext, df_bac_deriv, left_index=True, right_index=True, how='inner')
-        else:
-            df_sliced_ext = pd.merge(df_sliced_ext, df_bac_sliced, left_index=True, right_index=True, how='inner')
+        if use_deriv_microbiome is not None:
+            if use_deriv_microbiome:
+                df_sliced_ext = pd.merge(df_sliced_ext, df_bac_deriv, left_index=True, right_index=True, how='inner')
+            else:
+                df_sliced_ext = pd.merge(df_sliced_ext, df_bac_sliced, left_index=True, right_index=True, how='inner')
 
         # predict SCFA derivative and SCFA value
         all_mice = set(df_sliced_ext['SubjectID'])
@@ -662,3 +682,6 @@ def get_rf_prediction_error(
     df_pred['RelativeError_SCFA_value'] = (df_pred['SCFA_value_predicted']-df_pred['SCFA_value_observed'])/df_pred['SCFA_value_observed']*100
     df_pred['RelativeError_SCFA_deriv'] = (df_pred['SCFA_deriv_predicted']-df_pred['SCFA_deriv_observed'])/df_pred['SCFA_deriv_observed']*100
     return df_pred
+
+def smape(A, F):
+    return 100/len(A) * np.sum(np.abs(F - A) / (np.abs(A) + np.abs(F)))

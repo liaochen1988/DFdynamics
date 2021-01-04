@@ -32,13 +32,19 @@
 30,pairwise_interaction,"('Bacteroides', 'Christensenellaceae_dash_R_dash_7_dash_group')",0.21,3.92,2.065,2.189751412873505,True,vandeputte_2017_gut
 31,pairwise_interaction,"('Faecalibacterium', 'Faecalibacterium')",1.53,4.28,2.905,4.193005972829511,True,vandeputte_2017_gut
 32,pairwise_interaction,"('Bifidobacterium', 'Bifidobacterium')",0.36,3.93,2.145,2.36037822335232,True,vandeputte_2017_gut
-33,pairwise_interaction,"('Lachnospiraceae', 'Akkermansia_muciniphila')",0.11,1.63,0.87,2.270559359104416,True,creswell_2020_GM
-34,pairwise_interaction,"('Lachnospiraceae', 'Roseburia_intestinalis')",0.59,3.42,2.005,2.780318494266626,True,creswell_2020_GM
-35,pairwise_interaction,"('Faecalibacterium_prausnitzii', 'Gemmiger_formicilis')",0.2,3.54,1.87,2.234029348567134,True,creswell_2020_GM
-36,pairwise_interaction,"('Prevotella_copri', 'Anaerostipes_hadrus')",-2.41,-0.63,-1.52,-3.372511325782239,True,creswell_2020_GM
-37,pairwise_interaction,"('Prevotella_copri', 'Bifidobacterium_adolescentis')",0.28,1.87,1.075,2.674802215648642,True,creswell_2020_GM
-38,pairwise_interaction,"('Prevotella_copri', 'Prevotella_copri')",0.17,1.18,0.6749999999999999,2.628094875120634,True,creswell_2020_GM
-39,pairwise_interaction,"('Roseburia_faecis', 'Roseburia_faecis')",0.11,2.22,1.165,2.202735063282831,True,creswell_2020_GM
-40,pairwise_interaction,"('Akkermansia_muciniphila', 'Anaerostipes_hadrus')",-2.08,-0.3,-1.19,-2.648680639695992,True,creswell_2020_GM
-41,pairwise_interaction,"('Akkermansia_muciniphila', 'Bifidobacterium_adolescentis')",-1.59,-0.02,-0.805,-2.011412218991742,True,creswell_2020_GM
-42,pairwise_interaction,"('Akkermansia_muciniphila', 'Akkermansia_muciniphila')",-2.49,-0.97,-1.73,-4.480155920195205,True,creswell_2020_GM
+33,basal_growth_rate,Anaerostipes_hadrus,-0.54,-0.01,-0.275,-2.046499024809486,True,creswell_2020_GM
+34,basal_growth_rate,Akkermansia_muciniphila,0.18,0.72,0.45,3.271727353549587,True,creswell_2020_GM
+35,fiber_response,Anaerostipes_hadrus,0.01,0.06,0.035,2.616083610820898,True,creswell_2020_GM
+36,fiber_response,Prevotella_copri,-0.06,-0.01,-0.035,-2.553259555165301,True,creswell_2020_GM
+37,fiber_response,Akkermansia_muciniphila,-0.06,-0.01,-0.035,-3.069801028701256,True,creswell_2020_GM
+38,pairwise_interaction,"('Dorea_longicatena', 'Akkermansia_muciniphila')",0.07,1.57,0.8200000000000001,2.139535457451752,True,creswell_2020_GM
+39,pairwise_interaction,"('Anaerostipes_hadrus', 'Anaerostipes_hadrus')",0.33,2.07,1.2,2.706595504953359,True,creswell_2020_GM
+40,pairwise_interaction,"('Anaerostipes_hadrus', 'Akkermansia_muciniphila')",2.38,3.89,3.135,8.252108519261345,True,creswell_2020_GM
+41,pairwise_interaction,"('Bifidobacterium_adolescentis', 'Akkermansia_muciniphila')",0.16,1.66,0.9099999999999999,2.423329175086533,True,creswell_2020_GM
+42,pairwise_interaction,"('Prevotella_copri', 'Prevotella_copri')",0.92,1.92,1.42,5.584872378336489,True,creswell_2020_GM
+43,pairwise_interaction,"('Prevotella_copri', 'Roseburia_intestinalis')",0.59,3.4,1.995,2.773699996524947,True,creswell_2020_GM
+44,pairwise_interaction,"('Roseburia_faecis', 'Roseburia_faecis')",0.12,2.25,1.185,2.189039311272863,True,creswell_2020_GM
+45,pairwise_interaction,"('Akkermansia_muciniphila', 'Anaerostipes_hadrus')",-3.28,-1.52,-2.4,-5.390934189821829,True,creswell_2020_GM
+46,pairwise_interaction,"('Akkermansia_muciniphila', 'Bifidobacterium_adolescentis')",0.13,1.71,0.9199999999999999,2.26506583142965,True,creswell_2020_GM
+47,pairwise_interaction,"('Akkermansia_muciniphila', 'Akkermansia_muciniphila')",-8.37,-6.87,-7.619999999999999,-19.90393899523232,True,creswell_2020_GM
+48,pairwise_interaction,"('Roseburia_intestinalis', 'Roseburia_intestinalis')",-3.14,-0.37,-1.755,-2.537860751971707,True,creswell_2020_GM
