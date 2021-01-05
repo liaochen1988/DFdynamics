@@ -548,7 +548,7 @@ def get_rf_prediction_error(
     df_pred = None
     if prediction_type=='intrapolation':
         exclude_set = np.sort(list(set(df_meta.RandomizedGroup)))
-        exclude_set = [lett for lett in exclude_set if lett in ['A','B','C','D']]
+        exclude_set = [lett for lett in exclude_set if lett in ['A','B','C','D']] # we never use group E as exclude set
         if is_plot:
             fig, ax = plt.subplots(figsize=(20, 3*len(exclude_set)), nrows=len(exclude_set), ncols=4, sharex=True)
     elif prediction_type=='extrapolation':
@@ -611,16 +611,17 @@ def get_rf_prediction_error(
             else:
                 df_sliced_ext = pd.merge(df_sliced_ext, df_bac_sliced, left_index=True, right_index=True, how='inner')
         else:
-            df_day_pres = binarize_categories(df_sliced_ext.Day)
+            df_day_pres = binarize_categories(list(df_sliced_ext.Day))
             for d in df_day_pres.columns:
                 df_sliced_ext[d] = list(df_day_pres[d])
+
+        # remove duplicate columns
+        df_sliced_ext = df_sliced_ext.drop([c for c in df_sliced_ext.columns if '_x' in str(c) or '_y' in str(c) or '_z' in str(c)], axis=1)
 
         # predict SCFA derivative and SCFA value
         all_mice = set(df_sliced_ext['SubjectID'])
         for scfa_ in target_scfa:
             topN_taxa = reg[scfa_].feature_names
-            print(topN_taxa)
-            print(df_sliced_ext.columns)
             X_var = np.asarray(df_sliced_ext[topN_taxa].values)
             if use_deriv_scfa:
                 df_sliced_ext['%s_deriv_predicted'%(scfa_)] = reg[scfa_].predict(X_var)
