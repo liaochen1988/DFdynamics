@@ -87,12 +87,12 @@ def data_processing_scfa(
 
 def binarize_categories(lst):
     lines = []
-    lst_sorted = list(np.sort(list(set(lst))))
+    all_days = [0, 1, 2, 3, 5, 8, 10, 13, 19, 25, 31]
     for elem in lst:
-        curr_line = [0]*len(lst_sorted)
-        curr_line[lst_sorted.index(elem)] = 1
+        curr_line = [0]*len(all_days)
+        curr_line[all_days.index(elem)] = 1
         lines.append(curr_line)
-    df_line = pd.DataFrame(lines, columns=lst_sorted)
+    df_line = pd.DataFrame(lines, columns=all_days)
     return df_line
 
 def train_scfa_dynamics_model(
@@ -275,7 +275,7 @@ def train_scfa_dynamics_model(
                 )
             clf = reg.fit(X_var, Y_var)
             if use_deriv_microbiome is None:
-                reg.feature_names = deepcopy(df_day_pres.columns) # add feature names
+                reg.feature_names = deepcopy(list(df_day_pres.columns)) # add feature names
             else:
                 reg.feature_names = deepcopy(selected_topN_bac) # add feature names
             lines_reg.append([scfa_, clf.score(X_var, Y_var)]+ list(clf.feature_importances_))
@@ -619,6 +619,8 @@ def get_rf_prediction_error(
         all_mice = set(df_sliced_ext['SubjectID'])
         for scfa_ in target_scfa:
             topN_taxa = reg[scfa_].feature_names
+            print(topN_taxa)
+            print(df_sliced_ext.columns)
             X_var = np.asarray(df_sliced_ext[topN_taxa].values)
             if use_deriv_scfa:
                 df_sliced_ext['%s_deriv_predicted'%(scfa_)] = reg[scfa_].predict(X_var)
