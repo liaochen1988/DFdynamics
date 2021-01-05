@@ -1,4 +1,4 @@
 ,SCFA,n_estimators,max_features,max_depth,min_samples_split,min_samples_leaf,bootstrap
-0,Acetate,650,auto,10.0,2,4,True
-1,Butyrate,200,sqrt,,5,2,False
-2,Propionate,200,sqrt,,5,1,True
+0,Acetate,200,sqrt,20,2,4,False
+1,Butyrate,200,auto,20,2,4,True
+2,Propionate,200,auto,10,2,1,True
