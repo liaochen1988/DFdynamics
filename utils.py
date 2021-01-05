@@ -9,6 +9,8 @@ from scipy.interpolate import CubicSpline
 from scipy.integrate import odeint, ode, solve_ivp
 from scipy.stats import pearsonr, spearmanr
 import scipy.stats.kde as kde
+from scipy.spatial import distance
+from skbio.stats.ordination import pcoa
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -20,7 +22,8 @@ def data_processing_scfa(
     target_scfa, # dependent variable(s) in the regression
     topN,    # keep only the most abundance N taxa in the model
     exclude_group, # group of mice excluded from model training
-    exclude_vendor # vendor of mice excluded from model training
+    exclude_vendor, # vendor of mice excluded from model training
+    use_pcoa # convert bacterial abundance to pcoa
 ):
     # exlucde mice group
     if exclude_group is not None:
@@ -60,6 +63,13 @@ def data_processing_scfa(
 
     # keep only samples in df_meta_sliced for bacterial abundance data
     df_bac_sliced = df_bac.loc[df_meta_sliced.index]
+
+    # run PCOA if needed
+    if use_pcoa:
+        bac_dist = distance.squareform(distance.pdist(df_bac_sliced, metric="braycurtis"))
+        df_bac_dist = pd.DataFrame(bac_dist, index = df_bac_sliced.index, columns = df_bac_sliced.index)
+        OrdinationResults = pcoa(df_bac_dist.values, number_of_dimensions=topN)
+        df_bac_sliced = pd.DataFrame(OrdinationResults.samples.values, index=df_bac_sliced.index, columns=['PC%d'%(n) for n in np.arange(1,topN+1)])
 
     # select the topN taxa based on averaged abundance
     df_bac_sliced_T = df_bac_sliced.T
@@ -108,9 +118,10 @@ def train_scfa_dynamics_model(
     use_deriv_scfa=True, # whether using dSCFA/dt as the dependent variable
     use_deriv_microbiome=False, # whether dMicrobiome/dt as the independent variable
                                 # if None, use day as the sole indepedent variable
+    use_pcoa=False
 ):
     # get processed input data
-    selected_topN_bac, df_meta_sliced, df_bac_sliced, df_bac_deriv, df_scfa_sliced, df_scfa_deriv = data_processing_scfa(df_meta, df_bac, df_scfa, target_scfa, topN, exclude_group, exclude_vendor)
+    selected_topN_bac, df_meta_sliced, df_bac_sliced, df_bac_deriv, df_scfa_sliced, df_scfa_deriv = data_processing_scfa(df_meta, df_bac, df_scfa, target_scfa, topN, exclude_group, exclude_vendor, use_pcoa)
 
     # train specified model on the data
     if model=='Correlation':
