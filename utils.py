@@ -66,17 +66,18 @@ def data_processing_scfa(
 
     # run PCOA if needed
     if use_pcoa:
+        # keep the topN principle components
         bac_dist = distance.squareform(distance.pdist(df_bac_sliced, metric="braycurtis"))
         df_bac_dist = pd.DataFrame(bac_dist, index = df_bac_sliced.index, columns = df_bac_sliced.index)
         OrdinationResults = pcoa(df_bac_dist.values, number_of_dimensions=topN)
         df_bac_sliced = pd.DataFrame(OrdinationResults.samples.values, index=df_bac_sliced.index, columns=['PC%d'%(n) for n in np.arange(1,topN+1)])
-
-    # select the topN taxa based on averaged abundance
-    df_bac_sliced_T = df_bac_sliced.T
-    df_bac_sliced_T['mean'] = df_bac_sliced_T.mean(axis=1)
-    df_bac_sliced_T = df_bac_sliced_T.sort_values(by=['mean'], axis=0, ascending=False)
-    df_bac_sliced_T = df_bac_sliced_T.drop('mean', axis=1)
-    df_bac_sliced = df_bac_sliced_T.iloc[0:topN].T
+    else:
+        # keep the topN taxa based on averaged abundance
+        df_bac_sliced_T = df_bac_sliced.T
+        df_bac_sliced_T['mean'] = df_bac_sliced_T.mean(axis=1)
+        df_bac_sliced_T = df_bac_sliced_T.sort_values(by=['mean'], axis=0, ascending=False)
+        df_bac_sliced_T = df_bac_sliced_T.drop('mean', axis=1)
+        df_bac_sliced = df_bac_sliced_T.iloc[0:topN].T
     selected_topN_bac = list(df_bac_sliced.columns)
 
     # calculate Microbiome derivative
@@ -491,7 +492,8 @@ def get_rf_training_error(
     exclude_group,
     exclude_vendor,
     use_deriv_scfa,
-    use_deriv_microbiome
+    use_deriv_microbiome,
+    use_pcoa
 ):
     df_train = None
 
@@ -503,7 +505,7 @@ def get_rf_training_error(
 
     # retrain the model
     selected_topN_bac, df_meta_sliced, df_bac_sliced, df_bac_deriv, df_scfa_sliced, df_scfa_deriv = data_processing_scfa(
-        df_meta, df_bac, df_scfa, target_scfa, topN=topN, exclude_group=exclude_group, exclude_vendor=exclude_vendor)
+        df_meta, df_bac, df_scfa, target_scfa, topN=topN, exclude_group=exclude_group, exclude_vendor=exclude_vendor, use_pcoa=use_pcoa)
     _,_,reg = train_scfa_dynamics_model(
         df_meta=df_meta,
         df_bac=df_bac,
@@ -515,7 +517,8 @@ def get_rf_training_error(
         model='RandomForest',
         opt_params = df_opt_paras,
         use_deriv_scfa=use_deriv_scfa,
-        use_deriv_microbiome=use_deriv_microbiome
+        use_deriv_microbiome=use_deriv_microbiome,
+        use_pcoa=use_pcoa
     )
 
     # get predicted SCFA derivative of the same training dataset
@@ -553,6 +556,7 @@ def get_rf_prediction_error(
     topN,
     use_deriv_scfa,
     use_deriv_microbiome,
+    use_pcoa,
     is_plot=False,
     save_fig=False
 ):
@@ -575,7 +579,7 @@ def get_rf_prediction_error(
 
     # get SCFA and microbiome derivative for all mice
     # keep all taxa at this step
-    selected_topN_bac, df_meta_sliced, df_bac_sliced, df_bac_deriv, df_scfa_sliced, df_scfa_deriv = data_processing_scfa(df_meta=df_meta, df_bac=df_bac, df_scfa=df_scfa, target_scfa=target_scfa, topN=len(df_bac.columns), exclude_group=None, exclude_vendor=None)
+    selected_topN_bac, df_meta_sliced, df_bac_sliced, df_bac_deriv, df_scfa_sliced, df_scfa_deriv = data_processing_scfa(df_meta=df_meta, df_bac=df_bac, df_scfa=df_scfa, target_scfa=target_scfa, topN=len(df_bac.columns), exclude_group=None, exclude_vendor=None, use_pcoa=use_pcoa)
 
     # rename columns of df_scfa_deriv
     df_scfa_sliced = df_scfa_sliced.rename({x:x+'_value_observed' for x in target_scfa}, axis=1)
@@ -602,7 +606,8 @@ def get_rf_prediction_error(
             model='RandomForest',
             opt_params=df_opt_paras,
             use_deriv_scfa=use_deriv_scfa,
-            use_deriv_microbiome=use_deriv_microbiome
+            use_deriv_microbiome=use_deriv_microbiome,
+            use_pcoa=use_pcoa
         )
 
         # rejoin sliced tables but only keep samples in the test dataset
