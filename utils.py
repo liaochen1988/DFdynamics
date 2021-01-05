@@ -69,8 +69,9 @@ def data_processing_scfa(
         # keep the topN principle components
         bac_dist = distance.squareform(distance.pdist(df_bac_sliced, metric="braycurtis"))
         df_bac_dist = pd.DataFrame(bac_dist, index = df_bac_sliced.index, columns = df_bac_sliced.index)
-        OrdinationResults = pcoa(df_bac_dist.values, number_of_dimensions=topN)
-        df_bac_sliced = pd.DataFrame(OrdinationResults.samples.values, index=df_bac_sliced.index, columns=['PC%d'%(n) for n in np.arange(1,topN+1)])
+        ndim = np.min([topN,len(df_bac_sliced.index)])
+        OrdinationResults = pcoa(df_bac_dist.values, number_of_dimensions=ndim)
+        df_bac_sliced = pd.DataFrame(OrdinationResults.samples.values, index=df_bac_sliced.index, columns=['PC%d'%(n) for n in np.arange(1,ndim+1)])
     else:
         # keep the topN taxa based on averaged abundance
         df_bac_sliced_T = df_bac_sliced.T
