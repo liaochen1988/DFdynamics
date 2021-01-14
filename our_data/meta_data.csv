@@ -1,0 +1,518 @@
+﻿SampleID,MiceID,Vendor,Day,Diet,RandomizedGroup
+sample131,BC1,Beijing,0,Control,C
+sample132,BC2,Beijing,0,Control,B
+sample133,BC3,Beijing,0,Control,A
+sample134,BC4,Beijing,0,Control,D
+sample135,BC5,Beijing,0,Control,E
+sample136,BR1,Beijing,0,Resistant starch,C
+sample137,BR2,Beijing,0,Resistant starch,D
+sample138,BR3,Beijing,0,Resistant starch,B
+sample139,BR4,Beijing,0,Resistant starch,E
+sample140,BR5,Beijing,0,Resistant starch,A
+sample141,BI1,Beijing,0,Inulin,A
+sample142,BI2,Beijing,0,Inulin,B
+sample143,BI3,Beijing,0,Inulin,D
+sample144,BI4,Beijing,0,Inulin,E
+sample145,BI5,Beijing,0,Inulin,C
+sample146,BC1,Beijing,1,Control,C
+sample147,BC2,Beijing,1,Control,B
+sample148,BC3,Beijing,1,Control,A
+sample149,BC4,Beijing,1,Control,D
+sample150,BC5,Beijing,1,Control,E
+sample151,BR1,Beijing,1,Resistant starch,C
+sample152,BR2,Beijing,1,Resistant starch,D
+sample153,BR3,Beijing,1,Resistant starch,B
+sample154,BR4,Beijing,1,Resistant starch,E
+sample155,BR5,Beijing,1,Resistant starch,A
+sample156,BI1,Beijing,1,Inulin,A
+sample157,BI2,Beijing,1,Inulin,B
+sample158,BI3,Beijing,1,Inulin,D
+sample159,BI4,Beijing,1,Inulin,E
+sample160,BI5,Beijing,1,Inulin,C
+sample161,BC1,Beijing,3,Control,C
+sample162,BC2,Beijing,3,Control,B
+sample163,BC3,Beijing,3,Control,A
+sample164,BC4,Beijing,3,Control,D
+sample165,BC5,Beijing,3,Control,E
+sample166,BR1,Beijing,3,Resistant starch,C
+sample167,BR2,Beijing,3,Resistant starch,D
+sample168,BR3,Beijing,3,Resistant starch,B
+sample169,BR4,Beijing,3,Resistant starch,E
+sample170,BR5,Beijing,3,Resistant starch,A
+sample171,BI1,Beijing,3,Inulin,A
+sample172,BI2,Beijing,3,Inulin,B
+sample173,BI3,Beijing,3,Inulin,D
+sample174,BI4,Beijing,3,Inulin,E
+sample175,BI5,Beijing,3,Inulin,C
+sample176,BC1,Beijing,5,Control,C
+sample177,BC2,Beijing,5,Control,B
+sample178,BC3,Beijing,5,Control,A
+sample179,BC4,Beijing,5,Control,D
+sample180,BC5,Beijing,5,Control,E
+sample181,BR1,Beijing,5,Resistant starch,C
+sample182,BR2,Beijing,5,Resistant starch,D
+sample183,BR3,Beijing,5,Resistant starch,B
+sample184,BR4,Beijing,5,Resistant starch,E
+sample185,BR5,Beijing,5,Resistant starch,A
+sample186,BI1,Beijing,5,Inulin,A
+sample187,BI2,Beijing,5,Inulin,B
+sample188,BI3,Beijing,5,Inulin,D
+sample189,BI4,Beijing,5,Inulin,E
+sample190,BI5,Beijing,5,Inulin,C
+sample191,BC1,Beijing,8,Control,C
+sample192,BC2,Beijing,8,Control,B
+sample193,BC3,Beijing,8,Control,A
+sample194,BC4,Beijing,8,Control,D
+sample195,BC5,Beijing,8,Control,E
+sample196,BR1,Beijing,8,Resistant starch,C
+sample197,BR2,Beijing,8,Resistant starch,D
+sample198,BR3,Beijing,8,Resistant starch,B
+sample199,BR4,Beijing,8,Resistant starch,E
+sample200,BR5,Beijing,8,Resistant starch,A
+sample201,BI1,Beijing,8,Inulin,A
+sample202,BI2,Beijing,8,Inulin,B
+sample203,BI3,Beijing,8,Inulin,D
+sample204,BI4,Beijing,8,Inulin,E
+sample205,BI5,Beijing,8,Inulin,C
+sample206,BC1,Beijing,13,Control,C
+sample207,BC2,Beijing,13,Control,B
+sample208,BC3,Beijing,13,Control,A
+sample209,BC4,Beijing,13,Control,D
+sample210,BC5,Beijing,13,Control,E
+sample211,BR1,Beijing,13,Resistant starch,C
+sample212,BR2,Beijing,13,Resistant starch,D
+sample213,BR3,Beijing,13,Resistant starch,B
+sample214,BR4,Beijing,13,Resistant starch,E
+sample215,BR5,Beijing,13,Resistant starch,A
+sample216,BI1,Beijing,13,Inulin,A
+sample217,BI2,Beijing,13,Inulin,B
+sample218,BI3,Beijing,13,Inulin,D
+sample219,BI4,Beijing,13,Inulin,E
+sample220,BI5,Beijing,13,Inulin,C
+sample221,BC1,Beijing,19,Control,C
+sample222,BC2,Beijing,19,Control,B
+sample223,BC3,Beijing,19,Control,A
+sample224,BC4,Beijing,19,Control,D
+sample225,BC5,Beijing,19,Control,E
+sample226,BR1,Beijing,19,Resistant starch,C
+sample227,BR2,Beijing,19,Resistant starch,D
+sample228,BR3,Beijing,19,Resistant starch,B
+sample229,BR4,Beijing,19,Resistant starch,E
+sample230,BR5,Beijing,19,Resistant starch,A
+sample231,BI1,Beijing,19,Inulin,A
+sample232,BI2,Beijing,19,Inulin,B
+sample233,BI3,Beijing,19,Inulin,D
+sample234,BI4,Beijing,19,Inulin,E
+sample235,BI5,Beijing,19,Inulin,C
+sample236,BC1,Beijing,25,Control,C
+sample237,BC2,Beijing,25,Control,B
+sample238,BC3,Beijing,25,Control,A
+sample239,BC4,Beijing,25,Control,D
+sample240,BC5,Beijing,25,Control,E
+sample241,BR1,Beijing,25,Resistant starch,C
+sample242,BR2,Beijing,25,Resistant starch,D
+sample243,BR3,Beijing,25,Resistant starch,B
+sample244,BR4,Beijing,25,Resistant starch,E
+sample245,BR5,Beijing,25,Resistant starch,A
+sample246,BI1,Beijing,25,Inulin,A
+sample247,BI2,Beijing,25,Inulin,B
+sample248,BI3,Beijing,25,Inulin,D
+sample249,BI4,Beijing,25,Inulin,E
+sample250,BI5,Beijing,25,Inulin,C
+sample251,BC1,Beijing,31,Control,C
+sample252,BC2,Beijing,31,Control,B
+sample253,BC3,Beijing,31,Control,A
+sample254,BC4,Beijing,31,Control,D
+sample255,BC5,Beijing,31,Control,E
+sample256,BR1,Beijing,31,Resistant starch,C
+sample257,BR2,Beijing,31,Resistant starch,D
+sample258,BR3,Beijing,31,Resistant starch,B
+sample259,BR4,Beijing,31,Resistant starch,E
+sample260,BR5,Beijing,31,Resistant starch,A
+sample261,BI1,Beijing,31,Inulin,A
+sample262,BI2,Beijing,31,Inulin,B
+sample263,BI3,Beijing,31,Inulin,D
+sample264,BI4,Beijing,31,Inulin,E
+sample265,BI5,Beijing,31,Inulin,C
+sample401,GC1,Guangdong,0,Control,C
+sample402,GC2,Guangdong,0,Control,A
+sample403,GC3,Guangdong,0,Control,B
+sample404,GC4,Guangdong,0,Control,E
+sample405,GC5,Guangdong,0,Control,D
+sample406,GR1,Guangdong,0,Resistant starch,B
+sample407,GR2,Guangdong,0,Resistant starch,C
+sample408,GR3,Guangdong,0,Resistant starch,D
+sample409,GR4,Guangdong,0,Resistant starch,A
+sample410,GR5,Guangdong,0,Resistant starch,E
+sample411,GI1,Guangdong,0,Inulin,A
+sample412,GI2,Guangdong,0,Inulin,B
+sample413,GI3,Guangdong,0,Inulin,C
+sample414,GI4,Guangdong,0,Inulin,D
+sample416,GC1,Guangdong,1,Control,C
+sample417,GC2,Guangdong,1,Control,A
+sample418,GC3,Guangdong,1,Control,B
+sample419,GC4,Guangdong,1,Control,E
+sample420,GC5,Guangdong,1,Control,D
+sample421,GR1,Guangdong,1,Resistant starch,B
+sample422,GR2,Guangdong,1,Resistant starch,C
+sample423,GR3,Guangdong,1,Resistant starch,D
+sample424,GR4,Guangdong,1,Resistant starch,A
+sample425,GR5,Guangdong,1,Resistant starch,E
+sample426,GI1,Guangdong,1,Inulin,A
+sample427,GI2,Guangdong,1,Inulin,B
+sample428,GI3,Guangdong,1,Inulin,C
+sample429,GI4,Guangdong,1,Inulin,D
+sample431,GC1,Guangdong,3,Control,C
+sample432,GC2,Guangdong,3,Control,A
+sample433,GC3,Guangdong,3,Control,B
+sample434,GC4,Guangdong,3,Control,E
+sample435,GC5,Guangdong,3,Control,D
+sample436,GR1,Guangdong,3,Resistant starch,B
+sample437,GR2,Guangdong,3,Resistant starch,C
+sample438,GR3,Guangdong,3,Resistant starch,D
+sample439,GR4,Guangdong,3,Resistant starch,A
+sample440,GR5,Guangdong,3,Resistant starch,E
+sample441,GI1,Guangdong,3,Inulin,A
+sample442,GI2,Guangdong,3,Inulin,B
+sample443,GI3,Guangdong,3,Inulin,C
+sample444,GI4,Guangdong,3,Inulin,D
+sample446,GC1,Guangdong,5,Control,C
+sample447,GC2,Guangdong,5,Control,A
+sample448,GC3,Guangdong,5,Control,B
+sample449,GC4,Guangdong,5,Control,E
+sample450,GC5,Guangdong,5,Control,D
+sample451,GR1,Guangdong,5,Resistant starch,B
+sample452,GR2,Guangdong,5,Resistant starch,C
+sample453,GR3,Guangdong,5,Resistant starch,D
+sample454,GR4,Guangdong,5,Resistant starch,A
+sample455,GR5,Guangdong,5,Resistant starch,E
+sample456,GI1,Guangdong,5,Inulin,A
+sample457,GI2,Guangdong,5,Inulin,B
+sample458,GI3,Guangdong,5,Inulin,C
+sample459,GI4,Guangdong,5,Inulin,D
+sample461,GC1,Guangdong,8,Control,C
+sample462,GC2,Guangdong,8,Control,A
+sample463,GC3,Guangdong,8,Control,B
+sample464,GC4,Guangdong,8,Control,E
+sample465,GC5,Guangdong,8,Control,D
+sample466,GR1,Guangdong,8,Resistant starch,B
+sample467,GR2,Guangdong,8,Resistant starch,C
+sample468,GR3,Guangdong,8,Resistant starch,D
+sample469,GR4,Guangdong,8,Resistant starch,A
+sample470,GR5,Guangdong,8,Resistant starch,E
+sample471,GI1,Guangdong,8,Inulin,A
+sample472,GI2,Guangdong,8,Inulin,B
+sample473,GI3,Guangdong,8,Inulin,C
+sample474,GI4,Guangdong,8,Inulin,D
+sample476,GC1,Guangdong,13,Control,C
+sample477,GC2,Guangdong,13,Control,A
+sample478,GC3,Guangdong,13,Control,B
+sample479,GC4,Guangdong,13,Control,E
+sample480,GC5,Guangdong,13,Control,D
+sample481,GR1,Guangdong,13,Resistant starch,B
+sample482,GR2,Guangdong,13,Resistant starch,C
+sample483,GR3,Guangdong,13,Resistant starch,D
+sample484,GR4,Guangdong,13,Resistant starch,A
+sample485,GR5,Guangdong,13,Resistant starch,E
+sample486,GI1,Guangdong,13,Inulin,A
+sample487,GI2,Guangdong,13,Inulin,B
+sample488,GI3,Guangdong,13,Inulin,C
+sample489,GI4,Guangdong,13,Inulin,D
+sample491,GC1,Guangdong,19,Control,C
+sample492,GC2,Guangdong,19,Control,A
+sample493,GC3,Guangdong,19,Control,B
+sample494,GC4,Guangdong,19,Control,E
+sample495,GC5,Guangdong,19,Control,D
+sample496,GR1,Guangdong,19,Resistant starch,B
+sample497,GR2,Guangdong,19,Resistant starch,C
+sample498,GR3,Guangdong,19,Resistant starch,D
+sample499,GR4,Guangdong,19,Resistant starch,A
+sample500,GR5,Guangdong,19,Resistant starch,E
+sample501,GI1,Guangdong,19,Inulin,A
+sample502,GI2,Guangdong,19,Inulin,B
+sample503,GI3,Guangdong,19,Inulin,C
+sample504,GI4,Guangdong,19,Inulin,D
+sample506,GC1,Guangdong,25,Control,C
+sample507,GC2,Guangdong,25,Control,A
+sample508,GC3,Guangdong,25,Control,B
+sample509,GC4,Guangdong,25,Control,E
+sample510,GC5,Guangdong,25,Control,D
+sample511,GR1,Guangdong,25,Resistant starch,B
+sample512,GR2,Guangdong,25,Resistant starch,C
+sample513,GR3,Guangdong,25,Resistant starch,D
+sample514,GR4,Guangdong,25,Resistant starch,A
+sample515,GR5,Guangdong,25,Resistant starch,E
+sample516,GI1,Guangdong,25,Inulin,A
+sample517,GI2,Guangdong,25,Inulin,B
+sample518,GI3,Guangdong,25,Inulin,C
+sample519,GI4,Guangdong,25,Inulin,D
+sample521,GC1,Guangdong,31,Control,C
+sample522,GC2,Guangdong,31,Control,A
+sample523,GC3,Guangdong,31,Control,B
+sample524,GC4,Guangdong,31,Control,E
+sample525,GC5,Guangdong,31,Control,D
+sample526,GR1,Guangdong,31,Resistant starch,B
+sample527,GR2,Guangdong,31,Resistant starch,C
+sample528,GR3,Guangdong,31,Resistant starch,D
+sample529,GR4,Guangdong,31,Resistant starch,A
+sample530,GR5,Guangdong,31,Resistant starch,E
+sample531,GI1,Guangdong,31,Inulin,A
+sample532,GI2,Guangdong,31,Inulin,B
+sample533,GI3,Guangdong,31,Inulin,C
+sample534,GI4,Guangdong,31,Inulin,D
+sample266,HC1,Hunan,0,Control,A
+sample267,HC2,Hunan,0,Control,B
+sample268,HC3,Hunan,0,Control,C
+sample269,HC4,Hunan,0,Control,D
+sample270,HC5,Hunan,0,Control,E
+sample271,HR1,Hunan,0,Resistant starch,B
+sample272,HR2,Hunan,0,Resistant starch,C
+sample273,HR3,Hunan,0,Resistant starch,A
+sample274,HR4,Hunan,0,Resistant starch,D
+sample275,HR5,Hunan,0,Resistant starch,E
+sample276,HI1,Hunan,0,Inulin,B
+sample277,HI2,Hunan,0,Inulin,A
+sample279,HI4,Hunan,0,Inulin,C
+sample280,HI5,Hunan,0,Inulin,D
+sample281,HC1,Hunan,1,Control,A
+sample282,HC2,Hunan,1,Control,B
+sample283,HC3,Hunan,1,Control,C
+sample284,HC4,Hunan,1,Control,D
+sample285,HC5,Hunan,1,Control,E
+sample286,HR1,Hunan,1,Resistant starch,B
+sample287,HR2,Hunan,1,Resistant starch,C
+sample288,HR3,Hunan,1,Resistant starch,A
+sample289,HR4,Hunan,1,Resistant starch,D
+sample290,HR5,Hunan,1,Resistant starch,E
+sample291,HI1,Hunan,1,Inulin,B
+sample292,HI2,Hunan,1,Inulin,A
+sample294,HI4,Hunan,1,Inulin,C
+sample295,HI5,Hunan,1,Inulin,D
+sample296,HC1,Hunan,3,Control,A
+sample297,HC2,Hunan,3,Control,B
+sample298,HC3,Hunan,3,Control,C
+sample299,HC4,Hunan,3,Control,D
+sample300,HC5,Hunan,3,Control,E
+sample301,HR1,Hunan,3,Resistant starch,B
+sample302,HR2,Hunan,3,Resistant starch,C
+sample303,HR3,Hunan,3,Resistant starch,A
+sample304,HR4,Hunan,3,Resistant starch,D
+sample305,HR5,Hunan,3,Resistant starch,E
+sample306,HI1,Hunan,3,Inulin,B
+sample307,HI2,Hunan,3,Inulin,A
+sample309,HI4,Hunan,3,Inulin,C
+sample310,HI5,Hunan,3,Inulin,D
+sample311,HC1,Hunan,5,Control,A
+sample312,HC2,Hunan,5,Control,B
+sample313,HC3,Hunan,5,Control,C
+sample314,HC4,Hunan,5,Control,D
+sample315,HC5,Hunan,5,Control,E
+sample316,HR1,Hunan,5,Resistant starch,B
+sample317,HR2,Hunan,5,Resistant starch,C
+sample318,HR3,Hunan,5,Resistant starch,A
+sample319,HR4,Hunan,5,Resistant starch,D
+sample320,HR5,Hunan,5,Resistant starch,E
+sample321,HI1,Hunan,5,Inulin,B
+sample322,HI2,Hunan,5,Inulin,A
+sample324,HI4,Hunan,5,Inulin,C
+sample325,HI5,Hunan,5,Inulin,D
+sample326,HC1,Hunan,8,Control,A
+sample327,HC2,Hunan,8,Control,B
+sample328,HC3,Hunan,8,Control,C
+sample329,HC4,Hunan,8,Control,D
+sample330,HC5,Hunan,8,Control,E
+sample331,HR1,Hunan,8,Resistant starch,B
+sample332,HR2,Hunan,8,Resistant starch,C
+sample333,HR3,Hunan,8,Resistant starch,A
+sample334,HR4,Hunan,8,Resistant starch,D
+sample335,HR5,Hunan,8,Resistant starch,E
+sample336,HI1,Hunan,8,Inulin,B
+sample337,HI2,Hunan,8,Inulin,A
+sample339,HI4,Hunan,8,Inulin,C
+sample340,HI5,Hunan,8,Inulin,D
+sample341,HC1,Hunan,13,Control,A
+sample342,HC2,Hunan,13,Control,B
+sample343,HC3,Hunan,13,Control,C
+sample344,HC4,Hunan,13,Control,D
+sample345,HC5,Hunan,13,Control,E
+sample346,HR1,Hunan,13,Resistant starch,B
+sample347,HR2,Hunan,13,Resistant starch,C
+sample348,HR3,Hunan,13,Resistant starch,A
+sample349,HR4,Hunan,13,Resistant starch,D
+sample350,HR5,Hunan,13,Resistant starch,E
+sample351,HI1,Hunan,13,Inulin,B
+sample352,HI2,Hunan,13,Inulin,A
+sample354,HI4,Hunan,13,Inulin,C
+sample355,HI5,Hunan,13,Inulin,D
+sample356,HC1,Hunan,19,Control,A
+sample357,HC2,Hunan,19,Control,B
+sample358,HC3,Hunan,19,Control,C
+sample359,HC4,Hunan,19,Control,D
+sample360,HC5,Hunan,19,Control,E
+sample361,HR1,Hunan,19,Resistant starch,B
+sample362,HR2,Hunan,19,Resistant starch,C
+sample363,HR3,Hunan,19,Resistant starch,A
+sample364,HR4,Hunan,19,Resistant starch,D
+sample365,HR5,Hunan,19,Resistant starch,E
+sample366,HI1,Hunan,19,Inulin,B
+sample367,HI2,Hunan,19,Inulin,A
+sample369,HI4,Hunan,19,Inulin,C
+sample370,HI5,Hunan,19,Inulin,D
+sample371,HC1,Hunan,25,Control,A
+sample372,HC2,Hunan,25,Control,B
+sample373,HC3,Hunan,25,Control,C
+sample374,HC4,Hunan,25,Control,D
+sample375,HC5,Hunan,25,Control,E
+sample376,HR1,Hunan,25,Resistant starch,B
+sample377,HR2,Hunan,25,Resistant starch,C
+sample378,HR3,Hunan,25,Resistant starch,A
+sample379,HR4,Hunan,25,Resistant starch,D
+sample380,HR5,Hunan,25,Resistant starch,E
+sample381,HI1,Hunan,25,Inulin,B
+sample382,HI2,Hunan,25,Inulin,A
+sample384,HI4,Hunan,25,Inulin,C
+sample385,HI5,Hunan,25,Inulin,D
+sample386,HC1,Hunan,31,Control,A
+sample387,HC2,Hunan,31,Control,B
+sample388,HC3,Hunan,31,Control,C
+sample389,HC4,Hunan,31,Control,D
+sample390,HC5,Hunan,31,Control,E
+sample391,HR1,Hunan,31,Resistant starch,B
+sample392,HR2,Hunan,31,Resistant starch,C
+sample393,HR3,Hunan,31,Resistant starch,A
+sample394,HR4,Hunan,31,Resistant starch,D
+sample395,HR5,Hunan,31,Resistant starch,E
+sample396,HI1,Hunan,31,Inulin,B
+sample397,HI2,Hunan,31,Inulin,A
+sample399,HI4,Hunan,31,Inulin,C
+sample400,HI5,Hunan,31,Inulin,D
+sample1,SC1,Shanghai,0,Control,D
+sample2,SC2,Shanghai,0,Control,B
+sample3,SC3,Shanghai,0,Control,A
+sample4,SC4,Shanghai,0,Control,C
+sample5,SC5,Shanghai,0,Control,E
+sample6,SR1,Shanghai,0,Resistant starch,C
+sample7,SR2,Shanghai,0,Resistant starch,E
+sample8,SR3,Shanghai,0,Resistant starch,B
+sample9,SR4,Shanghai,0,Resistant starch,A
+sample10,SR5,Shanghai,0,Resistant starch,D
+sample11,SC1,Shanghai,1,Control,D
+sample12,SC2,Shanghai,1,Control,B
+sample13,SC3,Shanghai,1,Control,A
+sample14,SC4,Shanghai,1,Control,C
+sample15,SC5,Shanghai,1,Control,E
+sample16,SR1,Shanghai,1,Resistant starch,C
+sample17,SR2,Shanghai,1,Resistant starch,E
+sample18,SR3,Shanghai,1,Resistant starch,B
+sample19,SR4,Shanghai,1,Resistant starch,A
+sample20,SR5,Shanghai,1,Resistant starch,D
+sample21,SC1,Shanghai,3,Control,D
+sample22,SC2,Shanghai,3,Control,B
+sample23,SC3,Shanghai,3,Control,A
+sample24,SC4,Shanghai,3,Control,C
+sample25,SC5,Shanghai,3,Control,E
+sample26,SR1,Shanghai,3,Resistant starch,C
+sample27,SR2,Shanghai,3,Resistant starch,E
+sample28,SR3,Shanghai,3,Resistant starch,B
+sample29,SR4,Shanghai,3,Resistant starch,A
+sample30,SR5,Shanghai,3,Resistant starch,D
+sample31,SI1,Shanghai,0,Inulin,D
+sample32,SI2,Shanghai,0,Inulin,B
+sample33,SI3,Shanghai,0,Inulin,A
+sample34,SI4,Shanghai,0,Inulin,C
+sample35,SI5,Shanghai,0,Inulin,E
+sample36,SC1,Shanghai,5,Control,D
+sample37,SC2,Shanghai,5,Control,B
+sample38,SC3,Shanghai,5,Control,A
+sample39,SC4,Shanghai,5,Control,C
+sample40,SC5,Shanghai,5,Control,E
+sample41,SR1,Shanghai,5,Resistant starch,C
+sample42,SR2,Shanghai,5,Resistant starch,E
+sample43,SR3,Shanghai,5,Resistant starch,B
+sample44,SR4,Shanghai,5,Resistant starch,A
+sample45,SR5,Shanghai,5,Resistant starch,D
+sample46,SI1,Shanghai,2,Inulin,D
+sample47,SI2,Shanghai,2,Inulin,B
+sample48,SI3,Shanghai,2,Inulin,A
+sample49,SI4,Shanghai,2,Inulin,C
+sample50,SI5,Shanghai,2,Inulin,E
+sample51,SC1,Shanghai,8,Control,D
+sample52,SC2,Shanghai,8,Control,B
+sample53,SC3,Shanghai,8,Control,A
+sample54,SC4,Shanghai,8,Control,C
+sample55,SC5,Shanghai,8,Control,E
+sample56,SR1,Shanghai,8,Resistant starch,C
+sample57,SR2,Shanghai,8,Resistant starch,E
+sample58,SR3,Shanghai,8,Resistant starch,B
+sample59,SR4,Shanghai,8,Resistant starch,A
+sample60,SR5,Shanghai,8,Resistant starch,D
+sample61,SI1,Shanghai,5,Inulin,D
+sample62,SI2,Shanghai,5,Inulin,B
+sample63,SI3,Shanghai,5,Inulin,A
+sample64,SI4,Shanghai,5,Inulin,C
+sample65,SI5,Shanghai,5,Inulin,E
+sample66,SC1,Shanghai,13,Control,D
+sample67,SC2,Shanghai,13,Control,B
+sample68,SC3,Shanghai,13,Control,A
+sample69,SC4,Shanghai,13,Control,C
+sample70,SC5,Shanghai,13,Control,E
+sample71,SR1,Shanghai,13,Resistant starch,C
+sample72,SR2,Shanghai,13,Resistant starch,E
+sample73,SR3,Shanghai,13,Resistant starch,B
+sample74,SR4,Shanghai,13,Resistant starch,A
+sample75,SR5,Shanghai,13,Resistant starch,D
+sample76,SI1,Shanghai,10,Inulin,D
+sample77,SI2,Shanghai,10,Inulin,B
+sample78,SI3,Shanghai,10,Inulin,A
+sample79,SI4,Shanghai,10,Inulin,C
+sample80,SI5,Shanghai,10,Inulin,E
+sample81,SI1,Shanghai,13,Inulin,D
+sample82,SI2,Shanghai,13,Inulin,B
+sample83,SI3,Shanghai,13,Inulin,A
+sample84,SI4,Shanghai,13,Inulin,C
+sample85,SI5,Shanghai,13,Inulin,E
+sample86,SC1,Shanghai,19,Control,D
+sample87,SC2,Shanghai,19,Control,B
+sample88,SC3,Shanghai,19,Control,A
+sample89,SC4,Shanghai,19,Control,C
+sample90,SC5,Shanghai,19,Control,E
+sample91,SR1,Shanghai,19,Resistant starch,C
+sample92,SR2,Shanghai,19,Resistant starch,E
+sample93,SR3,Shanghai,19,Resistant starch,B
+sample94,SR4,Shanghai,19,Resistant starch,A
+sample95,SR5,Shanghai,19,Resistant starch,D
+sample96,SI1,Shanghai,19,Inulin,D
+sample97,SI2,Shanghai,19,Inulin,B
+sample98,SI3,Shanghai,19,Inulin,A
+sample99,SI4,Shanghai,19,Inulin,C
+sample100,SI5,Shanghai,19,Inulin,E
+sample101,SC1,Shanghai,25,Control,D
+sample102,SC2,Shanghai,25,Control,B
+sample103,SC3,Shanghai,25,Control,A
+sample104,SC4,Shanghai,25,Control,C
+sample105,SC5,Shanghai,25,Control,E
+sample106,SR1,Shanghai,25,Resistant starch,C
+sample107,SR2,Shanghai,25,Resistant starch,E
+sample108,SR3,Shanghai,25,Resistant starch,B
+sample109,SR4,Shanghai,25,Resistant starch,A
+sample110,SR5,Shanghai,25,Resistant starch,D
+sample111,SI1,Shanghai,25,Inulin,D
+sample112,SI2,Shanghai,25,Inulin,B
+sample113,SI3,Shanghai,25,Inulin,A
+sample114,SI4,Shanghai,25,Inulin,C
+sample115,SI5,Shanghai,25,Inulin,E
+sample116,SC1,Shanghai,31,Control,D
+sample117,SC2,Shanghai,31,Control,B
+sample118,SC3,Shanghai,31,Control,A
+sample119,SC4,Shanghai,31,Control,C
+sample120,SC5,Shanghai,31,Control,E
+sample121,SR1,Shanghai,31,Resistant starch,C
+sample122,SR2,Shanghai,31,Resistant starch,E
+sample123,SR3,Shanghai,31,Resistant starch,B
+sample124,SR4,Shanghai,31,Resistant starch,A
+sample125,SR5,Shanghai,31,Resistant starch,D
+sample126,SI1,Shanghai,31,Inulin,D
+sample127,SI2,Shanghai,31,Inulin,B
+sample128,SI3,Shanghai,31,Inulin,A
+sample129,SI4,Shanghai,31,Inulin,C
+sample130,SI5,Shanghai,31,Inulin,E
