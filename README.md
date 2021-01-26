@@ -10,4 +10,5 @@ references: relevant papers
 
 
 To run the codes, the following third-party packages/databases are required
-1. Cmdstan (https://mc-stan.org/users/interfaces/cmdstan)
+1. Cmdstan (https://mc-stan.org/users/interfaces/cmdstan) for inulin responder detection in Fig.4
+2. seqNMF (https://github.com/ContextLab/seqnmf) for factor analysis in Fig.3
