@@ -1,0 +1,16 @@
+,BaselineSpecies,RsResponder,Spearman
+0,Alloprevotella,Muribaculaceae,0.26616541353383455
+1,Alloprevotella,Faecalibaculum,-0.4541353383458646
+2,Alloprevotella,Desulfovibrionaceae,0.7187969924812029
+3,Bacteroides,Muribaculaceae,-0.6360902255639098
+4,Bacteroides,Faecalibaculum,0.06466165413533834
+5,Bacteroides,Desulfovibrionaceae,-0.12330827067669171
+6,Faecalibaculum,Muribaculaceae,0.5052631578947367
+7,Faecalibaculum,Faecalibaculum,0.6571428571428571
+8,Faecalibaculum,Desulfovibrionaceae,0.08270676691729321
+9,Muribaculaceae,Muribaculaceae,0.8436090225563909
+10,Muribaculaceae,Faecalibaculum,0.1639097744360902
+11,Muribaculaceae,Desulfovibrionaceae,0.556390977443609
+12,Parabacteroides-goldsteinii,Muribaculaceae,-0.7398496240601502
+13,Parabacteroides-goldsteinii,Faecalibaculum,-0.2300751879699248
+14,Parabacteroides-goldsteinii,Desulfovibrionaceae,-0.6721804511278194
