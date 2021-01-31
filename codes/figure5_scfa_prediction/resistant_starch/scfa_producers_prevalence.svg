@@ -1,0 +1,1054 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Created with matplotlib (https://matplotlib.org/) -->
+<svg height="1152pt" version="1.1" viewBox="0 0 108 1152" width="108pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+*{stroke-linecap:butt;stroke-linejoin:round;}
+  </style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 1152 
+L 108 1152 
+L 108 0 
+L 0 0 
+z
+" style="fill:#ffffff;"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 13.5 1008 
+L 80.46 1008 
+L 80.46 138.24 
+L 13.5 138.24 
+z
+" style="fill:#ffffff;"/>
+   </g>
+   <g id="QuadMesh_1">
+    <path clip-path="url(#p976c6d3718)" d="M 13.5 138.24 
+L 46.98 138.24 
+L 46.98 159.984 
+L 13.5 159.984 
+L 13.5 138.24 
+" style="fill:#262626;"/>
+    <path clip-path="url(#p976c6d3718)" d="M 46.98 138.24 
+L 80.46 138.24 
+L 80.46 159.984 
+L 46.98 159.984 
+L 46.98 138.24 
+"/>
+    <path clip-path="url(#p976c6d3718)" d="M 13.5 159.984 
+L 46.98 159.984 
+L 46.98 181.728 
+L 13.5 181.728 
+L 13.5 159.984 
+" style="fill:#c0c0c0;"/>
+    <path clip-path="url(#p976c6d3718)" d="M 46.98 159.984 
+L 80.46 159.984 
+L 80.46 181.728 
+L 46.98 181.728 
+L 46.98 159.984 
+" style="fill:#c0c0c0;"/>
+    <path clip-path="url(#p976c6d3718)" d="M 13.5 181.728 
+L 46.98 181.728 
+L 46.98 203.472 
+L 13.5 203.472 
+L 13.5 181.728 
+" style="fill:#262626;"/>
+    <path clip-path="url(#p976c6d3718)" d="M 46.98 181.728 
+L 80.46 181.728 
+L 80.46 203.472 
+L 46.98 203.472 
+L 46.98 181.728 
+"/>
+    <path clip-path="url(#p976c6d3718)" d="M 13.5 203.472 
+L 46.98 203.472 
+L 46.98 225.216 
+L 13.5 225.216 
+L 13.5 203.472 
+" style="fill:#8c8c8c;"/>
+    <path clip-path="url(#p976c6d3718)" d="M 46.98 203.472 
+L 80.46 203.472 
+L 80.46 225.216 
+L 46.98 225.216 
+L 46.98 203.472 
+" style="fill:#808080;"/>
+    <path clip-path="url(#p976c6d3718)" d="M 13.5 225.216 
+L 46.98 225.216 
+L 46.98 246.96 
+L 13.5 246.96 
+L 13.5 225.216 
+" style="fill:#666666;"/>
+    <path clip-path="url(#p976c6d3718)" d="M 46.98 225.216 
+L 80.46 225.216 
+L 80.46 246.96 
+L 46.98 246.96 
+L 46.98 225.216 
+" style="fill:#404040;"/>
+    <path clip-path="url(#p976c6d3718)" d="M 13.5 246.96 
+L 46.98 246.96 
+L 46.98 268.704 
+L 13.5 268.704 
+L 13.5 246.96 
+" style="fill:#8c8c8c;"/>
+    <path clip-path="url(#p976c6d3718)" d="M 46.98 246.96 
+L 80.46 246.96 
+L 80.46 268.704 
+L 46.98 268.704 
+L 46.98 246.96 
+" style="fill:#404040;"/>
+    <path clip-path="url(#p976c6d3718)" d="M 13.5 268.704 
+L 46.98 268.704 
+L 46.98 290.448 
+L 13.5 290.448 
+L 13.5 268.704 
+" style="fill:#737373;"/>
+    <path clip-path="url(#p976c6d3718)" d="M 46.98 268.704 
+L 80.46 268.704 
+L 80.46 290.448 
+L 46.98 290.448 
+L 46.98 268.704 
+" style="fill:#404040;"/>
+    <path clip-path="url(#p976c6d3718)" d="M 13.5 290.448 
+L 46.98 290.448 
+L 46.98 312.192 
+L 13.5 312.192 
+L 13.5 290.448 
+" style="fill:#b3b3b3;"/>
+    <path clip-path="url(#p976c6d3718)" d="M 46.98 290.448 
+L 80.46 290.448 
+L 80.46 312.192 
+L 46.98 312.192 
+L 46.98 290.448 
+" style="fill:#808080;"/>
+    <path clip-path="url(#p976c6d3718)" d="M 13.5 312.192 
+L 46.98 312.192 
+L 46.98 333.936 
+L 13.5 333.936 
+L 13.5 312.192 
+" style="fill:#737373;"/>
+    <path clip-path="url(#p976c6d3718)" d="M 46.98 312.192 
+L 80.46 312.192 
+L 80.46 333.936 
+L 46.98 333.936 
+L 46.98 312.192 
+"/>
+    <path clip-path="url(#p976c6d3718)" d="M 13.5 333.936 
+L 46.98 333.936 
+L 46.98 355.68 
+L 13.5 355.68 
+L 13.5 333.936 
+" style="fill:#262626;"/>
+    <path clip-path="url(#p976c6d3718)" d="M 46.98 333.936 
+L 80.46 333.936 
+L 80.46 355.68 
+L 46.98 355.68 
+L 46.98 333.936 
+"/>
+    <path clip-path="url(#p976c6d3718)" d="M 13.5 355.68 
+L 46.98 355.68 
+L 46.98 377.424 
+L 13.5 377.424 
+L 13.5 355.68 
+" style="fill:#f3f3f3;"/>
+    <path clip-path="url(#p976c6d3718)" d="M 46.98 355.68 
+L 80.46 355.68 
+L 80.46 377.424 
+L 46.98 377.424 
+L 46.98 355.68 
+" style="fill:#c0c0c0;"/>
+    <path clip-path="url(#p976c6d3718)" d="M 13.5 377.424 
+L 46.98 377.424 
+L 46.98 399.168 
+L 13.5 399.168 
+L 13.5 377.424 
+" style="fill:#8c8c8c;"/>
+    <path clip-path="url(#p976c6d3718)" d="M 46.98 377.424 
+L 80.46 377.424 
+L 80.46 399.168 
+L 46.98 399.168 
+L 46.98 377.424 
+" style="fill:#404040;"/>
+    <path clip-path="url(#p976c6d3718)" d="M 13.5 399.168 
+L 46.98 399.168 
+L 46.98 420.912 
+L 13.5 420.912 
+L 13.5 399.168 
+" style="fill:#ffffff;"/>
+    <path clip-path="url(#p976c6d3718)" d="M 46.98 399.168 
+L 80.46 399.168 
+L 80.46 420.912 
+L 46.98 420.912 
+L 46.98 399.168 
+" style="fill:#ffffff;"/>
+    <path clip-path="url(#p976c6d3718)" d="M 13.5 420.912 
+L 46.98 420.912 
+L 46.98 442.656 
+L 13.5 442.656 
+L 13.5 420.912 
+" style="fill:#737373;"/>
+    <path clip-path="url(#p976c6d3718)" d="M 46.98 420.912 
+L 80.46 420.912 
+L 80.46 442.656 
+L 46.98 442.656 
+L 46.98 420.912 
+" style="fill:#404040;"/>
+    <path clip-path="url(#p976c6d3718)" d="M 13.5 442.656 
+L 46.98 442.656 
+L 46.98 464.4 
+L 13.5 464.4 
+L 13.5 442.656 
+" style="fill:#8c8c8c;"/>
+    <path clip-path="url(#p976c6d3718)" d="M 46.98 442.656 
+L 80.46 442.656 
+L 80.46 464.4 
+L 46.98 464.4 
+L 46.98 442.656 
+"/>
+    <path clip-path="url(#p976c6d3718)" d="M 13.5 464.4 
+L 46.98 464.4 
+L 46.98 486.144 
+L 13.5 486.144 
+L 13.5 464.4 
+" style="fill:#4c4c4c;"/>
+    <path clip-path="url(#p976c6d3718)" d="M 46.98 464.4 
+L 80.46 464.4 
+L 80.46 486.144 
+L 46.98 486.144 
+L 46.98 464.4 
+"/>
+    <path clip-path="url(#p976c6d3718)" d="M 13.5 486.144 
+L 46.98 486.144 
+L 46.98 507.888 
+L 13.5 507.888 
+L 13.5 486.144 
+" style="fill:#404040;"/>
+    <path clip-path="url(#p976c6d3718)" d="M 46.98 486.144 
+L 80.46 486.144 
+L 80.46 507.888 
+L 46.98 507.888 
+L 46.98 486.144 
+" style="fill:#404040;"/>
+    <path clip-path="url(#p976c6d3718)" d="M 13.5 507.888 
+L 46.98 507.888 
+L 46.98 529.632 
+L 13.5 529.632 
+L 13.5 507.888 
+" style="fill:#262626;"/>
+    <path clip-path="url(#p976c6d3718)" d="M 46.98 507.888 
+L 80.46 507.888 
+L 80.46 529.632 
+L 46.98 529.632 
+L 46.98 507.888 
+"/>
+    <path clip-path="url(#p976c6d3718)" d="M 13.5 529.632 
+L 46.98 529.632 
+L 46.98 551.376 
+L 13.5 551.376 
+L 13.5 529.632 
+" style="fill:#404040;"/>
+    <path clip-path="url(#p976c6d3718)" d="M 46.98 529.632 
+L 80.46 529.632 
+L 80.46 551.376 
+L 46.98 551.376 
+L 46.98 529.632 
+" style="fill:#404040;"/>
+    <path clip-path="url(#p976c6d3718)" d="M 13.5 551.376 
+L 46.98 551.376 
+L 46.98 573.12 
+L 13.5 573.12 
+L 13.5 551.376 
+" style="fill:#333333;"/>
+    <path clip-path="url(#p976c6d3718)" d="M 46.98 551.376 
+L 80.46 551.376 
+L 80.46 573.12 
+L 46.98 573.12 
+L 46.98 551.376 
+"/>
+    <path clip-path="url(#p976c6d3718)" d="M 13.5 573.12 
+L 46.98 573.12 
+L 46.98 594.864 
+L 13.5 594.864 
+L 13.5 573.12 
+" style="fill:#666666;"/>
+    <path clip-path="url(#p976c6d3718)" d="M 46.98 573.12 
+L 80.46 573.12 
+L 80.46 594.864 
+L 46.98 594.864 
+L 46.98 573.12 
+"/>
+    <path clip-path="url(#p976c6d3718)" d="M 13.5 594.864 
+L 46.98 594.864 
+L 46.98 616.608 
+L 13.5 616.608 
+L 13.5 594.864 
+" style="fill:#0c0c0c;"/>
+    <path clip-path="url(#p976c6d3718)" d="M 46.98 594.864 
+L 80.46 594.864 
+L 80.46 616.608 
+L 46.98 616.608 
+L 46.98 594.864 
+"/>
+    <path clip-path="url(#p976c6d3718)" d="M 13.5 616.608 
+L 46.98 616.608 
+L 46.98 638.352 
+L 13.5 638.352 
+L 13.5 616.608 
+"/>
+    <path clip-path="url(#p976c6d3718)" d="M 46.98 616.608 
+L 80.46 616.608 
+L 80.46 638.352 
+L 46.98 638.352 
+L 46.98 616.608 
+"/>
+    <path clip-path="url(#p976c6d3718)" d="M 13.5 638.352 
+L 46.98 638.352 
+L 46.98 660.096 
+L 13.5 660.096 
+L 13.5 638.352 
+"/>
+    <path clip-path="url(#p976c6d3718)" d="M 46.98 638.352 
+L 80.46 638.352 
+L 80.46 660.096 
+L 46.98 660.096 
+L 46.98 638.352 
+"/>
+    <path clip-path="url(#p976c6d3718)" d="M 13.5 660.096 
+L 46.98 660.096 
+L 46.98 681.84 
+L 13.5 681.84 
+L 13.5 660.096 
+" style="fill:#0c0c0c;"/>
+    <path clip-path="url(#p976c6d3718)" d="M 46.98 660.096 
+L 80.46 660.096 
+L 80.46 681.84 
+L 46.98 681.84 
+L 46.98 660.096 
+"/>
+    <path clip-path="url(#p976c6d3718)" d="M 13.5 681.84 
+L 46.98 681.84 
+L 46.98 703.584 
+L 13.5 703.584 
+L 13.5 681.84 
+"/>
+    <path clip-path="url(#p976c6d3718)" d="M 46.98 681.84 
+L 80.46 681.84 
+L 80.46 703.584 
+L 46.98 703.584 
+L 46.98 681.84 
+"/>
+    <path clip-path="url(#p976c6d3718)" d="M 13.5 703.584 
+L 46.98 703.584 
+L 46.98 725.328 
+L 13.5 725.328 
+L 13.5 703.584 
+" style="fill:#0c0c0c;"/>
+    <path clip-path="url(#p976c6d3718)" d="M 46.98 703.584 
+L 80.46 703.584 
+L 80.46 725.328 
+L 46.98 725.328 
+L 46.98 703.584 
+"/>
+    <path clip-path="url(#p976c6d3718)" d="M 13.5 725.328 
+L 46.98 725.328 
+L 46.98 747.072 
+L 13.5 747.072 
+L 13.5 725.328 
+"/>
+    <path clip-path="url(#p976c6d3718)" d="M 46.98 725.328 
+L 80.46 725.328 
+L 80.46 747.072 
+L 46.98 747.072 
+L 46.98 725.328 
+"/>
+    <path clip-path="url(#p976c6d3718)" d="M 13.5 747.072 
+L 46.98 747.072 
+L 46.98 768.816 
+L 13.5 768.816 
+L 13.5 747.072 
+"/>
+    <path clip-path="url(#p976c6d3718)" d="M 46.98 747.072 
+L 80.46 747.072 
+L 80.46 768.816 
+L 46.98 768.816 
+L 46.98 747.072 
+"/>
+    <path clip-path="url(#p976c6d3718)" d="M 13.5 768.816 
+L 46.98 768.816 
+L 46.98 790.56 
+L 13.5 790.56 
+L 13.5 768.816 
+"/>
+    <path clip-path="url(#p976c6d3718)" d="M 46.98 768.816 
+L 80.46 768.816 
+L 80.46 790.56 
+L 46.98 790.56 
+L 46.98 768.816 
+"/>
+    <path clip-path="url(#p976c6d3718)" d="M 13.5 790.56 
+L 46.98 790.56 
+L 46.98 812.304 
+L 13.5 812.304 
+L 13.5 790.56 
+"/>
+    <path clip-path="url(#p976c6d3718)" d="M 46.98 790.56 
+L 80.46 790.56 
+L 80.46 812.304 
+L 46.98 812.304 
+L 46.98 790.56 
+"/>
+    <path clip-path="url(#p976c6d3718)" d="M 13.5 812.304 
+L 46.98 812.304 
+L 46.98 834.048 
+L 13.5 834.048 
+L 13.5 812.304 
+"/>
+    <path clip-path="url(#p976c6d3718)" d="M 46.98 812.304 
+L 80.46 812.304 
+L 80.46 834.048 
+L 46.98 834.048 
+L 46.98 812.304 
+"/>
+    <path clip-path="url(#p976c6d3718)" d="M 13.5 834.048 
+L 46.98 834.048 
+L 46.98 855.792 
+L 13.5 855.792 
+L 13.5 834.048 
+"/>
+    <path clip-path="url(#p976c6d3718)" d="M 46.98 834.048 
+L 80.46 834.048 
+L 80.46 855.792 
+L 46.98 855.792 
+L 46.98 834.048 
+"/>
+    <path clip-path="url(#p976c6d3718)" d="M 13.5 855.792 
+L 46.98 855.792 
+L 46.98 877.536 
+L 13.5 877.536 
+L 13.5 855.792 
+"/>
+    <path clip-path="url(#p976c6d3718)" d="M 46.98 855.792 
+L 80.46 855.792 
+L 80.46 877.536 
+L 46.98 877.536 
+L 46.98 855.792 
+"/>
+    <path clip-path="url(#p976c6d3718)" d="M 13.5 877.536 
+L 46.98 877.536 
+L 46.98 899.28 
+L 13.5 899.28 
+L 13.5 877.536 
+"/>
+    <path clip-path="url(#p976c6d3718)" d="M 46.98 877.536 
+L 80.46 877.536 
+L 80.46 899.28 
+L 46.98 899.28 
+L 46.98 877.536 
+"/>
+    <path clip-path="url(#p976c6d3718)" d="M 13.5 899.28 
+L 46.98 899.28 
+L 46.98 921.024 
+L 13.5 921.024 
+L 13.5 899.28 
+"/>
+    <path clip-path="url(#p976c6d3718)" d="M 46.98 899.28 
+L 80.46 899.28 
+L 80.46 921.024 
+L 46.98 921.024 
+L 46.98 899.28 
+"/>
+    <path clip-path="url(#p976c6d3718)" d="M 13.5 921.024 
+L 46.98 921.024 
+L 46.98 942.768 
+L 13.5 942.768 
+L 13.5 921.024 
+"/>
+    <path clip-path="url(#p976c6d3718)" d="M 46.98 921.024 
+L 80.46 921.024 
+L 80.46 942.768 
+L 46.98 942.768 
+L 46.98 921.024 
+"/>
+    <path clip-path="url(#p976c6d3718)" d="M 13.5 942.768 
+L 46.98 942.768 
+L 46.98 964.512 
+L 13.5 964.512 
+L 13.5 942.768 
+" style="fill:#b3b3b3;"/>
+    <path clip-path="url(#p976c6d3718)" d="M 46.98 942.768 
+L 80.46 942.768 
+L 80.46 964.512 
+L 46.98 964.512 
+L 46.98 942.768 
+" style="fill:#808080;"/>
+    <path clip-path="url(#p976c6d3718)" d="M 13.5 964.512 
+L 46.98 964.512 
+L 46.98 986.256 
+L 13.5 986.256 
+L 13.5 964.512 
+" style="fill:#ffffff;"/>
+    <path clip-path="url(#p976c6d3718)" d="M 46.98 964.512 
+L 80.46 964.512 
+L 80.46 986.256 
+L 46.98 986.256 
+L 46.98 964.512 
+" style="fill:#ffffff;"/>
+    <path clip-path="url(#p976c6d3718)" d="M 13.5 986.256 
+L 46.98 986.256 
+L 46.98 1008 
+L 13.5 1008 
+L 13.5 986.256 
+" style="fill:#e6e6e6;"/>
+    <path clip-path="url(#p976c6d3718)" d="M 46.98 986.256 
+L 80.46 986.256 
+L 80.46 1008 
+L 46.98 1008 
+L 46.98 986.256 
+" style="fill:#c0c0c0;"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <defs>
+       <path d="M 0 0 
+L 0 3.5 
+" id="mf2c61f7e5a" style="stroke:#000000;stroke-width:0.8;"/>
+      </defs>
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="30.24" xlink:href="#mf2c61f7e5a" y="1008"/>
+      </g>
+     </g>
+     <g id="text_1">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;" transform="translate(32.860312 1099.525)rotate(-90)">prevalence_mice</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_2">
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="63.72" xlink:href="#mf2c61f7e5a" y="1008"/>
+      </g>
+     </g>
+     <g id="text_2">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;" transform="translate(66.340313 1110.342187)rotate(-90)">prevalence_vendor</text>
+     </g>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_3">
+      <defs>
+       <path d="M 0 0 
+L -3.5 0 
+" id="maf71252abf" style="stroke:#000000;stroke-width:0.8;"/>
+      </defs>
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="13.5" xlink:href="#maf71252abf" y="149.112"/>
+      </g>
+     </g>
+     <g id="text_3">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:end;" transform="rotate(-0, 6.5, 152.911219)" x="6.5" y="152.911219">Butyricimonas-synergistica</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_4">
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="13.5" xlink:href="#maf71252abf" y="170.856"/>
+      </g>
+     </g>
+     <g id="text_4">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:end;" transform="rotate(-0, 6.5, 174.655219)" x="6.5" y="174.655219">Alistipes</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_5">
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="13.5" xlink:href="#maf71252abf" y="192.6"/>
+      </g>
+     </g>
+     <g id="text_5">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:end;" transform="rotate(-0, 6.5, 196.399219)" x="6.5" y="196.399219">Alistipes-obesi</text>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_6">
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="13.5" xlink:href="#maf71252abf" y="214.344"/>
+      </g>
+     </g>
+     <g id="text_6">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:end;" transform="rotate(-0, 6.5, 218.143219)" x="6.5" y="218.143219">Desulfovibrio-fairfieldensis</text>
+     </g>
+    </g>
+    <g id="ytick_5">
+     <g id="line2d_7">
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="13.5" xlink:href="#maf71252abf" y="236.088"/>
+      </g>
+     </g>
+     <g id="text_7">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:end;" transform="rotate(-0, 6.5, 239.887219)" x="6.5" y="239.887219">Tannerellaceae</text>
+     </g>
+    </g>
+    <g id="ytick_6">
+     <g id="line2d_8">
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="13.5" xlink:href="#maf71252abf" y="257.832"/>
+      </g>
+     </g>
+     <g id="text_8">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:end;" transform="rotate(-0, 6.5, 261.631219)" x="6.5" y="261.631219">Alistipes-shahii</text>
+     </g>
+    </g>
+    <g id="ytick_7">
+     <g id="line2d_9">
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="13.5" xlink:href="#maf71252abf" y="279.576"/>
+      </g>
+     </g>
+     <g id="text_9">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:end;" transform="rotate(-0, 6.5, 283.375219)" x="6.5" y="283.375219">Bacteroides-xylanisolvens</text>
+     </g>
+    </g>
+    <g id="ytick_8">
+     <g id="line2d_10">
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="13.5" xlink:href="#maf71252abf" y="301.32"/>
+      </g>
+     </g>
+     <g id="text_10">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:end;" transform="rotate(-0, 6.5, 305.119219)" x="6.5" y="305.119219">Bacteroides-caecimuris</text>
+     </g>
+    </g>
+    <g id="ytick_9">
+     <g id="line2d_11">
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="13.5" xlink:href="#maf71252abf" y="323.064"/>
+      </g>
+     </g>
+     <g id="text_11">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:end;" transform="rotate(-0, 6.5, 326.863219)" x="6.5" y="326.863219">Enterobacteriaceae</text>
+     </g>
+    </g>
+    <g id="ytick_10">
+     <g id="line2d_12">
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="13.5" xlink:href="#maf71252abf" y="344.808"/>
+      </g>
+     </g>
+     <g id="text_12">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:end;" transform="rotate(-0, 6.5, 348.607219)" x="6.5" y="348.607219">[Ruminococcus]-torques-group</text>
+     </g>
+    </g>
+    <g id="ytick_11">
+     <g id="line2d_13">
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="13.5" xlink:href="#maf71252abf" y="366.552"/>
+      </g>
+     </g>
+     <g id="text_13">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:end;" transform="rotate(-0, 6.5, 370.351219)" x="6.5" y="370.351219">Lactobacillus</text>
+     </g>
+    </g>
+    <g id="ytick_12">
+     <g id="line2d_14">
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="13.5" xlink:href="#maf71252abf" y="388.296"/>
+      </g>
+     </g>
+     <g id="text_14">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:end;" transform="rotate(-0, 6.5, 392.095219)" x="6.5" y="392.095219">Ruminococcus-sp.-N15.MGS-57</text>
+     </g>
+    </g>
+    <g id="ytick_13">
+     <g id="line2d_15">
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="13.5" xlink:href="#maf71252abf" y="410.04"/>
+      </g>
+     </g>
+     <g id="text_15">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:end;" transform="rotate(-0, 6.5, 413.839219)" x="6.5" y="413.839219">Escherichia-Shigella</text>
+     </g>
+    </g>
+    <g id="ytick_14">
+     <g id="line2d_16">
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="13.5" xlink:href="#maf71252abf" y="431.784"/>
+      </g>
+     </g>
+     <g id="text_16">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:end;" transform="rotate(-0, 6.5, 435.583219)" x="6.5" y="435.583219">Parabacteroides-distasonis</text>
+     </g>
+    </g>
+    <g id="ytick_15">
+     <g id="line2d_17">
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="13.5" xlink:href="#maf71252abf" y="453.528"/>
+      </g>
+     </g>
+     <g id="text_17">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:end;" transform="rotate(-0, 6.5, 457.327219)" x="6.5" y="457.327219">Bifidobacterium</text>
+     </g>
+    </g>
+    <g id="ytick_16">
+     <g id="line2d_18">
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="13.5" xlink:href="#maf71252abf" y="475.272"/>
+      </g>
+     </g>
+     <g id="text_18">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:end;" transform="rotate(-0, 6.5, 479.071219)" x="6.5" y="479.071219">[Eubacterium]-coprostanoligenes-group</text>
+     </g>
+    </g>
+    <g id="ytick_17">
+     <g id="line2d_19">
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="13.5" xlink:href="#maf71252abf" y="497.016"/>
+      </g>
+     </g>
+     <g id="text_19">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:end;" transform="rotate(-0, 6.5, 500.815219)" x="6.5" y="500.815219">Parabacteroides-sp.</text>
+     </g>
+    </g>
+    <g id="ytick_18">
+     <g id="line2d_20">
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="13.5" xlink:href="#maf71252abf" y="518.76"/>
+      </g>
+     </g>
+     <g id="text_20">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:end;" transform="rotate(-0, 6.5, 522.559219)" x="6.5" y="522.559219">Alistipes-sp.-N15.MGS-157</text>
+     </g>
+    </g>
+    <g id="ytick_19">
+     <g id="line2d_21">
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="13.5" xlink:href="#maf71252abf" y="540.504"/>
+      </g>
+     </g>
+     <g id="text_21">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:end;" transform="rotate(-0, 6.5, 544.303219)" x="6.5" y="544.303219">Bifidobacterium-choerinum</text>
+     </g>
+    </g>
+    <g id="ytick_20">
+     <g id="line2d_22">
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="13.5" xlink:href="#maf71252abf" y="562.248"/>
+      </g>
+     </g>
+     <g id="text_22">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:end;" transform="rotate(-0, 6.5, 566.047219)" x="6.5" y="566.047219">Peptostreptococcaceae</text>
+     </g>
+    </g>
+    <g id="ytick_21">
+     <g id="line2d_23">
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="13.5" xlink:href="#maf71252abf" y="583.992"/>
+      </g>
+     </g>
+     <g id="text_23">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:end;" transform="rotate(-0, 6.5, 587.791219)" x="6.5" y="587.791219">Lactococcus</text>
+     </g>
+    </g>
+    <g id="ytick_22">
+     <g id="line2d_24">
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="13.5" xlink:href="#maf71252abf" y="605.736"/>
+      </g>
+     </g>
+     <g id="text_24">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:end;" transform="rotate(-0, 6.5, 609.535219)" x="6.5" y="609.535219">Cetobacterium</text>
+     </g>
+    </g>
+    <g id="ytick_23">
+     <g id="line2d_25">
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="13.5" xlink:href="#maf71252abf" y="627.48"/>
+      </g>
+     </g>
+     <g id="text_25">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:end;" transform="rotate(-0, 6.5, 631.279219)" x="6.5" y="631.279219">Bacteroides-caccae</text>
+     </g>
+    </g>
+    <g id="ytick_24">
+     <g id="line2d_26">
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="13.5" xlink:href="#maf71252abf" y="649.224"/>
+      </g>
+     </g>
+     <g id="text_26">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:end;" transform="rotate(-0, 6.5, 653.023219)" x="6.5" y="653.023219">Dialister-sp.-Marseille-P5638</text>
+     </g>
+    </g>
+    <g id="ytick_25">
+     <g id="line2d_27">
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="13.5" xlink:href="#maf71252abf" y="670.968"/>
+      </g>
+     </g>
+     <g id="text_27">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:end;" transform="rotate(-0, 6.5, 674.767219)" x="6.5" y="674.767219">Akkermansia</text>
+     </g>
+    </g>
+    <g id="ytick_26">
+     <g id="line2d_28">
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="13.5" xlink:href="#maf71252abf" y="692.712"/>
+      </g>
+     </g>
+     <g id="text_28">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:end;" transform="rotate(-0, 6.5, 696.511219)" x="6.5" y="696.511219">Vagococcus-fluvialis</text>
+     </g>
+    </g>
+    <g id="ytick_27">
+     <g id="line2d_29">
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="13.5" xlink:href="#maf71252abf" y="714.456"/>
+      </g>
+     </g>
+     <g id="text_29">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:end;" transform="rotate(-0, 6.5, 718.255219)" x="6.5" y="718.255219">[Clostridium]-aldenense</text>
+     </g>
+    </g>
+    <g id="ytick_28">
+     <g id="line2d_30">
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="13.5" xlink:href="#maf71252abf" y="736.2"/>
+      </g>
+     </g>
+     <g id="text_30">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:end;" transform="rotate(-0, 6.5, 739.999219)" x="6.5" y="739.999219">Streptococcus-respiraculi</text>
+     </g>
+    </g>
+    <g id="ytick_29">
+     <g id="line2d_31">
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="13.5" xlink:href="#maf71252abf" y="757.944"/>
+      </g>
+     </g>
+     <g id="text_31">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:end;" transform="rotate(-0, 6.5, 761.743219)" x="6.5" y="761.743219">Megasphaera</text>
+     </g>
+    </g>
+    <g id="ytick_30">
+     <g id="line2d_32">
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="13.5" xlink:href="#maf71252abf" y="779.688"/>
+      </g>
+     </g>
+     <g id="text_32">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:end;" transform="rotate(-0, 6.5, 783.487219)" x="6.5" y="783.487219">Bacteroides-sp.-Smarlab-3302398</text>
+     </g>
+    </g>
+    <g id="ytick_31">
+     <g id="line2d_33">
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="13.5" xlink:href="#maf71252abf" y="801.432"/>
+      </g>
+     </g>
+     <g id="text_33">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:end;" transform="rotate(-0, 6.5, 805.231219)" x="6.5" y="805.231219">Alistipes-finegoldii</text>
+     </g>
+    </g>
+    <g id="ytick_32">
+     <g id="line2d_34">
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="13.5" xlink:href="#maf71252abf" y="823.176"/>
+      </g>
+     </g>
+     <g id="text_34">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:end;" transform="rotate(-0, 6.5, 826.975219)" x="6.5" y="826.975219">Anaerostipes</text>
+     </g>
+    </g>
+    <g id="ytick_33">
+     <g id="line2d_35">
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="13.5" xlink:href="#maf71252abf" y="844.92"/>
+      </g>
+     </g>
+     <g id="text_35">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:end;" transform="rotate(-0, 6.5, 848.719219)" x="6.5" y="848.719219">Dialister</text>
+     </g>
+    </g>
+    <g id="ytick_34">
+     <g id="line2d_36">
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="13.5" xlink:href="#maf71252abf" y="866.664"/>
+      </g>
+     </g>
+     <g id="text_36">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:end;" transform="rotate(-0, 6.5, 870.463219)" x="6.5" y="870.463219">Shewanella</text>
+     </g>
+    </g>
+    <g id="ytick_35">
+     <g id="line2d_37">
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="13.5" xlink:href="#maf71252abf" y="888.408"/>
+      </g>
+     </g>
+     <g id="text_37">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:end;" transform="rotate(-0, 6.5, 892.207219)" x="6.5" y="892.207219">Dialister-invisus-DSM-15470</text>
+     </g>
+    </g>
+    <g id="ytick_36">
+     <g id="line2d_38">
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="13.5" xlink:href="#maf71252abf" y="910.152"/>
+      </g>
+     </g>
+     <g id="text_38">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:end;" transform="rotate(-0, 6.5, 913.951219)" x="6.5" y="913.951219">Bacteroides-faecichinchillae</text>
+     </g>
+    </g>
+    <g id="ytick_37">
+     <g id="line2d_39">
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="13.5" xlink:href="#maf71252abf" y="931.896"/>
+      </g>
+     </g>
+     <g id="text_39">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:end;" transform="rotate(-0, 6.5, 935.695219)" x="6.5" y="935.695219">Streptococcus-danieliae</text>
+     </g>
+    </g>
+    <g id="ytick_38">
+     <g id="line2d_40">
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="13.5" xlink:href="#maf71252abf" y="953.64"/>
+      </g>
+     </g>
+     <g id="text_40">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:end;" transform="rotate(-0, 6.5, 957.439219)" x="6.5" y="957.439219">Bacteroides-uniformis</text>
+     </g>
+    </g>
+    <g id="ytick_39">
+     <g id="line2d_41">
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="13.5" xlink:href="#maf71252abf" y="975.384"/>
+      </g>
+     </g>
+     <g id="text_41">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:end;" transform="rotate(-0, 6.5, 979.183219)" x="6.5" y="979.183219">Akkermansia-muciniphila</text>
+     </g>
+    </g>
+    <g id="ytick_40">
+     <g id="line2d_42">
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="13.5" xlink:href="#maf71252abf" y="997.128"/>
+      </g>
+     </g>
+     <g id="text_42">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:end;" transform="rotate(-0, 6.5, 1000.927219)" x="6.5" y="1000.927219">Bacteroides-acidifaciens</text>
+     </g>
+    </g>
+    <g id="text_43">
+     <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:middle;" transform="rotate(-90, -198.751563, 573.12)" x="-198.751563" y="573.12">Species</text>
+    </g>
+   </g>
+  </g>
+  <g id="axes_2">
+   <g id="patch_3">
+    <path clip-path="url(#p33728020dd)" d="M 84.645 698.67 
+L 84.645 697.689141 
+L 84.645 448.550859 
+L 84.645 447.57 
+L 97.2 447.57 
+L 97.2 448.550859 
+L 97.2 697.689141 
+L 97.2 698.67 
+z
+" style="fill:#ffffff;stroke:#ffffff;stroke-linejoin:miter;stroke-width:0.01;"/>
+   </g>
+   <image height="251" id="image91d95f7577" transform="scale(1 -1)translate(0 -251)" width="12" x="85" xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAAwAAAD7CAYAAABe4nVGAAAABHNCSVQICAgIfAhkiAAAAFhJREFUaIHt1kEKACAIRUGV7n/lOkNQhDGuHf72ZUTM2LiRmTv/APA1qKrLCwAAAAAAAMBhIOEAAAAAAADaAQkHAAAAAADwP9B8AAAAAAAA7YCEAwAAeA8W7P8H5neNzUoAAAAASUVORK5CYII=" y="-448"/>
+   <g id="matplotlib.axis_3"/>
+   <g id="matplotlib.axis_4">
+    <g id="ytick_41">
+     <g id="line2d_43">
+      <defs>
+       <path d="M 0 0 
+L 3.5 0 
+" id="me2cce3ee92" style="stroke:#000000;stroke-width:0.8;"/>
+      </defs>
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="97.2" xlink:href="#me2cce3ee92" y="698.67"/>
+      </g>
+     </g>
+     <g id="text_44">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:start;" transform="rotate(-0, 104.2, 702.469219)" x="104.2" y="702.469219">0.0</text>
+     </g>
+    </g>
+    <g id="ytick_42">
+     <g id="line2d_44">
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="97.2" xlink:href="#me2cce3ee92" y="648.45"/>
+      </g>
+     </g>
+     <g id="text_45">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:start;" transform="rotate(-0, 104.2, 652.249219)" x="104.2" y="652.249219">0.2</text>
+     </g>
+    </g>
+    <g id="ytick_43">
+     <g id="line2d_45">
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="97.2" xlink:href="#me2cce3ee92" y="598.23"/>
+      </g>
+     </g>
+     <g id="text_46">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:start;" transform="rotate(-0, 104.2, 602.029219)" x="104.2" y="602.029219">0.4</text>
+     </g>
+    </g>
+    <g id="ytick_44">
+     <g id="line2d_46">
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="97.2" xlink:href="#me2cce3ee92" y="548.01"/>
+      </g>
+     </g>
+     <g id="text_47">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:start;" transform="rotate(-0, 104.2, 551.809219)" x="104.2" y="551.809219">0.6</text>
+     </g>
+    </g>
+    <g id="ytick_45">
+     <g id="line2d_47">
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="97.2" xlink:href="#me2cce3ee92" y="497.79"/>
+      </g>
+     </g>
+     <g id="text_48">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:start;" transform="rotate(-0, 104.2, 501.589219)" x="104.2" y="501.589219">0.8</text>
+     </g>
+    </g>
+    <g id="ytick_46">
+     <g id="line2d_48">
+      <g>
+       <use style="stroke:#000000;stroke-width:0.8;" x="97.2" xlink:href="#me2cce3ee92" y="447.57"/>
+      </g>
+     </g>
+     <g id="text_49">
+      <text style="font-family:DejaVu Sans;font-size:10px;font-style:normal;font-weight:normal;text-anchor:start;" transform="rotate(-0, 104.2, 451.369219)" x="104.2" y="451.369219">1.0</text>
+     </g>
+    </g>
+   </g>
+   <g id="patch_4">
+    <path d="M 84.645 698.67 
+L 84.645 697.689141 
+L 84.645 448.550859 
+L 84.645 447.57 
+L 97.2 447.57 
+L 97.2 448.550859 
+L 97.2 697.689141 
+L 97.2 698.67 
+z
+" style="fill:none;"/>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p976c6d3718">
+   <rect height="869.76" width="66.96" x="13.5" y="138.24"/>
+  </clipPath>
+  <clipPath id="p33728020dd">
+   <rect height="251.1" width="12.555" x="84.645" y="447.57"/>
+  </clipPath>
+ </defs>
+</svg>
