@@ -8,7 +8,6 @@ btn,-1
 ca2,-1
 cbl1,-1
 cellul,-2.82E-05
-cgly,-1
 chol,-1
 cl,-1
 cobalt2,-1
@@ -30,11 +29,9 @@ lnlc,-0.359109
 lnlnca,-0.017565
 lnlncg,-0.017565
 lys_L,-1
-malttr,-1
 met_L,-1
 mg2,-1
 mn2,-1
-mqn7,-1
 na1,-1
 ocdca,-0.169283
 ocdcea,-0.681445
@@ -48,11 +45,9 @@ pydxn,-1
 ribflv,-1
 ser_L,-1
 so4,-1
-succ,-1
 sucr,-0.074493
 thm,-1
 thr_L,-1
-thymd,-1
 trp_L,-1
 tyr_L,-1
 val_L,-1
