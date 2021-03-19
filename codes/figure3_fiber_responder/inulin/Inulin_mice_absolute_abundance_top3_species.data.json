@@ -1,0 +1,19 @@
+{
+"N" : 10,
+"dlogX" : [-0.4595455107069793,-0.7291321306505599,-0.16486983494241542,-0.22404640105816148,0.5323424608507852,1.1274235430964588,2.8425822914564267,1.8924245689632102,2.4581032118083495,-1.3046470584772933],
+"growth_rate_Muribaculaceae" : [1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],
+"inulin_response_Muribaculaceae" : [0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0],
+"pairwise_interaction_Muribaculaceae_Muribaculaceae" : [0.05861154808151111,0.06832002264880241,0.037118514757511795,0.10404056375867791,0.05364284108178135,0.0688105261249189,0.03286502811221414,0.07437855373013848,0.054309473889649885,0.12000553739215995],
+"pairwise_interaction_Muribaculaceae_Bacteroides_dash_acidifaciens" : [0.004525112391505406,0.01198575409885293,0.0036024924149799112,0.02756056923847819,0.01284661461941184,0.0019666709535283307,0.004085597645882394,0.05162032098663008,0.014417078393553143,0.009655149467287462],
+"pairwise_interaction_Muribaculaceae_Akkermansia_dash_muciniphila" : [0.010143893106158031,0.00702250107314804,0.010031715464126857,0.060870399573004164,0.012717086341530619,0.007541456126538247,0.000333614977966714,0.0010010622969040196,0.0001605327786657966,0.0016891982884462283],
+"growth_rate_Bacteroides_dash_acidifaciens" : [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],
+"inulin_response_Bacteroides_dash_acidifaciens" : [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],
+"pairwise_interaction_Bacteroides_dash_acidifaciens_Muribaculaceae" : [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],
+"pairwise_interaction_Bacteroides_dash_acidifaciens_Bacteroides_dash_acidifaciens" : [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],
+"pairwise_interaction_Bacteroides_dash_acidifaciens_Akkermansia_dash_muciniphila" : [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],
+"growth_rate_Akkermansia_dash_muciniphila" : [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],
+"inulin_response_Akkermansia_dash_muciniphila" : [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],
+"pairwise_interaction_Akkermansia_dash_muciniphila_Muribaculaceae" : [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],
+"pairwise_interaction_Akkermansia_dash_muciniphila_Bacteroides_dash_acidifaciens" : [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],
+"pairwise_interaction_Akkermansia_dash_muciniphila_Akkermansia_dash_muciniphila" : [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
+}
